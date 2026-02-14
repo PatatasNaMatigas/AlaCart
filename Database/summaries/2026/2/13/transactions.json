@@ -1,0 +1,50 @@
+[
+    {
+        "transaction_id": "T000000001",
+        "date_time": "2026-02-13 22:33:35.036320",
+        "items_summary": [
+            {
+                "item_id": 1,
+                "item_name": "Coke",
+                "quantity": 10,
+                "price_at_purchase": 72.5,
+                "sub_total": 725.0
+            },
+            {
+                "item_id": 2,
+                "item_name": "XO Candy Coffee",
+                "quantity": 200,
+                "price_at_purchase": 47.6,
+                "sub_total": 9520.0
+            }
+        ],
+        "total_price": 10245.0,
+        "pay_amount": 11000.0,
+        "change": 755.0,
+        "payment_method": "MLBB Diamonds"
+    },
+    {
+        "transaction_id": "T000000002",
+        "date_time": "2026-02-13 22:33:44.806620",
+        "items_summary": [
+            {
+                "item_id": 1,
+                "item_name": "Coke",
+                "quantity": 10,
+                "price_at_purchase": 72.5,
+                "sub_total": 725.0
+            },
+            {
+                "item_id": 2,
+                "item_name": "XO Candy Coffee",
+                "quantity": 200,
+                "price_at_purchase": 47.6,
+                "sub_total": 9520.0
+            }
+        ],
+        "total_price": 10245.0,
+        "pay_amount": 11000.0,
+        "change": 755.0,
+        "payment_method": "MLBB Diamonds"
+    }
+]

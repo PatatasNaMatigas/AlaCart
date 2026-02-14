@@ -1,5 +1,6 @@
-import FileHandler as FH
-from DataModels import Items, Transactions
+from util import Utils
+from dataManager import FileHandler as FH, DataModels
+from dataManager.DataModels import Items, Transactions, Accounts
 
 FH.initDatabaseStructure()
 
@@ -45,9 +46,39 @@ print(items.getItems())
 print("---------------------------------------------------------------------------------------------")
 
 transactions = Transactions()
-transactions.recordTransaction([{"item_id" : 3, "quantity" : 4}, {"item_id" : 5, "quantity" : 6}, {"item_id" : 7, "quantity" : 8}], 679.67)
+transactions.recordTransaction(
+    [
+        DataModels.createItemEntry(
+            1,
+            "Coke",
+            10,
+            72.50
+        ),
+        DataModels.createItemEntry(
+            2,
+            "XO Candy Coffee",
+            200,
+            47.60
+        )
+    ],
+    11000.00,
+    Transactions.PaymentMethods.MLBB_DIAMONDS
+
+)
 print(transactions.getTransactions())
 print("---------------------------------------------------------------------------------------------")
-transactions.recordTransaction([{"item_id" : 1, "quantity" : 9}, {"item_id" : 7, "quantity" : 5}], 1975)
-print(transactions.getTransactions())
-print("---------------------------------------------------------------------------------------------")
+
+accounts = Accounts()
+username = "Aee"
+password = "SomePassword"
+try:
+    accounts.createAccount(username, password)
+except ValueError:
+    Utils.wtf(f"Account \"{username}\" already exists!")
+print(accounts.getAccounts())
+print("------------------------------------------")
+accounts.modifyAccount(
+    1,
+    password="Eticles"
+)
+print(accounts.getAccounts())

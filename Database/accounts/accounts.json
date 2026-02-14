@@ -1,0 +1,11 @@
+[
+    {
+        "user_id": 1,
+        "username": "Aee",
+        "password": "Eticles",
+        "stats": {
+            "items_purchased": 0,
+            "amount_spent": 0
+        }
+    }
+]
