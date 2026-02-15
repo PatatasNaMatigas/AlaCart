@@ -1,11 +1,22 @@
+import datetime
+
 from dataManager import FileHandler as FH
 from enum import Enum
+
+def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float) -> dict:
+    return {
+        "item_id"           : itemId,
+        "item_name"         : itemName,
+        "quantity"          : quantity,
+        "price_at_purchase" : priceAtPurchase,
+        "sub_total"         : quantity * priceAtPurchase
+    }
 
 class ID(Enum):
     ITEM        = 0
     ACCOUNT     = 1
     TRANSACTION = 2
-    RECEIPT     = 3
+    ORDER      = 3
 
 class Items:
     """
@@ -55,9 +66,9 @@ class Items:
         raise ValueError(f"Item with id {itemId} not found")
 
     def getItem(self, itemId: int) -> dict:
-        for i in range(len(self.items)):
-            if self.items[i]["id"] == itemId:
-                return self.items[i]
+        for item in self.items:
+            if item["id"] == itemId:
+                return item
         raise ValueError(f"Item with id {itemId} not found")
 
     def getItems(self) -> list:
@@ -70,15 +81,6 @@ class Items:
                 FH.updateItems(self.items)
                 return 0
         return 1
-
-def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float) -> dict:
-    return {
-        "item_id"           : itemId,
-        "item_name"         : itemName,
-        "quantity"          : quantity,
-        "price_at_purchase" : priceAtPurchase,
-        "sub_total"         : quantity * priceAtPurchase
-    }
 
 class Transactions:
 
@@ -208,3 +210,60 @@ class Accounts:
                 del(self.accounts[i])
                 return
         raise ValueError(f"Account with id {userId} not found")
+
+class Orders:
+
+    """
+    Structure:
+    [
+        {
+            order_id        : str
+            created_at      : ISO datetime string
+            items           : list[OrderItem]
+            total_amount    : float
+            status          : str (enum)
+        }
+    ]
+    """
+
+    class Status(Enum):
+        PENDING   = 0
+        PAID      = 1
+        CANCELLED = 2
+        EXPIRED   = 3
+        COMPLETED = 4
+
+    def __init__(self, account: dict):
+        self.username = account["username"]
+        self.orders = FH.loadOrders(self.username)
+
+    def getOrders(self) -> list:
+        return self.orders
+
+    def createOrder(self, items: list, status: Status) -> dict:
+        totalAmount = 0
+        for item in items:
+            totalAmount += item["sub_total"]
+        return {
+            "order_id"     : FH.autoIncrement(ID.ORDER),
+            "date_time"    : datetime.datetime.now().isoformat(),
+            "items"        : items,
+            "total_amount" : totalAmount,
+            "status"       : status
+        }
+
+    def modifyOrder(self, orderId: int, items: list = None, status: Status = None) -> dict:
+        newTotal = 0
+        if items is not None:
+            for item in items:
+                newTotal += item["sub_total"]
+        for order in self.orders:
+            if order["order_id"] == orderId:
+                order["items"] = items if items is not None else order["items"]
+                order["total_amount"] = newTotal if items is not None else order["total_amount"]
+                order["status"] = status if status is not None else ["status"]
+                return order
+        raise ValueError(f"Order with id {orderId} not found")
+
+    def updateOrders(self, data: list) -> None:
+        FH.updateOrders(self.username, data)

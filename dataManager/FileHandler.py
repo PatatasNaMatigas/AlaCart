@@ -5,9 +5,14 @@ from datetime import datetime
 def initDatabaseStructure() -> None:
     try:
         os.mkdir("../Database")
+    except FileExistsError:
+        pass
+    try:
         os.mkdir("../Database/summaries")
+    except FileExistsError:
+        pass
+    try:
         os.mkdir("../Database/accounts")
-        os.mkdir("../Database/temp")
     except FileExistsError:
         pass
 
@@ -17,6 +22,7 @@ def initDatabaseStructure() -> None:
             "next_item_id" : 0,
             "next_account_id" : 0,
             "next_transaction_id" : 0,
+            "next_order_id" : 0
         }
         safeWrite(metaFile, data)
 
@@ -50,7 +56,13 @@ def loadTransactions() -> list:
     date = datetime.now().date()
     try:
         os.mkdir(f"../Database/summaries/{date.year}")
+    except FileExistsError:
+        pass
+    try:
         os.mkdir(f"../Database/summaries/{date.year}/{date.month}")
+    except FileExistsError:
+        pass
+    try:
         os.mkdir(f"../Database/summaries/{date.year}/{date.month}/{date.day}")
     except FileExistsError:
         pass
@@ -80,6 +92,11 @@ def createAccount(data: dict) -> None:
     safeCreateFile(folder + "/shoppingCart.json")
     safeCreateFile(folder + "/orders.json")
 
+def loadOrders(username: str) -> list:
+    return read(f"../Database/accounts/{username}/orders.json")
+
+def updateOrders(username: str, data: list) -> None:
+    safeWrite(f"../Database/accounts/{username}/orders.json", data)
 def autoIncrement(idType: DataModels.ID) -> int:
     nextId = 0
     with open("../Database/meta.json", 'r+') as file:
@@ -94,9 +111,9 @@ def autoIncrement(idType: DataModels.ID) -> int:
             case DataModels.ID.TRANSACTION:
                 nextId = ids["next_transaction_id"] + 1
                 ids["next_transaction_id"] = nextId
-            case DataModels.ID.RECEIPT:
-                nextId = ids["next_receipt_id"] + 1
-                ids["next_receipt_id"] = nextId
+            case DataModels.ID.ORDER:
+                nextId = ids["next_order_id"] + 1
+                ids["next_order_id"] = nextId
     safeWrite("../Database/meta.json", ids)
     return nextId
 
