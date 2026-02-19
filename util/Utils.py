@@ -7,13 +7,16 @@ class Color(Enum):
     BLUE   = "\033[94m"
     RESET  = "\033[0m"
 
-def coloredText(text: str, color: Color) -> str:
-    return color.value + text + Color.RESET.value
+def log(log: object) -> None:
+    print(Color.GREEN.value, log, Color.RESET.value)
 
-def warn(warning: str) -> None:
-    print(coloredText(warning, Color.YELLOW))
+def logbr() -> None:
+    print("-" * 500)
 
-def wtf(wtf: str) -> None:
+def warn(warning: object) -> None:
+    print(Color.YELLOW.value, warning, Color.RESET.value)
+
+def wtf(wtf: object) -> None:
     # WTF means "What a Terrible Failure"
     # nakuha ko lang nung nagawa ako ng app sa phone (Log.wtf("", ""))
-    print(coloredText(wtf, Color.RED))
+    print(Color.RED.value, wtf, Color.RESET.value)

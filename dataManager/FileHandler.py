@@ -81,6 +81,9 @@ def loadAccounts() -> list:
 def updateAccounts(data: list) -> None:
     safeWrite("../Database/accounts/accounts.json", data)
 
+def updateAccount(username: str, data: list) -> None:
+    safeWrite(f"../Database/accounts/{username}/profile.json", data)
+
 def createAccount(data: dict) -> None:
     folder = f"../Database/accounts/{data["username"]}"
     try:
