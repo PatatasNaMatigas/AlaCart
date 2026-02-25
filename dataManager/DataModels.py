@@ -80,11 +80,11 @@ class Items:
         return self.items
 
     def deleteItem(self, itemId: int) -> None:
-        for i in range(len(self.items)):
-            if self.items[i]["id"] == itemId:
-                del(self.items[i])
+        for item in self.items:
+            if item["id"] == itemId:
+                del item
                 FH.updateItems(self.items)
-        warn(f"Item with id {itemId} not found")
+        warn(f"Item with id {itemId} not found", tag="DELETE ITEM")
 
 class Transactions:
 
