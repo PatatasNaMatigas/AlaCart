@@ -19,30 +19,32 @@ class ID(Enum):
     ITEM        = 0
     ACCOUNT     = 1
     TRANSACTION = 2
-    ORDER      = 3
+    ORDER       = 3
 
 class Items:
     """
         Structure:
         [
             {
-                id    : autoIncrement(ID.Items)     (int)
-                name  : ""                          (str)
-                price : 0.0                         (float)
-                stock : 0                           (int)
-                tags  : [                           (list)
-                    "", "", "", "", ...
+                item_id    : (int)
+                name  : (str)
+                price : (float)
+                stock : (int)
+                tags  : [
+                    (str),
+                    ...
                 ]
-            }
+            },
+            ...
         ]
     """
 
     def __init__(self):
-        self.items = FH.loadItems()
+        self.items = FH.getItems()
 
     def addItem(self, name: str, price: float, stock: int, tags: list) -> dict:
         data = {
-            "id"    : FH.autoIncrement(ID.ITEM),
+            "item_id"    : FH.autoIncrement(ID.ITEM),
             "name"  : name,
             "price" : price,
             "stock" : stock,
@@ -55,7 +57,7 @@ class Items:
     def modifyItem(self, itemId: int, name: str = None, price: float = None,
                    stock: int = None, tags: list = None, replace: bool = False) -> dict:
         for item in self.items:
-            if item["id"] == itemId:
+            if item["item_id"] == itemId:
                 item["name"] = name if name is not None else item["name"]
                 item["price"] = price if price is not None else item["price"]
                 item["stock"] = stock if stock is not None else item["stock"]
@@ -66,25 +68,26 @@ class Items:
                         item["tags"].extend(tags)
                 FH.updateItems(self.items)
                 return item
-        warn(f"Item {itemId} not found")
+        warn(f"Item {itemId} not found", "MODIFY ITEM")
         return {}
 
     def getItem(self, itemId: int) -> dict:
         for item in self.items:
-            if item["id"] == itemId:
+            if item["item_id"] == itemId:
                 return item
-        warn(f"Item with id {itemId} not found")
+        warn(f"Item with id {itemId} not found", "GET ITEM")
         return {}
 
     def getItems(self) -> list:
         return self.items
 
     def deleteItem(self, itemId: int) -> None:
-        for item in self.items:
-            if item["id"] == itemId:
-                del item
+        for i in range(len(self.items)):
+            if self.items[i]["item_id"] == itemId:
+                del self.items[i]
                 FH.updateItems(self.items)
-        warn(f"Item with id {itemId} not found", tag="DELETE ITEM")
+                return
+        warn(f"Item with id {itemId} not found", "DELETE ITEM")
 
 class Transactions:
 
@@ -92,22 +95,24 @@ class Transactions:
     Structure:
     [
         {
-            transaction_id : T00001,                     (str)
-            date_time      : YYYY-MM-DDTHH:MM:SS,        (str: ISO)
-            items_summary  : [                           (list)
+            transaction_id : (str)
+            date_time      : (str: ISO)
+            items_summary  : [
                 {
-                    "item_id"           : 1,
-                    "item_name"         : "Coke",
-                    "quantity"          : 67,
-                    "price_at_purchase" : 6.7,
-                    "subtotal"          : 448.9
-                },...
+                    "item_id"           : (int)
+                    "item_name"         : (str)
+                    "quantity"          : (int)
+                    "price_at_purchase" : (float)
+                    "subtotal"          : (float)
+                },
+                ...
             ],
-            total_price    : 0.0,                        (float)
-            pay_amount     : 10.0,                       (float)
-            change         : 5.0,                        (float)
-            payment_method : CASH                        (str: PaymentMethods)
-        }
+            total_price    : (float)
+            pay_amount     : (float)
+            change         : (float)
+            payment_method : (PaymentMethods.value)
+        },
+        ...
     ]
     """
 
@@ -129,7 +134,7 @@ class Transactions:
         BEEP_CARD         = "Beep Card"
 
     def __init__(self):
-        self.transactions = FH.loadTransactions()
+        self.transactions = FH.getTransactions()
         pass
 
     def recordTransaction(self, items: list, payAmount: float, paymentMethod: PaymentMethods) -> None:
@@ -138,7 +143,7 @@ class Transactions:
             totalPrice += item["sub_total"]
         change = payAmount - totalPrice
         record = FH.prepareTransactionRecord(items, totalPrice, payAmount, change, paymentMethod)
-        self.transactions = FH.loadTransactions()
+        self.transactions = FH.getTransactions()
         self.transactions.append(record)
         FH.updateTransactions(self.transactions)
 
@@ -147,7 +152,7 @@ class Transactions:
             print(self.transactions[i]["transaction_id"])
             if self.transactions[i]["transaction_id"] == transactionId:
                 return self.transactions[i]
-        warn(f"Transaction with id {transactionId} not found")
+        warn(f"Transaction with id {transactionId} not found", "GET TRANSACTION")
         return {}
 
     def getTransactions(self) -> list:
@@ -159,85 +164,88 @@ class Accounts:
     Structure:
     [
         {
-            user_id  : 1                   (int)
-            username : ""                  (str)
-            password : ""                  (str)
-            stats    : {
-                items_purchased : 1        (int)
+            "user_id"  : (int)
+            "username" : (str)
+            "password" : (str)
+            "stats"    : {
+                items_purchased : (int),
+                "amount_spent"  : (int),
             }
-        }
+        },
+        ...
     ]
     """
 
-    def __init__(self):
-        self.accounts = FH.loadAccounts()
+    class Role(Enum):
+        OWNER = 1
+        CUSTOMER = 2
 
-    def createAccount(self, username: str, password: str) -> dict:
-        for account in self.accounts:
-            if account["username"].strip().lower() == username.strip().lower():
-                warn(f"Account with username {username} already exists")
+    def __init__(self):
+        self.accounts = FH.getAccounts()
+
+    def createAccount(self, username: str, password: str, role: Role) -> dict:
+        if username in self.accounts:
+            warn(f"Account with username {username} already exists", "CREATE ACCOUNT")
+            return {}
+
+        self.accounts.append(
+            username
+        )
+        FH.updateAccounts(self.accounts)
+
         profile = {
             "user_id"  : FH.autoIncrement(ID.ACCOUNT),
             "username" : username,
             "password" : password,
-            "stats"    : {
+            "role"     : role.value,
+            "stats": {
                 "items_purchased" : 0,
                 "amount_spent"    : 0
             }
         }
-        self.accounts.append(profile)
-        FH.updateAccounts(self.accounts)
         FH.createAccount(profile)
+
         return profile
 
-    def getAccount(self, userId: int) -> dict:
-        for account in self.accounts:
-            if account["user_id"] == userId:
-                return account
-        warn(f"Account with id {userId} not found")
-        return {}
+    def modifyAccount(self, username: str, newUsername: str = None, newPassword: str = None,
+                      itemsPurchased: int = None, incrementItemsPurchased: bool = False,
+                      amountSpent: int = None, incrementAmountSpent: bool = False) -> None:
+        if username not in self.accounts:
+            warn(f"Account with username \"{username}\" does not exist", "MODIFY ACCOUNT")
+            return
 
-    def getAccounts(self):
-        return self.accounts
+        profile = FH.getAccount(username)
+        profile["username"] = newUsername if newUsername is not None else profile["username"]
+        profile["password"] = newPassword if newPassword is not None else profile["password"]
+        if itemsPurchased is not None:
+            if incrementItemsPurchased:
+                profile["stats"]["items_purchased"] += itemsPurchased
+            else:
+                profile["stats"]["items_purchased"] = itemsPurchased
+        if amountSpent is not None:
+            if incrementAmountSpent:
+                profile["stats"]["amount_spent"] += amountSpent
+            else:
+                profile["stats"]["amount_spent"] = amountSpent
+        self.accounts.remove(username)
+        self.accounts.append(newUsername)
+        FH.updateAccounts(self.accounts)
+        FH.changeFileName(
+            "../Database/accounts/",
+            username,
+            newUsername
+        )
+        FH.updateAccount(newUsername, profile)
 
-    def modifyAccount(self, userId: int, username: str = None, password: str = None,
-                      itemsPurchased: int = None, amountSpent: int = None, incrementItemsPurchased: bool = False,
-                      incrementAmountSpent: bool = False) -> dict:
-        for account in self.accounts:
-            if account["user_id"] == userId:
-                account["username"] = username if username is not None else account["username"]
-                account["password"] = password if password is not None else account["password"]
-                if itemsPurchased is not None:
-                    if incrementItemsPurchased:
-                        account["stats"]["items_purchased"] += itemsPurchased
-                    else:
-                        account["stats"]["items_purchased"] = itemsPurchased
-                if amountSpent is not None:
-                    if incrementAmountSpent:
-                        account["stats"]["amount_spent"] += amountSpent
-                    else:
-                        account["stats"]["amount_spent"] = amountSpent
+    def deleteAccount(self, username: str) -> None:
+        if username not in self.accounts:
+            warn(f"Account with username \"{username}\" not found", "DELETE ACCOUNT")
+            return
 
-                FH.updateAccount(account["username"], [{
-                    "user_id" : account["user_id"],
-                    "username" : account["username"],
-                    "password" : account["password"],
-                    "stats": {
-                        "items_purchased": account["stats"]["items_purchased"],
-                        "amount_spent": account["stats"]["amount_spent"]
-                    }
-                }])
-                FH.updateAccounts(self.accounts)
-                return account
-        warn(f"Account with id {userId} not found")
-        return {}
+        self.accounts.remove(username)
+        FH.updateAccounts(self.accounts)
+        FH.deleteFile(f"../Database/accounts/{username}")
 
-    def deleteAccount(self, userId: int) -> None:
-        for i in range(len(self.accounts)):
-            if self.accounts[i]["user_id"] == userId:
-                del(self.accounts[i])
-                return
-        warn(f"Account with id {userId} not found")
 
 class Orders:
 
@@ -245,12 +253,19 @@ class Orders:
     Structure:
     [
         {
-            order_id        : str
-            created_at      : ISO datetime string
-            items           : list[OrderItem]
-            total_amount    : float
-            status          : str (enum)
-        }
+            order_id        : (str)
+            created_at      : (str)
+            items           : [
+                "item_id"           : (int),
+                "item_name"         : (str),
+                "quantity"          : (int),
+                "price_at_purchase" : (float),
+                "sub_total"         : (float)
+            ]
+            total_amount    : (float)
+            status          : (Status.value)
+        },
+        ...
     ]
     """
 
@@ -262,9 +277,8 @@ class Orders:
         COMPLETED = 4
 
     def __init__(self, account: dict):
-        self.username = account["username"]
-        self.userId = account["user_id"]
-        self.orders = FH.loadOrders(self.username)
+        self.account = account
+        self.orders = FH.getOrders(self.account["username"])
 
     def getOrders(self) -> list:
         return self.orders
@@ -281,7 +295,7 @@ class Orders:
             "status"       : status.value
         }
         self.orders.append(data)
-        self.updateOrders(self.orders)
+        FH.updateOrders(self.account["username"], self.orders)
         return data
 
     def modifyOrder(self, orderId: int, items: list = None, status: Status = None) -> dict:
@@ -294,23 +308,19 @@ class Orders:
                 order["items"] = items if items is not None else order["items"]
                 order["total_amount"] = newTotal if items is not None else order["total_amount"]
                 order["status"] = status.value if status is not None else order["status"]
+                FH.updateOrders(self.account["username"], self.orders)
                 return order
-        warn(f"Order with id \"{orderId}\" not found")
+        warn(f"Order with id \"{orderId}\" not found", "MODIFY ORDER")
         return {}
 
-    def updateOrders(self, data: list) -> None:
-        FH.updateOrders(self.username, data)
-
     def completeOrder(self, account: Accounts, orderId: int) -> None:
-        # Mark order as COMPLETE
-        # Increment items_purchased, amount_spent at user profile
         for order in self.orders:
             if order["order_id"] == orderId:
                 if order["status"] == Orders.Status.COMPLETED.value:
                     warn(f"Order with id \"{orderId}\" has already completed")
                     return
         self.modifyOrder(orderId, status=Orders.Status.COMPLETED)
-        self.updateOrders(self.orders)
+        FH.updateOrders(self.account["username"], self.orders)
 
         order = {}
         for o in self.orders:
@@ -324,7 +334,7 @@ class Orders:
         amountSpent = order["total_amount"]
 
         account.modifyAccount(
-            self.userId,
+            self.account["user_id"],
             itemsPurchased=itemsPurchased,
             amountSpent=amountSpent,
             incrementItemsPurchased=True,
@@ -335,7 +345,7 @@ class Orders:
         for order in self.orders:
             if order["order_id"] == orderId:
                 return order
-        warn(f"Order with id \"{orderId}\" not found")
+        warn(f"Order with id \"{orderId}\" not found", "GET ORDER")
         return {}
 
 class ShoppingCart:
@@ -344,9 +354,60 @@ class ShoppingCart:
     Structure:
     [
         {
-            "items" : {
-                "" :
-            |
-        }
+            "item_id"   : (str)
+            "item_name" : (str)
+            "quantity"  : (int)
+            "price"     : (float)
+        },
+        ...
     ]
     """
+
+    def createItemEntry(self, itemId: int, itemName: str, quantity: int, subtotal: float) -> dict:
+        return {
+            "item_id"   : itemId,
+            "item_name" : itemName,
+            "quantity"  : quantity,
+            "price"     : subtotal
+        }
+
+    def __init__(self, account: dict):
+        self.cart = FH.getCart(account["username"])
+        self.account = account
+
+    def addItem(self, item: dict) -> None:
+        for i in self.cart:
+            if i["item_id"] == item["item_id"]:
+                i["quantity"] += item["quantity"]
+                FH.updateCart(self.account["username"], self.cart)
+                return
+        self.cart.append(item)
+        FH.updateCart(self.account["username"], self.cart)
+
+    def modifyItem(self, itemId: int, quantity: int=None, price: float=None) -> dict:
+        for item in self.cart:
+            if item["item_id"] == itemId:
+                item["quantity"] = quantity if quantity is not None else item["quantity"]
+                item["price"] = price if price is not None else item["price"]
+                FH.updateCart(self.account["username"], self.cart)
+                return item
+        warn(f"Item with id \"{itemId}\" not found in the cart", "MODIFY ITEM / SHOPPING CART")
+        return {}
+
+    def getItem(self, itemId: int) -> dict:
+        for item in self.cart:
+            if item["item_id"] == itemId:
+                return item
+        warn(f"Item with id {itemId} not found", "GET ITEM / SHOPPING CART")
+        return {}
+
+    def getCart(self) -> list:
+        return self.cart
+
+    def deleteItem(self, itemId: int) -> None:
+        for i in range(len(self.cart)):
+            if self.cart[i]["item_id"] == itemId:
+                del self.cart[i]
+                FH.updateCart(self.account["username"], self.cart)
+                return
+        warn(f"Item with id {itemId} not found", "DELETE ITEM / SHOPPING CART")

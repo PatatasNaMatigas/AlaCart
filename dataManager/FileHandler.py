@@ -1,6 +1,10 @@
 import os, json
+import shutil
+
 from dataManager import DataModels
 from datetime import datetime
+
+from util.Utils import wtf
 
 def initDatabaseStructure() -> None:
     try:
@@ -29,7 +33,7 @@ def initDatabaseStructure() -> None:
     safeCreateFile("../Database/items.json")
     safeCreateFile("../Database/accounts/accounts.json")
 
-def loadItems() -> list:
+def getItems() -> list:
     return read("../Database/items.json")
 
 def updateItems(data: list) -> None:
@@ -52,7 +56,7 @@ def prepareTransactionRecord(items: list, totalPrice: float, payAmount: float, c
 
     return data
 
-def loadTransactions() -> list:
+def getTransactions() -> list:
     date = datetime.now().date()
     try:
         os.mkdir(f"../Database/summaries/{date.year}")
@@ -75,11 +79,14 @@ def updateTransactions(data: list) -> None:
     date = datetime.now().date()
     safeWrite(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json", data)
 
-def loadAccounts() -> list:
+def getAccounts() -> list:
     return read("../Database/accounts/accounts.json")
 
+def getAccount(username: str) -> list:
+    return read(f"../Database/accounts/{username}/profile.json")
+
 def updateAccounts(data: list) -> None:
-    safeWrite("../Database/accounts/accounts.json", data)
+    safeWrite("../Database/accounts/accounts.json", data, )
 
 def updateAccount(username: str, data: list) -> None:
     safeWrite(f"../Database/accounts/{username}/profile.json", data)
@@ -91,15 +98,22 @@ def createAccount(data: dict) -> None:
     except FileExistsError:
         pass
 
-    safeWrite(folder + "/profile.json", data)
+    safeWrite(folder + "/profile.json", data,)
     safeCreateFile(folder + "/shoppingCart.json")
     safeCreateFile(folder + "/orders.json")
 
-def loadOrders(username: str) -> list:
+def getOrders(username: str) -> list:
     return read(f"../Database/accounts/{username}/orders.json")
 
 def updateOrders(username: str, data: list) -> None:
     safeWrite(f"../Database/accounts/{username}/orders.json", data)
+
+def getCart(username: str) -> list:
+    return read(f"../Database/accounts/{username}/shoppingCart.json")
+
+def updateCart(username: str, data: list) -> None:
+    safeWrite(f"../Database/accounts/{username}/shoppingCart.json", data)
+
 def autoIncrement(idType: DataModels.ID) -> int:
     nextId = 0
     with open("../Database/meta.json", 'r+') as file:
@@ -120,7 +134,36 @@ def autoIncrement(idType: DataModels.ID) -> int:
     safeWrite("../Database/meta.json", ids)
     return nextId
 
-def safeWrite(filename, data) -> None:
+def createFile(filename: str, isList: bool=True) -> None:
+    temp_file = filename + ".tmp"
+
+    with open(temp_file, "w") as file:
+        json.dump(list() if isList else dict(), file, indent=4)
+
+    os.replace(temp_file, filename)
+
+def safeCreateFile(filename: str, isList: bool=True) -> None:
+    if not os.path.exists(filename) or os.path.getsize(filename) == 0:
+        temp_file = filename + ".tmp"
+
+        with open(temp_file, "w") as file:
+            json.dump(list() if isList else dict(), file, indent=4)
+
+        os.replace(temp_file, filename)
+
+def changeFileName(base: str, oldName: str, newName: str) -> None:
+    try:
+        os.rename(os.path.join(base, oldName), os.path.join(base, newName))
+    except:
+        wtf(f"File/Directory with the name {newName} already exists", "CHANGE FILE NAME")
+
+def deleteFile(filename: str) -> None:
+    try:
+        shutil.rmtree(filename)
+    except PermissionError:
+        wtf("Folder cannot be deleted", "DELETE FILE NAME")
+
+def safeWrite(filename: str, data: object) -> None:
     temp_file = filename + ".tmp"
 
     with open(temp_file, "w") as file:
@@ -128,23 +171,6 @@ def safeWrite(filename, data) -> None:
 
     os.replace(temp_file, filename)
 
-def createFile(filename) -> None:
-    temp_file = filename + ".tmp"
-
-    with open(temp_file, "w") as file:
-        json.dump([], file, indent=4)
-
-    os.replace(temp_file, filename)
-
-def safeCreateFile(filename) -> None:
-    if not os.path.exists(filename) or os.path.getsize(filename) == 0:
-        temp_file = filename + ".tmp"
-
-        with open(temp_file, "w") as file:
-            json.dump([], file, indent=4)
-
-        os.replace(temp_file, filename)
-
-def read(filename) -> list:
+def read(filename: str):
     with open(filename, "r") as file:
         return json.load(file)
