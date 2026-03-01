@@ -1,3 +1,4 @@
+import ctypes
 import json
 from enum import Enum
 
@@ -11,7 +12,7 @@ class Color(Enum):
 def log(log: object, tag: str = None) -> None:
     print(Color.GREEN.value, log, Color.RESET.value, sep="", end='')
     if tag is not None:
-        print(" | ", Color.BLUE.value, tag, Color.RESET.value, sep="")
+        print(f" {Color.YELLOW.value}|{Color.RESET.value} ", Color.BLUE.value, tag, Color.RESET.value, sep="")
     else:
         print()
 
@@ -21,7 +22,7 @@ def logbr() -> None:
 def warn(warning: object, tag: str = None) -> None:
     print(Color.YELLOW.value, warning, Color.RESET.value, sep="", end="")
     if tag is not None:
-        print(" | ", Color.BLUE.value, tag, Color.RESET.value, sep="")
+        print(f" {Color.YELLOW.value}|{Color.RESET.value} ", Color.BLUE.value, tag, Color.RESET.value, sep="")
     else:
         print()
 
@@ -30,7 +31,7 @@ def wtf(wtf: object, tag: str = None) -> None:
     # nakuha ko lang nung nagawa ako ng app sa phone (Log.wtf("", ""))
     print(Color.RED.value, wtf, Color.RESET.value, sep="", end='')
     if tag is not None:
-        print(" | ", Color.BLUE.value, tag, Color.RESET.value, sep="")
+        print(f" {Color.YELLOW.value}|{Color.RESET.value} ", Color.BLUE.value, tag, Color.RESET.value, sep="")
     else:
         print()
 
@@ -39,3 +40,6 @@ def logData(data: object, tag: str=None) -> None:
         log(tag)
 
     print(json.dumps(data, indent=4))
+
+def initFont(fontName: str) -> None:
+    ctypes.windll.gdi32.AddFontResourceExW(f"res/fonts/{fontName}", 0x10, 0)
