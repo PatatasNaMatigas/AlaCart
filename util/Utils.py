@@ -42,4 +42,4 @@ def logData(data: object, tag: str=None) -> None:
     print(json.dumps(data, indent=4))
 
 def initFont(fontName: str) -> None:
-    ctypes.windll.gdi32.AddFontResourceExW(f"res/fonts/{fontName}", 0x10, 0)
+    ctypes.windll.gdi32.AddFontResourceExW(f"../res/fonts/{fontName}", 0x10, 0)

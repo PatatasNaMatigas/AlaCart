@@ -23,11 +23,13 @@ class ItemManager(tk.Frame):
             bg="#48426D",
             highlightthickness = 0
         )
+        self.query = ""
         self.canvas.create_rectangle(
             0, 0,
             1000, 600,
             fill="#48426D",
-            outline=""
+            outline="",
+            tags="drywall"
         )
 
         self.icons = {}
@@ -108,6 +110,24 @@ class ItemManager(tk.Frame):
         )
 
     def initUX(self):
+        self.canvas.create_rectangle(
+            85, 95,
+            1000, 600,
+            fill="#48426D",
+            outline="",
+            tags="noSearch"
+        )
+        self.canvas.create_text(
+            530, 130,
+            anchor="center",
+            text="",
+            font=("koulen", 25),
+            fill="#F0C38E",
+            tags=("noSearch", "noSearchResult")
+        )
+        self.canvas.tag_lower("drywall")
+        self.canvas.tag_lower("noSearch")
+
         # Home Button
         self.createRoundRect(
             self.canvas,
@@ -196,7 +216,6 @@ class ItemManager(tk.Frame):
         self.canvas.tag_bind("filterButton", "<ButtonRelease-1>", filterOnRelease)
 
     def initSearchBar(self):
-        self.query = ""
         self.active = False
         self.createRoundRect(
             self.canvas,
@@ -257,9 +276,19 @@ class ItemManager(tk.Frame):
                 self.drawItems(items)
                 self.itemEntryY = 0
                 self.itemEntryMaxY = 0
+                self.itemEntryMinY = min(325 - ((len(items) + 2) // 3 * 210) - 90, 0)
                 self.canvas.tag_raise("search")
                 self.canvas.tag_raise("front")
                 self.active = False
+                if len(items) == 0:
+                    self.canvas.tag_raise("noSearch")
+                    self.canvas.itemconfig("noSearchResult", text=f"No items found for \"{self.query}\"")
+                else:
+                    self.canvas.tag_lower("noSearch")
+                    self.canvas.tag_raise("drywall")
+                    self.canvas.tag_raise("itemEntry")
+                    self.canvas.tag_raise("search")
+                    self.canvas.tag_raise("front")
             elif len(event.char) == 1:
                 self.query += event.char
 

@@ -1,31 +1,35 @@
-from nltk.stem import PorterStemmer
-from dataManager.DataModels import Items
+from nltk.stem import SnowballStemmer
+from collections import defaultdict
 
-stemmer = PorterStemmer()
+from dataManager.DataModels import Items
 
 class SearchEngine:
 
-    def __init__(self, item: Items):
-        self.items = item.getItems()
+    def __init__(self, item_manager: Items):
+        self.raw_items = item_manager.getItems()
+        self.stemmer = SnowballStemmer("english")
+        self.index = defaultdict(list)
+        self._build_index()
+
+    def _build_index(self) -> None:
+        for idx, item in enumerate(self.raw_items):
+            text = f"{item['name']} {' '.join(item['tags'])}"
+            words = set(self.stemmer.stem(w.lower()) for w in text.split())
+            for word in words:
+                self.index[word].append(idx)
 
     def search(self, query: str) -> list:
-        itemScores = []
-        queryWords = [stemmer.stem(word.lower()) for word in query.split()]
+        query_stems = [self.stemmer.stem(w.lower()) for w in query.split()]
+        scores = defaultdict(int)
 
-        for item in self.items:
-            score = 0
-            itemName = [stemmer.stem(word) for word in item["name"].lower().split()]
-            itemTags = [stemmer.stem(tag.lower()) for tag in item["tags"]]
+        for stem in query_stems:
+            if stem in self.index:
+                for item_idx in self.index[stem]:
+                    item = self.raw_items[item_idx]
+                    if stem in [self.stemmer.stem(w.lower()) for w in item['name'].split()]:
+                        scores[item_idx] += 3
+                    else:
+                        scores[item_idx] += 1
 
-            for word in queryWords:
-                if word in itemName:
-                    score += 2
-                if word in itemTags:
-                    score += 1
-
-            if score > 0:
-                itemScores.append((score, item))
-
-        itemScores.sort(key=lambda x: x[0], reverse=True)
-
-        return [item for score, item in itemScores]
+        sorted_indices = sorted(scores.items(), key=lambda x: x[1], reverse=True)
+        return [self.raw_items[i] for i, score in sorted_indices]
