@@ -159,7 +159,7 @@ class ItemManager(tk.Frame):
             radius=20,
             fill="#363152",
             outline="",
-            tags="filterButtonShadow"
+            tags=("filterButtonShadow", "front")
         )
         self.createRoundRect(
             self.canvas,
@@ -168,13 +168,13 @@ class ItemManager(tk.Frame):
             radius=20,
             fill="#F0C38E",
             outline="",
-            tags=""
+            tags="front"
         )
         self.canvas.create_image(
             925, 45,
             image=self.icons["filter"],
             anchor="center",
-            tags=""
+            tags="front"
         )
         self.createRoundRect(
             self.canvas,
@@ -183,7 +183,7 @@ class ItemManager(tk.Frame):
             radius=20,
             fill="",
             outline="",
-            tags=("filterButton", "search")
+            tags=("filterButton", "front")
         )
         def filterOnPress(event):
             log("Filter", "drawUX().filter()")
