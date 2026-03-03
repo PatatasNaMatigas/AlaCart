@@ -3,7 +3,7 @@ import datetime
 from dataManager import FileHandler as FH
 from enum import Enum
 
-from util.Utils import warn
+from util.Utils import warn, log
 
 
 def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float) -> dict:
@@ -72,6 +72,7 @@ class Items:
         return {}
 
     def getItem(self, itemId: int) -> dict:
+        log(itemId, "Items.getItem()")
         for item in self.items:
             if item["item_id"] == itemId:
                 return item
