@@ -19,6 +19,10 @@ def initDatabaseStructure() -> None:
         os.mkdir("../Database/accounts")
     except FileExistsError:
         pass
+    try:
+        os.mkdir("../Database/images")
+    except FileExistsError:
+        pass
 
     metaFile = "../Database/meta.json"
     if not os.path.exists(metaFile) or os.path.getsize(metaFile) == 0:
@@ -162,6 +166,12 @@ def deleteFile(filename: str) -> None:
         shutil.rmtree(filename)
     except PermissionError:
         wtf("Folder cannot be deleted", "DELETE FILE NAME")
+
+def clone(source: str, destination: str) -> None:
+    try:
+        shutil.copy2(source, destination)
+    except PermissionError:
+        wtf("Folder cannot be cloned", "CLONE FILE NAME")
 
 def safeWrite(filename: str, data: object) -> None:
     temp_file = filename + ".tmp"

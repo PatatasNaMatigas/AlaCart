@@ -1,9 +1,13 @@
 import tkinter as tk
 import tkinter.font as tkFont
+from tkinter import filedialog
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler as FH, DataModels as DM
+from dataManager.DataModels import Items
 from scenes import UIUtils
+from scenes import App
 from util.Utils import log, warn
 
 class AddItem(tk.Frame):
@@ -11,9 +15,13 @@ class AddItem(tk.Frame):
     def __init__(self, parent, controller):
         super().__init__(parent, bg="#48426D")
 
+        self.image = ""
         self.icons = {}
         self.icons["add_48426D"] = ImageTk.PhotoImage(
             Image.open("../res/add_48426D.png").resize((25, 25), Image.Resampling.LANCZOS)
+        )
+        self.icons["add_9C827D"] = ImageTk.PhotoImage(
+            Image.open("../res/add_9C827D.png").resize((80, 80), Image.Resampling.LANCZOS)
         )
 
         self.itemName = ["", "Enter Item Name", "itemName"]
@@ -34,13 +42,26 @@ class AddItem(tk.Frame):
             0, 0,
             1000, 600,
             fill="#48426D",
-            outline=""
+            outline="",
+            tags="bg"
         )
         self.initHeader()
         self.initForm()
+        self.initPhoto()
+        self.initOperations()
 
         self.canvas.pack(fill="both", expand=True)
         self.canvas.bind("<Key>", self.onKeyPress)
+        self.canvas.tag_bind("bg", "<Button-1>", self.reset)
+
+    def reset(self, event):
+        self.itemName = ["", "Enter Item Name", "itemName"]
+        self.itemPrice = ["", "Enter item price", "itemPrice"]
+        self.itemStock = ["", "Enter item stock", "itemStock"]
+        self.itemTag = ["", "Enter item tag", "itemTag", []]
+        self.focusedField = None
+        self.image = ""
+        self.canvas.itemconfig("selectorLine", fill="#48426D")
 
     def initHeader(self):
         self.canvas.create_rectangle(
@@ -122,7 +143,8 @@ class AddItem(tk.Frame):
             x + 160, y + 34,
             x + 580, y + 34,
             fill="#48426D",
-            width=2
+            width=2,
+            tags=(f"line:{tag}", "selectorLine")
         )
         self.canvas.create_text(
             x + 170, y - 4,
@@ -162,10 +184,8 @@ class AddItem(tk.Frame):
             self.focusedField = tag
             self.canvas.focus_set()
             self.canvas.move(f"shadow:{tag}", -5, -5)
-            log(f"Item Name: {self.itemName[0]}")
-            log(f"Item Price: {self.itemPrice[0]}")
-            log(f"Item Stock: {self.itemStock[0]}")
-            log(f"Item Tag: {self.itemTag[0]}")
+            self.canvas.itemconfig("selectorLine", fill="#48426D")
+            self.canvas.itemconfig(f"line:{tag}", fill="#FFFFFF")
         def onRelease(event):
             self.canvas.move(f"shadow:{tag}", 5, 5)
 
@@ -194,7 +214,8 @@ class AddItem(tk.Frame):
             x + 160, y + 34,
             x + 530, y + 34,
             fill="#48426D",
-            width=2
+            width=2,
+            tags=("line:itemTag", "selectorLine")
         )
         self.canvas.create_text(
             x + 170, y - 4,
@@ -265,10 +286,8 @@ class AddItem(tk.Frame):
             self.focusedField = "itemTag"
             self.canvas.focus_set()
             self.canvas.move(f"shadow:itemTag", -5, -5)
-            log(f"Item Name: {self.itemName[0]}")
-            log(f"Item Price: {self.itemPrice[0]}")
-            log(f"Item Stock: {self.itemStock[0]}")
-            log(f"Item Tag: {self.itemTag[0]}")
+            self.canvas.itemconfig("selectorLine", fill="#48426D")
+            self.canvas.itemconfig("line:itemTag", fill="#FFFFFF")
 
         def onRelease(event):
             self.canvas.move(f"shadow:itemTag", 5, 5)
@@ -353,6 +372,177 @@ class AddItem(tk.Frame):
 
         return x + width + 20
 
+    def initPhoto(self):
+        UIUtils.createRoundRect(
+            self.canvas,
+            675, 145,
+            280, 305,
+            radius=40,
+            fill="#363152",
+            outline="",
+            tags="uploadPhotoShadow",
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            670, 140,
+            280, 305,
+            radius=40,
+            fill="#F0C38E",
+            outline=""
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            670, 365,
+            280, 80,
+            radius=40,
+            fill="#312C51",
+            outline=""
+        )
+        self.canvas.create_rectangle(
+            670, 365,
+            950, 400,
+            fill="#312C51",
+            outline=""
+        )
+        self.canvas.create_text(
+            810, 405,
+            text="Cover photo",
+            font=("koulen", 24),
+            anchor="center",
+            fill="#F0C38E",
+        )
+        self.canvas.create_image(
+            810, 250,
+            image=self.icons["add_9C827D"]
+        )
+        self.canvas.create_text(
+            810, 320,
+            text="Upload photo",
+            font=("koulen", 18),
+            fill="#9C827D",
+            anchor="center",
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            670, 140,
+            280, 305,
+            radius=40,
+            fill="",
+            outline="",
+            tags="uploadPhoto",
+        )
+
+        def onClick(event):
+            self.canvas.move("uploadPhotoShadow", -5, -5)
+            imageTypes = [
+                ("Image files", "*.jpg *.jpeg *.png *.gif *.bmp"),
+                ("JPEG files", "*.jpg *.jpeg"),
+                ("PNG files", "*.png")
+            ]
+            self.image = filedialog.askopenfilename(
+                title="Select a file to upload",
+                filetypes=imageTypes
+            )
+
+        def onRelease(event):
+            self.canvas.move("uploadPhotoShadow", 5, 5)
+
+        self.canvas.tag_bind("uploadPhoto", "<Button-1>", onClick)
+        self.canvas.tag_bind("uploadPhoto", "<ButtonRelease-1>", onRelease)
+
+    def initOperations(self):
+        UIUtils.createRoundRect(
+            self.canvas,
+            715, 505,
+            100, 40,
+            fill="#363152",
+            outline="",
+            tags="cancelButtonShadow"
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            710, 500,
+            100, 40,
+            fill="#F0C38E",
+            outline="",
+        )
+        self.canvas.create_text(
+            760, 520,
+            text="Cancel",
+            font=("koulen", 21),
+            fill="#48426D",
+            anchor="center",
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            710, 500,
+            100, 40,
+            fill="",
+            outline="",
+            tags="cancelButton"
+        )
+
+        def cancelClick(event):
+            self.canvas.move("cancelButtonShadow", -5, -5)
+        def cancelRelease(event):
+            self.canvas.move("cancelButtonShadow", 5, 5)
+            self.reset("")
+            App.show("ItemManager")
+
+        self.canvas.tag_bind("cancelButton", "<Button-1>", cancelClick)
+        self.canvas.tag_bind("cancelButton", "<ButtonRelease-1>", cancelRelease)
+
+        UIUtils.createRoundRect(
+            self.canvas,
+            830, 505,
+            80, 40,
+            fill="#363152",
+            outline="",
+            tags="doneButtonShadow"
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            825, 500,
+            80, 40,
+            fill="#F0C38E",
+            outline="",
+        )
+        self.canvas.create_text(
+            865, 520,
+            text="Done",
+            font=("koulen", 21),
+            fill="#48426D",
+            anchor="center",
+        )
+        UIUtils.createRoundRect(
+            self.canvas,
+            825, 500,
+            80, 40,
+            fill="",
+            outline="",
+            tags="doneButton"
+        )
+
+        def doneClick(event):
+            self.canvas.move("doneButtonShadow", -5, -5)
+        def doneRelease(event):
+            self.canvas.move("doneButtonShadow", 5, 5)
+            self.saveData()
+            App.show("ItemManager")
+
+        self.canvas.tag_bind("doneButton", "<Button-1>", doneClick)
+        self.canvas.tag_bind("doneButton", "<ButtonRelease-1>", doneRelease)
+
+    def saveData(self):
+        items = Items()
+        item = items.addItem(
+            self.itemName[0],
+            float(self.itemPrice[0]),
+            int(self.itemStock[0]),
+            self.itemTag[3]
+        )
+        FH.clone(self.image, f"../Database/images/{item["item_id"]}.{self.image.split('.').pop()}")
+
     def onKeyPress(self, event):
         if not self.focusedField:
             return
@@ -372,6 +562,7 @@ class AddItem(tk.Frame):
 
         elif event.keysym == "Escape":
             self.focusedField = None
+            self.canvas.itemconfig("selectorLine", fill="#48426D")
 
         elif event.keysym == "Return":
             if self.focusedField == "itemTag" and userInput[0] not in userInput[3]:
@@ -379,6 +570,9 @@ class AddItem(tk.Frame):
                 userInput[0] = ""
                 self.initTags()
                 log(f"Tags updated: {userInput[3]}")
+            else:
+                self.focusedField = None
+                self.canvas.itemconfig("selectorLine", fill="#48426D")
 
         elif len(event.char) == 1 and event.char.isprintable():
             char = event.char
@@ -395,7 +589,10 @@ class AddItem(tk.Frame):
                 elif not char.isdigit():
                     return
 
-            userInput[0] += char
+            if self.focusedField == "itemTag" and len(userInput[0]) < 20:
+                userInput[0] += char
+            elif self.focusedField != "itemTag":
+                userInput[0] += char
 
         display = userInput[0] if userInput[0] else userInput[1]
         color = "#48426D" if userInput[0] else "#9C827D"

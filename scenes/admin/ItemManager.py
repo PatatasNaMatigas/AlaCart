@@ -70,6 +70,7 @@ class ItemManager(tk.Frame):
 
             if dy != 0:
                 self.canvas.move("itemEntry", 0, dy)
+                self.canvas.move("addButton", 0, dy)
 
         self.canvas.bind_all("<MouseWheel>", scrollItems)
 
@@ -121,7 +122,7 @@ class ItemManager(tk.Frame):
             radius=40,
             fill="#363152",
             outline="",
-            tags=("itemEntry", f"addButton", f"addButtonShadow")
+            tags=(f"addButton", f"addButtonShadow")
         )
         UIUtils.createRoundRect(
             self.canvas,
@@ -131,7 +132,7 @@ class ItemManager(tk.Frame):
             radius=40,
             fill="#312C51",
             outline="",
-            tags=("itemEntry", f"addButton")
+            tags=(f"addButton")
         )
         UIUtils.createRoundRect(
             self.canvas,
@@ -140,14 +141,14 @@ class ItemManager(tk.Frame):
             radius=40,
             fill="#48426D",
             outline="",
-            tags=("itemEntry", "addButton")
+            tags=("addButton")
         )
         self.canvas.create_rectangle(
             100, 215,
             370, 250,
             outline="",
             fill="#48426D",
-            tags=("itemEntry", f"addButton")
+            tags=(f"addButton")
         )
         self.canvas.create_text(
             245, 252,
@@ -155,13 +156,13 @@ class ItemManager(tk.Frame):
             font=("koulen", 23),
             fill="#F0C38E",
             anchor="center",
-            tags=("itemEntry", f"addButton")
+            tags=(f"addButton")
         )
         self.canvas.create_image(
             245, 160,
             image=self.icons["add"],
             anchor="center",
-            tags=("itemEntry", f"addButton")
+            tags=(f"addButton")
         )
         def addItemOnPress(event):
             log("Add Item", "initUX().addItem()")
@@ -324,8 +325,10 @@ class ItemManager(tk.Frame):
                 self.initItems(items)
                 self.itemEntryY = 0
                 self.itemEntryMaxY = 0
+                self.canvas.tag_raise("addButton")
                 self.canvas.tag_raise("search")
                 self.canvas.tag_raise("front")
+                self.canvas.moveto("addButton", 105, 105)
                 self.active = False
             elif len(event.char) == 1 and event.char.isprintable():
                 self.query += event.char
@@ -385,9 +388,11 @@ class ItemManager(tk.Frame):
             tags=("itemEntry", f"id_{itemId}")
         )
         koulen = tkFont.Font(family="koulen", size=20)
+        width = koulen.measure(itemName)
         while koulen.measure(itemName + "...") > 250:
             itemName = itemName[:-1]
-        itemName += "..."
+        if width > 250:
+            itemName += "..."
         canvas.create_text(
             x + 10,
             y + 140,
@@ -430,15 +435,15 @@ class ItemManager(tk.Frame):
             self.canvas.move(f"itemEntry{itemId}ButtonShadow", -5, -5)
             current_item_clicked = canvas.find_closest(event.x, event.y)
             tags = canvas.gettags(current_item_clicked)
-            actual_id = None
+            id = None
             for tag in tags:
                 if tag.startswith("id_"):
-                    actual_id = tag.split("_")[1]
+                    id = tag.split("_")[1]
                     break
 
-            if actual_id:
-                log(f"Clicked on item ID: {actual_id}")
-                logData(self.items.getItem(int(actual_id)))
+            if id:
+                log(f"Clicked on item ID: {id}")
+                logData(self.items.getItem(int(id)))
 
         def onRelease(event):
             self.canvas.move(f"itemEntry{itemId}ButtonShadow", 5, 5)

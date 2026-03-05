@@ -11,7 +11,7 @@ from util import Utils
 
 frames = {}
 
-def show(name):
+def show(name: str) -> None:
     frame = frames[name]
     frame.tkraise()
 
@@ -45,3 +45,4 @@ class App(tk.Tk):
             frame.grid(row=0, column=0, sticky="nsew")
 
         show("AddItem")
+        show("ItemManager")
