@@ -1,9 +1,19 @@
 import tkinter as tk
 
+from scenes.admin.Home import Home as AdminHome
+from scenes.admin.AddItem import AddItem
 from scenes.admin.ItemManager import ItemManager
 from scenes.admin.Summaries import Summaries
+
+from scenes.customer.Home import Home as CustomerHome
+
 from util import Utils
 
+frames = {}
+
+def show(name):
+    frame = frames[name]
+    frame.tkraise()
 
 class App(tk.Tk):
     def __init__(self):
@@ -18,15 +28,20 @@ class App(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        self.frames = {}
+        adminScenes = {
+            AdminHome,
+            ItemManager,
+            AddItem,
+            Summaries
+        }
+        customerScenes = {
+            CustomerHome
+        }
+        scenes = adminScenes | customerScenes
 
-        for F in (ItemManager, Summaries):
+        for F in scenes:
             frame = F(container, self)
-            self.frames[F.__name__] = frame
+            frames[F.__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        self.show("ItemManager")
-
-    def show(self, name):
-        frame = self.frames[name]
-        frame.tkraise()
+        show("AddItem")
