@@ -5,8 +5,8 @@ from dataManager.DataModels import Items
 
 class SearchEngine:
 
-    def __init__(self, item_manager: Items):
-        self.raw_items = item_manager.getItems()
+    def __init__(self, items: Items):
+        self.raw_items = items.getItems()
         self.stemmer = SnowballStemmer("english")
         self.index = defaultdict(list)
         self._build_index()

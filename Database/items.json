@@ -1,0 +1,106 @@
+[
+    {
+        "item_id": 1,
+        "name": "Not'so regular sisy g",
+        "price": 100.0,
+        "stock": 60,
+        "tags": [
+            "masarap",
+            "legit",
+            "bili n kau",
+            "pls"
+        ]
+    },
+    {
+        "item_id": 2,
+        "name": "kuryenteh",
+        "price": 5500.67,
+        "stock": 1,
+        "tags": [
+            "solar power station",
+            "charging station",
+            "power bank",
+            "innovation"
+        ]
+    },
+    {
+        "item_id": 3,
+        "name": "susi ni dave",
+        "price": 56.2,
+        "stock": 2,
+        "tags": [
+            "rararoooo"
+        ]
+    },
+    {
+        "item_id": 4,
+        "name": "watering can ni dave",
+        "price": 120.54,
+        "stock": 1,
+        "tags": [
+            "rarrarooo"
+        ]
+    },
+    {
+        "item_id": 5,
+        "name": "almanac ni dave",
+        "price": 48.43,
+        "stock": 1,
+        "tags": [
+            "rararooo"
+        ]
+    },
+    {
+        "item_id": 6,
+        "name": "si carl",
+        "price": 100000000000.0,
+        "stock": 1,
+        "tags": [
+            "nigga"
+        ]
+    },
+    {
+        "item_id": 7,
+        "name": "overseer",
+        "price": 60.11,
+        "stock": 500,
+        "tags": [
+            "kinalbo",
+            "si",
+            "ae"
+        ]
+    },
+    {
+        "item_id": 8,
+        "name": "Moution",
+        "price": 60.0,
+        "stock": 5000,
+        "tags": [
+            "mouse on phone",
+            "kinalbo",
+            "din",
+            "si",
+            "ae"
+        ]
+    },
+    {
+        "item_id": 10,
+        "name": "ai ni jed",
+        "price": 10000000.0,
+        "stock": 1,
+        "tags": [
+            "ai",
+            "jed",
+            "bangga"
+        ]
+    },
+    {
+        "item_id": 12,
+        "name": "bold ni vj at spike",
+        "price": 100.0,
+        "stock": 50,
+        "tags": [
+            "bida max"
+        ]
+    }
+]

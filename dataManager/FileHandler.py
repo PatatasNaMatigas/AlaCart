@@ -173,6 +173,9 @@ def clone(source: str, destination: str) -> None:
     except PermissionError:
         wtf("Folder cannot be cloned", "CLONE FILE NAME")
 
+def replace(source: str, destination: str) -> None:
+    os.replace(source, destination)
+
 def safeWrite(filename: str, data: object) -> None:
     temp_file = filename + ".tmp"
 

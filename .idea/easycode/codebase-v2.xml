@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="com.obiscr.chatgpt.settings.EasyCodeState">
+    <option name="projectFiles" value="$PROJECT_DIR$/Database/accounts/accounts.json;C:/Users/AMD/PycharmProjects/OnlineShop/Database/items.json;C:/Users/AMD/PycharmProjects/OnlineShop/Database/meta.json;C:/Users/AMD/PycharmProjects/OnlineShop/dataManager/DataModels.py;C:/Users/AMD/PycharmProjects/OnlineShop/dataManager/FileHandler.py;C:/Users/AMD/PycharmProjects/OnlineShop/dataManager/SearchEngine.py;C:/Users/AMD/PycharmProjects/OnlineShop/main/__init__.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/admin/AddItem.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/admin/Home.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/admin/ItemManager.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/admin/Summaries.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/customer/Home.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/App.py;C:/Users/AMD/PycharmProjects/OnlineShop/scenes/UIUtils.py;C:/Users/AMD/PycharmProjects/OnlineShop/util/Utils.py" />
+  </component>
+</project>
