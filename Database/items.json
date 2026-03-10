@@ -71,19 +71,6 @@
         ]
     },
     {
-        "item_id": 8,
-        "name": "Moution",
-        "price": 60.0,
-        "stock": 5000,
-        "tags": [
-            "mouse on phone",
-            "kinalbo",
-            "din",
-            "si",
-            "ae"
-        ]
-    },
-    {
         "item_id": 10,
         "name": "ai ni jed",
         "price": 10000000.0,
@@ -101,6 +88,33 @@
         "stock": 50,
         "tags": [
             "bida max"
+        ]
+    },
+    {
+        "item_id": 14,
+        "name": "dog",
+        "price": 8000.0,
+        "stock": 1,
+        "tags": [
+            "arf arf"
+        ]
+    },
+    {
+        "item_id": 15,
+        "name": "airplane",
+        "price": 67000000.0,
+        "stock": 12,
+        "tags": [
+            "eroplanong papel"
+        ]
+    },
+    {
+        "item_id": 16,
+        "name": "spotify",
+        "price": 10.0,
+        "stock": 192,
+        "tags": [
+            "music"
         ]
     }
 ]

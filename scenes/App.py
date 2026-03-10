@@ -1,5 +1,6 @@
 import tkinter as tk
 
+from scenes.Index import Index
 from scenes.admin.Item import Item
 from scenes.admin.Home import Home as AdminHome
 from scenes.admin.ItemManager import ItemManager
@@ -50,7 +51,7 @@ class App(tk.Tk):
         container.grid_rowconfigure(0, weight=1)
         container.grid_columnconfigure(0, weight=1)
 
-        scenes = adminScenes | customerScenes
+        scenes = adminScenes | customerScenes | {"Index" : {"frame" : Index}}
 
         for k, v in scenes.items():
             frame = v["frame"](container, self)

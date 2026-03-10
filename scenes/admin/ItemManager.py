@@ -36,8 +36,11 @@ class ItemManager(tk.Frame):
         self.icons["home"] = ImageTk.PhotoImage(
             Image.open("../res/home.png").resize((45, 45), Image.Resampling.LANCZOS)
         )
-        self.icons["trash"] = ImageTk.PhotoImage(
-            Image.open("../res/trash.png").resize((45, 45), Image.Resampling.LANCZOS)
+        self.icons["trash_48426D"] = ImageTk.PhotoImage(
+            Image.open("../res/trash_48426D.png").resize((45, 45), Image.Resampling.LANCZOS)
+        )
+        self.icons["trash_9A0000"] = ImageTk.PhotoImage(
+            Image.open("../res/trash_9A0000.png").resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.icons["filter"] = ImageTk.PhotoImage(
             Image.open("../res/filter.png").resize((30, 30), Image.Resampling.LANCZOS)
@@ -218,6 +221,15 @@ class ItemManager(tk.Frame):
             self.canvas.move("filterExitButtonShadow", 5, 5)
             self.filterActive = False
             self.canvas.tag_lower("filter")
+            self.canvas.delete("itemEntry")
+            self.initItems(Items().sort(self.activeFilter, ascending=self.activeSortType))
+            self.itemEntryY = 0
+            self.itemEntryMaxY = 0
+            self.canvas.tag_raise("addButton")
+            self.canvas.tag_raise("search")
+            self.canvas.tag_raise("front")
+            self.canvas.moveto("addButton", 105, 105)
+            self.searchActive = False
 
         self.canvas.tag_bind("filterExitButton", "<Button-1>", onFilterExitClick)
         self.canvas.tag_bind("filterExitButton", "<ButtonRelease-1>", onFilterExitRelease)
@@ -480,9 +492,9 @@ class ItemManager(tk.Frame):
         )
         self.canvas.create_image(
             40, 125,
-            image=self.icons["trash"],
+            image=self.icons["trash_48426D"],
             anchor="center",
-            tags="front"
+            tags=("front", "trashIcon")
         )
         UIUtils.createRoundRect(
             self.canvas,
@@ -498,6 +510,11 @@ class ItemManager(tk.Frame):
             self.canvas.move("trashButtonShadow", 5, 5)
             self.deleteActive = not self.deleteActive
             self.searchActive = False
+            if self.deleteActive:
+                self.canvas.itemconfig("trashIcon", image=self.icons["trash_9A0000"])
+            else:
+                self.canvas.itemconfig("trashIcon", image=self.icons["trash_48426D"])
+
 
         self.canvas.tag_bind("trashButton", "<Button-1>", trashOnPress)
         self.canvas.tag_bind("trashButton", "<ButtonRelease-1>", trashOnRelease)
