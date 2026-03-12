@@ -6,12 +6,12 @@ from tkinter import filedialog
 from PIL import ImageTk, Image
 from PIL.ImageTk import PhotoImage
 
-from dataManager import FileHandler as FH, DataModels as DM
+from dataManager import FileHandler as FH
 from dataManager.DataModels import Items
-from scenes import UIUtils
-from scenes import App
+from ui import UIUtils
+from ui.main import App
 from util import Utils
-from util.Utils import log, warn, logData, wtf
+from util.Utils import warn, logData, wtf, log
 
 
 class Item(tk.Frame):
@@ -28,6 +28,10 @@ class Item(tk.Frame):
         )
         self.icons["add_9C827D"] = ImageTk.PhotoImage(
             Image.open("../res/add_9C827D.png").resize((80, 80), Image.Resampling.LANCZOS)
+        )
+        self.images = {}
+        self.images["bg"] = ImageTk.PhotoImage(
+            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
         self.itemName = ["", "Enter Item Name", "itemName"]
@@ -46,11 +50,9 @@ class Item(tk.Frame):
         )
 
     def initUi(self):
-        self.canvas.create_rectangle(
-            0, 0,
-            1000, 600,
-            fill="#48426D",
-            outline="",
+        self.canvas.create_image(
+            500, 300,
+            image=self.images["bg"],
             tags="bg"
         )
         self.initHeader()
@@ -106,7 +108,7 @@ class Item(tk.Frame):
     def deepReset(self) -> None:
         self.canvas.delete("all")
 
-        self.selectedItem = App.adminScenes["ItemManager"]["selectedItem"]
+        self.selectedItem = App.sellerScenes["ItemManager"]["selectedItem"]
 
         if self.selectedItem:
             self.itemName[0] = self.selectedItem["name"]
@@ -135,7 +137,7 @@ class Item(tk.Frame):
         self.canvas.create_text(
             20, 0,
             text=f"{"Modify" if self.selectedItem else "Add"} Item",
-            font=("koulen", 30),
+            font=(Utils.Fonts.KOULEN.value, 30),
             fill="#F0C38E",
             anchor='nw'
         )
@@ -144,14 +146,14 @@ class Item(tk.Frame):
         self.canvas.create_text(
             30, 80,
             text="Item Details:",
-            font=("koulen", 24),
+            font=(Utils.Fonts.KOULEN.value, 24),
             fill="#F0C38E",
             anchor='nw'
         )
         self.canvas.create_text(
             30, 385,
             text="Item Tags:",
-            font=("koulen", 24),
+            font=(Utils.Fonts.KOULEN.value, 24),
             fill="#F0C38E",
             anchor='nw'
         )
@@ -202,7 +204,7 @@ class Item(tk.Frame):
             x + 170, y - 4,
             text=data[0] if data[0] else data[1],
             fill= "#48426D" if data[0] else "#9C827D",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             anchor='nw',
             tags="input:" + tag
         )
@@ -218,7 +220,7 @@ class Item(tk.Frame):
             x + 20, y - 4,
             text=label,
             fill="#F0C38E",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             anchor='nw'
         )
         UIUtils.createRoundRect(
@@ -272,7 +274,7 @@ class Item(tk.Frame):
             x + 170, y - 4,
             text="Enter Item Tag",
             fill="#9C827D",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             anchor='nw',
             tags="input:itemTag"
         )
@@ -288,7 +290,7 @@ class Item(tk.Frame):
             x + 20, y - 4,
             text="Tag:",
             fill="#F0C38E",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             anchor='nw'
         )
         UIUtils.createRoundRect(
@@ -360,7 +362,7 @@ class Item(tk.Frame):
         self.canvas.tag_bind("addTag", "<ButtonRelease-1>", onAddRelease)
 
     def initTags(self) -> None:
-        font = tkFont.Font(family="koulen", size=21)
+        font = tkFont.Font(family=Utils.Fonts.KOULEN.value, size=21)
         maxWidth = 600
         yLevel = 0
         self.canvas.delete("itemTagEntry")
@@ -415,7 +417,6 @@ class Item(tk.Frame):
             self.canvas.delete(f"tag:{tag}")
             self.itemTag[3].remove(tag)
             self.initTags()
-            logData(self.itemTag[3])
 
         self.canvas.tag_bind(f"tag:{tag}", "<Button-1>", onClick)
         self.canvas.tag_bind(f"tag:{tag}", "<ButtonRelease-1>", deleteItem)
@@ -462,7 +463,7 @@ class Item(tk.Frame):
         self.canvas.create_text(
             810, 405,
             text="Cover photo",
-            font=("koulen", 24),
+            font=(Utils.Fonts.KOULEN.value, 24),
             anchor="center",
             fill="#F0C38E",
         )
@@ -473,7 +474,7 @@ class Item(tk.Frame):
         self.canvas.create_text(
             810, 320,
             text="Upload photo",
-            font=("koulen", 18),
+            font=(Utils.Fonts.KOULEN.value, 18),
             fill="#9C827D",
             anchor="center",
         )
@@ -538,7 +539,7 @@ class Item(tk.Frame):
         self.canvas.create_text(
             760, 520,
             text="Cancel",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             fill="#48426D",
             anchor="center",
         )
@@ -556,7 +557,7 @@ class Item(tk.Frame):
         def cancelRelease(event) -> None:
             self.canvas.move("cancelButtonShadow", 5, 5)
             self.reset("")
-            App.adminScenes["ItemManager"]["selectedItem"] = []
+            App.sellerScenes["ItemManager"]["selectedItem"] = []
             App.show("ItemManager")
 
         self.canvas.tag_bind("cancelButton", "<Button-1>", cancelClick)
@@ -580,7 +581,7 @@ class Item(tk.Frame):
         self.canvas.create_text(
             865, 520,
             text="Done",
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             fill="#48426D",
             anchor="center",
         )
@@ -640,7 +641,7 @@ class Item(tk.Frame):
             FH.clone(self.image, f"../Database/images/{item["item_id"]}.{self.image.split('.').pop()}")
 
         self.reset("")
-        App.adminScenes["ItemManager"]["selectedItem"] = []
+        App.sellerScenes["ItemManager"]["selectedItem"] = []
 
     def attemptLoadImage(self, itemId: int, maxWidth: int, maxHeight: int) -> PhotoImage:
         try:
@@ -656,12 +657,13 @@ class Item(tk.Frame):
             return ImageTk.PhotoImage(itemImage)
         except:
             wtf(
-                f"{Utils.Color.YELLOW.value}No image found{Utils.Color.RED.value} that has {Utils.Color.BLUE.value}{itemId}{Utils.Color.RED.value} as the name!",
+                f"{Utils.Colors.YELLOW.value}No image found{Utils.Colors.RED.value} that has {Utils.Colors.BLUE.value}{itemId}{Utils.Colors.RED.value} as the name!",
                 "Load Item Image"
             )
 
     def onKeyPress(self, event) -> None:
         if not self.focusedField:
+            warn("No Active Input Fields")
             return
 
         fields = {
@@ -672,7 +674,8 @@ class Item(tk.Frame):
         }
         userInput = fields.get(self.focusedField)
 
-        if not userInput: return
+        if not userInput:
+            return
 
         if event.keysym == "BackSpace":
             userInput[0] = userInput[0][:-1]
@@ -720,4 +723,5 @@ class Item(tk.Frame):
         )
 
     def onRaise(self) -> None:
+        log(f"Raised Item<{"Modify" if self.selectedItem else "Add"}>")
         self.deepReset()

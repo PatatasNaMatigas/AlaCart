@@ -9,8 +9,8 @@ from dataManager.DataModels import Items
 from dataManager.SearchEngine import SearchEngine
 from util import Utils
 from util.Utils import *
-from scenes import App, UIUtils
-
+from ui import UIUtils
+from ui.main import App
 
 class ItemManager(tk.Frame):
 
@@ -51,6 +51,9 @@ class ItemManager(tk.Frame):
         )
         self.images["trashCover"] = ImageTk.PhotoImage(
             Image.open("../res/delete_cover.png").resize((270, 190), Image.Resampling.LANCZOS)
+        )
+        self.images["bg"] = ImageTk.PhotoImage(
+            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
         self.filterIcons = [
@@ -93,11 +96,10 @@ class ItemManager(tk.Frame):
         self.activeSortType = 0
 
     def initUi(self):
-        self.canvas.create_rectangle(
-            0, 0,
-            1000, 600,
-            fill="#48426D",
-            outline=""
+        self.canvas.create_image(
+            500, 300,
+            image=self.images["bg"],
+            tags="bg"
         )
 
         self.itemList = self.items.getItems()
@@ -178,7 +180,7 @@ class ItemManager(tk.Frame):
         self.canvas.create_text(
             500, 185,
             text="Filter Items By",
-            font=("koulen", 27),
+            font=(Utils.Fonts.KOULEN.value, 27),
             fill="#F0C38E",
             tags="filter",
         )
@@ -202,7 +204,7 @@ class ItemManager(tk.Frame):
             500, 385,
             text="Done",
             fill="#48426D",
-            font=("koulen", 23),
+            font=(Utils.Fonts.KOULEN.value, 23),
             tags="filter"
         )
         UIUtils.createRoundRect(
@@ -255,7 +257,7 @@ class ItemManager(tk.Frame):
         self.canvas.create_text(
             400, 260,
             text=self.filters[self.activeFilter],
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             fill="#F0C38E",
             tags=("filter", "filterTypeText")
         )
@@ -307,7 +309,7 @@ class ItemManager(tk.Frame):
         self.canvas.create_text(
             600, 260,
             text=self.sortType[self.activeSortType],
-            font=("koulen", 21),
+            font=(Utils.Fonts.KOULEN.value, 21),
             fill="#F0C38E",
             tags=("filter", "sortTypeText")
         )
@@ -410,7 +412,7 @@ class ItemManager(tk.Frame):
         self.canvas.create_text(
             245, 252,
             text="Add Item",
-            font=("koulen", 23),
+            font=(Utils.Fonts.KOULEN.value, 23),
             fill="#F0C38E",
             anchor="center",
             tags=(f"addButton")
@@ -469,6 +471,7 @@ class ItemManager(tk.Frame):
         def homeOnRelease(event):
             self.canvas.move("homeButtonShadow", 5, 5)
             self.searchActive = False
+            App.show("SellerHome")
 
         self.canvas.tag_bind("homeButton", "<Button-1>", homeOnPress)
         self.canvas.tag_bind("homeButton", "<ButtonRelease-1>", homeOnRelease)
@@ -492,7 +495,7 @@ class ItemManager(tk.Frame):
         )
         self.canvas.create_image(
             40, 125,
-            image=self.icons["trash_48426D"],
+            image=self.icons["trash_48426D"] if not self.deleteActive else self.icons["trash_9A0000"],
             anchor="center",
             tags=("front", "trashIcon")
         )
@@ -593,7 +596,7 @@ class ItemManager(tk.Frame):
             495, 45,
             anchor="center",
             text="Search",
-            font=("koulen", 25),
+            font=(Utils.Fonts.KOULEN.value, 25),
             fill="#48426D",
             tags="search"
         )
@@ -626,7 +629,7 @@ class ItemManager(tk.Frame):
             elif event.keysym == "Return":
                 items = SearchEngine(self.items).search(self.query)
                 self.canvas.delete("itemEntry")
-                self.initItems(items if len(items) > 0 else self.items.getItems())
+                self.initItems(items if self.query else self.items.getItems())
                 self.itemEntryY = 0
                 self.itemEntryMaxY = 0
                 self.canvas.tag_raise("addButton")
@@ -710,7 +713,7 @@ class ItemManager(tk.Frame):
             )
         except:
             wtf(
-                f"{Utils.Color.YELLOW.value}No image found{Utils.Color.RED.value} that has {Utils.Color.BLUE.value}{itemId}{Utils.Color.RED.value} as the name!",
+                f"{Utils.Colors.YELLOW.value}No image found{Utils.Colors.RED.value} that has {Utils.Colors.BLUE.value}{itemId}{Utils.Colors.RED.value} as the name!",
                 "Load Item Image"
             )
 
@@ -730,7 +733,7 @@ class ItemManager(tk.Frame):
             fill="#48426D",
             tags=("itemEntry", f"id_{itemId}")
         )
-        koulen = tkFont.Font(family="koulen", size=20)
+        koulen = tkFont.Font(family=Utils.Fonts.KOULEN.value, size=20)
         width = koulen.measure(itemName)
         while koulen.measure(itemName + "...") > 250:
             itemName = itemName[:-1]
@@ -742,7 +745,7 @@ class ItemManager(tk.Frame):
             anchor="w",
             text=itemName,
             fill="#F0C38E",
-            font=("koulen", 20),
+            font=(Utils.Fonts.KOULEN.value, 20),
             tags=("itemEntry", f"id_{itemId}")
         )
         self.canvas.create_text(
@@ -750,8 +753,8 @@ class ItemManager(tk.Frame):
             y + 170,
             anchor="w",
             text=f"Stock: {stock}",
-            fill="#F0C38E",
-            font=("koulen", 12),
+            fill="#F0C38E" if stock > 5 else "#990000",
+            font=(Utils.Fonts.KOULEN.value, 12),
             tags=("itemEntry", f"id_{itemId}")
         )
         self.canvas.create_text(
@@ -760,7 +763,7 @@ class ItemManager(tk.Frame):
             anchor="e",
             text=f"Price: P{price}",
             fill="#F0C38E",
-            font=("koulen", 12),
+            font=(Utils.Fonts.KOULEN.value, 12),
             tags=("itemEntry", f"id_{itemId}")
         )
         UIUtils.createRoundRect(
@@ -781,12 +784,13 @@ class ItemManager(tk.Frame):
             self.canvas.move(f"itemEntry{itemId}ButtonShadow", 5, 5)
             self.searchActive = False
             if not self.deleteActive:
-                App.adminScenes["ItemManager"]["selectedItem"] = copy.deepcopy(self.items.getItem(int(itemId)))
+                App.sellerScenes["ItemManager"]["selectedItem"] = copy.deepcopy(self.items.getItem(int(itemId)))
                 App.show("Item")
             else:
                 self.items = Items()
                 self.items.deleteItem(itemId)
                 self.canvas.delete("all")
+                self.deleteActive = True
                 self.initUi()
 
         def onMouseHover(event, itemId):
@@ -805,6 +809,8 @@ class ItemManager(tk.Frame):
         self.canvas.tag_bind(f"id_{itemId}", "<Leave>", lambda e, i=itemId: onMouseHoverLeave(e, i))
 
     def onRaise(self):
+        log("Raised ItemManager")
+
         self.items = Items()
         self.canvas.delete("all")
         self.deleteActive = False

@@ -42,15 +42,6 @@
         ]
     },
     {
-        "item_id": 5,
-        "name": "almanac ni dave",
-        "price": 48.43,
-        "stock": 1,
-        "tags": [
-            "rararooo"
-        ]
-    },
-    {
         "item_id": 6,
         "name": "si carl",
         "price": 100000000000.0,
@@ -91,30 +82,12 @@
         ]
     },
     {
-        "item_id": 14,
-        "name": "dog",
-        "price": 8000.0,
-        "stock": 1,
-        "tags": [
-            "arf arf"
-        ]
-    },
-    {
         "item_id": 15,
         "name": "airplane",
         "price": 67000000.0,
         "stock": 12,
         "tags": [
             "eroplanong papel"
-        ]
-    },
-    {
-        "item_id": 16,
-        "name": "spotify",
-        "price": 10.0,
-        "stock": 192,
-        "tags": [
-            "music"
         ]
     }
 ]

@@ -86,7 +86,7 @@ def updateTransactions(data: list) -> None:
 def getAccounts() -> list:
     return read("../Database/accounts/accounts.json")
 
-def getAccount(username: str) -> list:
+def getAccount(username: str) -> dict:
     return read(f"../Database/accounts/{username}/profile.json")
 
 def updateAccounts(data: list) -> None:
@@ -185,5 +185,8 @@ def safeWrite(filename: str, data: object) -> None:
     os.replace(temp_file, filename)
 
 def read(filename: str):
-    with open(filename, "r") as file:
-        return json.load(file)
+    try:
+        with open(filename, "r") as file:
+            return json.load(file)
+    except:
+        wtf(f"File named {filename} not found!")

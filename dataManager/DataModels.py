@@ -3,6 +3,7 @@ import datetime
 from dataManager import FileHandler as FH
 from enum import Enum
 
+from ui.Codes import ReturnCode
 from util.Utils import warn, log, logData
 
 
@@ -78,7 +79,6 @@ class Items:
         return {}
 
     def getItem(self, itemId: int) -> dict:
-        log(itemId, "Items.getItem()")
         for item in self.items:
             if item["item_id"] == itemId:
                 return item
@@ -199,16 +199,24 @@ class Accounts:
     """
 
     class Role(Enum):
-        OWNER = 1
-        CUSTOMER = 2
+        SELLER = "seller"
+        BUYER  = "buyer"
 
     def __init__(self):
         self.accounts = FH.getAccounts()
 
-    def createAccount(self, username: str, password: str, role: Role) -> dict:
+    def createAccount(self, username: str, password: str, role: Role) -> tuple:
+        if not username or not password:
+            return tuple(
+                code for code, condition in [
+                    (ReturnCode.MISSING_USERNAME, not username),
+                    (ReturnCode.MISSING_PASSWORD, not password),
+                    ({}, True)
+                ] if condition
+            )
+
         if username in self.accounts:
-            warn(f"Account with username {username} already exists", "CREATE ACCOUNT")
-            return {}
+            return ReturnCode.ACCOUNT_ALREADY_EXISTS, {}
 
         self.accounts.append(
             username
@@ -220,30 +228,40 @@ class Accounts:
             "username" : username,
             "password" : password,
             "role"     : role.value,
-            "stats": {
+            "stats"    : {
                 "items_purchased" : 0,
-                "amount_spent"    : 0
+                "amount_spent"    : 0,
+                "items_sold"      : 0,
+                "amount_earned"    : 0,
             }
         }
         FH.createAccount(profile)
 
-        return profile
+        return ReturnCode.SUCCESS, profile
 
-    def authenticate(self, username: str, password: str) -> bool:
+    def authenticate(self, username: str, password: str) -> ReturnCode | tuple:
+        if not username or not password:
+            return tuple(
+                code for code, condition in [
+                    (ReturnCode.MISSING_USERNAME, not username),
+                    (ReturnCode.MISSING_PASSWORD, not password)
+                ] if condition
+            )
         if not username in self.accounts:
-            warn(f"Account with username {username} not found", "AUTHENTICATE")
-            return False
+            return ReturnCode.ACCOUNT_DOES_NOT_EXIST
         if FH.getAccount(username)["password"] == password:
-            return True
-        warn(f"Password incorrect for {username}", "AUTHENTICATE")
-        return False
+            return ReturnCode.SUCCESS
+        return ReturnCode.PASSWORD_INCORRECT
 
     def getRole(self, username: str) -> Role:
         return self.Role(FH.getAccount(username)["role"])
 
     def modifyAccount(self, username: str, newUsername: str = None, newPassword: str = None,
                       itemsPurchased: int = None, incrementItemsPurchased: bool = False,
-                      amountSpent: int = None, incrementAmountSpent: bool = False) -> None:
+                      amountSpent: int = None, incrementAmountSpent: bool = False,
+                      itemsSold: int = None, incrementItemsSold: bool = False,
+                      amountEarned: int = None, incrementAmountEarned: bool = False,
+                      ) -> None:
         if username not in self.accounts:
             warn(f"Account with username \"{username}\" does not exist", "MODIFY ACCOUNT")
             return
@@ -261,6 +279,16 @@ class Accounts:
                 profile["stats"]["amount_spent"] += amountSpent
             else:
                 profile["stats"]["amount_spent"] = amountSpent
+        if itemsSold is not None:
+            if incrementItemsSold:
+                profile["stats"]["items_sold"] += itemsSold
+            else:
+                profile["stats"]["items_sold"] = itemsSold
+        if amountEarned is not None:
+            if incrementAmountEarned:
+                profile["stats"]["amount_earned"] += amountEarned
+            else:
+                profile["stats"]["amount_earned"] = amountEarned
         self.accounts.remove(username)
         self.accounts.append(newUsername)
         FH.updateAccounts(self.accounts)
@@ -279,6 +307,9 @@ class Accounts:
         self.accounts.remove(username)
         FH.updateAccounts(self.accounts)
         FH.deleteFile(f"../Database/accounts/{username}")
+
+    def getAccount(self, username: str) -> dict:
+        return FH.getAccount(username)
 
 class Orders:
 
