@@ -24,52 +24,12 @@
         ]
     },
     {
-        "item_id": 3,
-        "name": "susi ni dave",
-        "price": 56.2,
-        "stock": 2,
-        "tags": [
-            "rararoooo"
-        ]
-    },
-    {
-        "item_id": 4,
-        "name": "watering can ni dave",
-        "price": 120.54,
-        "stock": 1,
-        "tags": [
-            "rarrarooo"
-        ]
-    },
-    {
         "item_id": 6,
         "name": "si carl",
         "price": 100000000000.0,
         "stock": 1,
         "tags": [
             "nigga"
-        ]
-    },
-    {
-        "item_id": 7,
-        "name": "overseer",
-        "price": 60.11,
-        "stock": 500,
-        "tags": [
-            "kinalbo",
-            "si",
-            "ae"
-        ]
-    },
-    {
-        "item_id": 10,
-        "name": "ai ni jed",
-        "price": 10000000.0,
-        "stock": 1,
-        "tags": [
-            "ai",
-            "jed",
-            "bangga"
         ]
     },
     {
@@ -82,12 +42,12 @@
         ]
     },
     {
-        "item_id": 15,
-        "name": "airplane",
-        "price": 67000000.0,
-        "stock": 12,
+        "item_id": 18,
+        "name": "bold ni yuan at rainier",
+        "price": 694.2,
+        "stock": 67,
         "tags": [
-            "eroplanong papel"
+            "bida max"
         ]
     }
 ]

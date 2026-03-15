@@ -215,6 +215,9 @@ class Accounts:
                 ] if condition
             )
 
+        if self.checkPassword(password):
+            return ReturnCode.PASSWORD_INVALID, {}
+
         if username in self.accounts:
             return ReturnCode.ACCOUNT_ALREADY_EXISTS, {}
 
@@ -252,6 +255,18 @@ class Accounts:
         if FH.getAccount(username)["password"] == password:
             return ReturnCode.SUCCESS
         return ReturnCode.PASSWORD_INCORRECT
+
+    def checkPassword(self, password: str) -> ReturnCode:
+        if len(password) < 8:
+            return ReturnCode.PASSWORD_INVALID
+        number = False
+        specialCharacter = False
+        for c in password:
+            if c.isdigit():
+                number = True
+            if not c.isalnum() and not c.isspace() and not c.isdigit():
+                specialCharacter = True
+        return ReturnCode.SUCCESS if number and specialCharacter else ReturnCode.PASSWORD_INVALID
 
     def getRole(self, username: str) -> Role:
         return self.Role(FH.getAccount(username)["role"])

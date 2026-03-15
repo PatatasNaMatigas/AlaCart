@@ -7,7 +7,7 @@ from ui import UIUtils
 from ui.Codes import ReturnCode, ThreatLevel
 from ui.main import App
 from util import Utils
-from util.Utils import log, warn
+from util.Utils import log, warn, logData
 
 
 class Login(tk.Frame):
@@ -231,6 +231,7 @@ class Login(tk.Frame):
                         "Incorrect Credentials",
                         "Username or Password is incorrect, please try again"
                     )
+                self.focusedField = None
                 return
             log(f"Login success for account: {self.username[0]}")
             if accounts.getRole(self.username[0]) == Accounts.Role.SELLER:
@@ -382,7 +383,7 @@ class SignUp(tk.Frame):
             Image.open("../res/buyer.png").resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.icons["seller"] = ImageTk.PhotoImage(
-            Image.open("../res/seller.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open("../res/seller_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
         )
 
     def initImages(self):
@@ -483,9 +484,9 @@ class SignUp(tk.Frame):
 
         def onSignUpClick(event):
             self.canvas.move("switchShadow", -5, -5)
-
         def onSignUpRelease(event):
             self.canvas.move("switchShadow", 5, 5)
+            self.focusedField = None
             App.show("Login")
 
         def onSignUpHover(event):
@@ -613,6 +614,11 @@ class SignUp(tk.Frame):
                     UIUtils.launchErrorWindow(
                         "Account Already Exists!",
                         "Username not available to use, please choose another username."
+                    )
+                elif result[0] == ReturnCode.PASSWORD_INVALID:
+                    UIUtils.launchErrorWindow(
+                        "Invalid input",
+                        "Password must contain atleast 8 characters, number, and special characters"
                     )
                 return
             if Accounts.Role(self.role) == Accounts.Role.SELLER:

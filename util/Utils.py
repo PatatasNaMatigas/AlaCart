@@ -14,6 +14,8 @@ class Fonts(Enum):
     MONO_MANIAC = "monomaniac one regular"
 
 def log(log: object, tag: str = None) -> None:
+    if not log:
+        return
     print(Colors.GREEN.value, log, Colors.RESET.value, sep="", end='')
     if tag is not None:
         print(f" {Colors.YELLOW.value}|{Colors.RESET.value} ", Colors.BLUE.value, tag, Colors.RESET.value, sep="")
@@ -24,6 +26,8 @@ def logbr() -> None:
     print("-" * 500)
 
 def warn(warning: object, tag: str = None) -> None:
+    if not warning:
+        return
     print(Colors.YELLOW.value, warning, Colors.RESET.value, sep="", end="")
     if tag is not None:
         print(f" {Colors.YELLOW.value}|{Colors.RESET.value} ", Colors.BLUE.value, tag, Colors.RESET.value, sep="")
@@ -33,6 +37,8 @@ def warn(warning: object, tag: str = None) -> None:
 def wtf(wtf: object, tag: str = None) -> None:
     # WTF means "What a Terrible Failure"
     # nakuha ko lang nung nagawa ako ng app sa phone (Log.wtf("", ""))
+    if not wtf:
+        return
     print(Colors.RED.value, wtf, Colors.RESET.value, sep="", end='')
     if tag is not None:
         print(f" {Colors.YELLOW.value}|{Colors.RESET.value} ", Colors.BLUE.value, tag, Colors.RESET.value, sep="")
@@ -40,6 +46,8 @@ def wtf(wtf: object, tag: str = None) -> None:
         print()
 
 def logData(data: object, tag: str=None) -> None:
+    if not data:
+        return
     if tag:
         log(tag)
 

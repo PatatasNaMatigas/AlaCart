@@ -87,7 +87,6 @@ class SellerHome(tk.Frame):
         username = ""
         try:
             username = App.sellerScenes["SellerHome"]["account"]["username"]
-            log(App.sellerScenes["SellerHome"]["account"])
         except KeyError:
             pass
 

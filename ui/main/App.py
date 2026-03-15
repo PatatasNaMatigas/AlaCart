@@ -12,6 +12,7 @@ from ui.seller.ItemManager import ItemManager
 from ui.seller.Summaries import Summaries
 
 from util import Utils
+from util.Utils import logData
 
 frames = {}
 
@@ -25,7 +26,7 @@ sellerScenes = {
     },
     "ItemManager" : {
         "frame" : ItemManager,
-        "selectedItem" : Accounts().getAccount("admin")
+        "selectedItem" : {}
     },
     "Item" : {
         "frame" : Item
@@ -75,4 +76,4 @@ class App(tk.Tk):
             frames[v["frame"].__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        show("SellerHome")
+        show("Login")
