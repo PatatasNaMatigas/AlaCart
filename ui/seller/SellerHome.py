@@ -65,7 +65,7 @@ class SellerHome(tk.Frame):
             Image.open("../res/signout.png").resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.images["profile"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open("../res/buyer_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
         )
 
     def initUi(self) -> None:

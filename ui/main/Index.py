@@ -238,7 +238,8 @@ class Login(tk.Frame):
                 App.sellerScenes["SellerHome"]["account"] = accounts.getAccount(self.username[0])
                 App.show("SellerHome")
             else:
-                pass
+                App.customerScenes["CustomerHome"]["account"] = accounts.getAccount(self.username[0])
+                App.show("CustomerHome")
 
         self.canvas.tag_bind("loginButton", "<Button-1>", onLoginClick)
         self.canvas.tag_bind("loginButton", "<ButtonRelease>", onLoginRelease)
@@ -380,7 +381,7 @@ class SignUp(tk.Frame):
 
     def initIcons(self):
         self.icons["buyer"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open("../res/buyer_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.icons["seller"] = ImageTk.PhotoImage(
             Image.open("../res/seller_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
@@ -625,7 +626,8 @@ class SignUp(tk.Frame):
                 App.sellerScenes["SellerHome"]["account"] = result[-1]
                 App.show("SellerHome")
             else:
-                pass
+                App.customerScenes["CustomerHome"]["account"] = accounts.getAccount(self.username[0])
+                App.show("CustomerHome")
 
         self.canvas.tag_bind("signInButton", "<Button-1>", onLoginClick)
         self.canvas.tag_bind("signInButton", "<ButtonRelease>", onLoginRelease)

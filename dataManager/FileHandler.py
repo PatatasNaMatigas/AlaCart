@@ -4,7 +4,8 @@ import shutil
 from dataManager import DataModels
 from datetime import datetime
 
-from util.Utils import wtf
+from util.Utils import wtf, log
+
 
 def initDatabaseStructure() -> None:
     try:
@@ -102,8 +103,8 @@ def createAccount(data: dict) -> None:
     except FileExistsError:
         pass
 
-    safeWrite(folder + "/profile.json", data,)
-    safeCreateFile(folder + "/shoppingCart.json")
+    safeWrite(folder + "/profile.json", data)
+    safeCreateFile(folder + "/shoppingCart.json", False)
     safeCreateFile(folder + "/orders.json")
 
 def getOrders(username: str) -> list:
@@ -112,10 +113,10 @@ def getOrders(username: str) -> list:
 def updateOrders(username: str, data: list) -> None:
     safeWrite(f"../Database/accounts/{username}/orders.json", data)
 
-def getCart(username: str) -> list:
+def getCart(username: str) -> dict:
     return read(f"../Database/accounts/{username}/shoppingCart.json")
 
-def updateCart(username: str, data: list) -> None:
+def updateCart(username: str, data: dict) -> None:
     safeWrite(f"../Database/accounts/{username}/shoppingCart.json", data)
 
 def autoIncrement(idType: DataModels.ID) -> int:
@@ -138,7 +139,7 @@ def autoIncrement(idType: DataModels.ID) -> int:
     safeWrite("../Database/meta.json", ids)
     return nextId
 
-def createFile(filename: str, isList: bool=True) -> None:
+def createFile(filename: str, isList: bool=False) -> None:
     temp_file = filename + ".tmp"
 
     with open(temp_file, "w") as file:
@@ -146,7 +147,7 @@ def createFile(filename: str, isList: bool=True) -> None:
 
     os.replace(temp_file, filename)
 
-def safeCreateFile(filename: str, isList: bool=True) -> None:
+def safeCreateFile(filename: str, isList: bool=False) -> None:
     if not os.path.exists(filename) or os.path.getsize(filename) == 0:
         temp_file = filename + ".tmp"
 
@@ -189,4 +190,8 @@ def read(filename: str):
         with open(filename, "r") as file:
             return json.load(file)
     except:
-        wtf(f"File named {filename} not found!")
+        wtf(f"File named {filename} not found! Attempting file creation...")
+        safeCreateFile(filename)
+        log("Creation Successful")
+        with open(filename, "r") as file:
+            return json.load(file)

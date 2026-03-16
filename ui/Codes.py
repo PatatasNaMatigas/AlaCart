@@ -13,7 +13,7 @@ class ReturnCode(Enum):
     ACCOUNT_DOES_NOT_EXIST  = 1
     ACCOUNT_ALREADY_EXISTS  = 2
     PASSWORD_INCORRECT      = 3
-    PASSWORD_INVALID        = 3
-    MISSING_USERNAME        = 4
-    MISSING_PASSWORD        = 5
-    MISSING_HER             = 6
+    PASSWORD_INVALID        = 4
+    MISSING_USERNAME        = 5
+    MISSING_PASSWORD        = 6
+    MISSING_HER             = 7

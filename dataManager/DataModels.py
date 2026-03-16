@@ -215,7 +215,7 @@ class Accounts:
                 ] if condition
             )
 
-        if self.checkPassword(password):
+        if not self.checkPassword(password):
             return ReturnCode.PASSWORD_INVALID, {}
 
         if username in self.accounts:
@@ -431,62 +431,29 @@ class ShoppingCart:
 
     """
     Structure:
-    [
-        {
-            "item_id"   : (str)
-            "item_name" : (str)
-            "quantity"  : (int)
-            "price"     : (float)
-        },
+    {
+        "item_id"   : "quantity,
         ...
-    ]
+    },
+    ...
     """
-
-    def createItemEntry(self, itemId: int, itemName: str, quantity: int, subtotal: float) -> dict:
-        return {
-            "item_id"   : itemId,
-            "item_name" : itemName,
-            "quantity"  : quantity,
-            "price"     : subtotal
-        }
 
     def __init__(self, account: dict):
         self.cart = FH.getCart(account["username"])
         self.account = account
 
-    def addItem(self, item: dict) -> None:
-        for i in self.cart:
-            if i["item_id"] == item["item_id"]:
-                i["quantity"] += item["quantity"]
-                FH.updateCart(self.account["username"], self.cart)
-                return
-        self.cart.append(item)
+    def item(self, item: str, quantity: int) -> None:
+        self.cart = FH.getCart(self.account["username"])
+        self.cart[item] = quantity
         FH.updateCart(self.account["username"], self.cart)
 
-    def modifyItem(self, itemId: int, quantity: int=None, price: float=None) -> dict:
-        for item in self.cart:
-            if item["item_id"] == itemId:
-                item["quantity"] = quantity if quantity is not None else item["quantity"]
-                item["price"] = price if price is not None else item["price"]
-                FH.updateCart(self.account["username"], self.cart)
-                return item
-        warn(f"Item with id \"{itemId}\" not found in the cart", "MODIFY ITEM / SHOPPING CART")
-        return {}
+    def getCart(self) -> dict:
+        return FH.getCart(self.account["username"])
 
-    def getItem(self, itemId: int) -> dict:
-        for item in self.cart:
-            if item["item_id"] == itemId:
-                return item
-        warn(f"Item with id {itemId} not found", "GET ITEM / SHOPPING CART")
-        return {}
-
-    def getCart(self) -> list:
-        return self.cart
-
-    def deleteItem(self, itemId: int) -> None:
-        for i in range(len(self.cart)):
-            if self.cart[i]["item_id"] == itemId:
-                del self.cart[i]
-                FH.updateCart(self.account["username"], self.cart)
-                return
-        warn(f"Item with id {itemId} not found", "DELETE ITEM / SHOPPING CART")
+    def deleteItem(self, item: str) -> None:
+        self.cart = FH.getCart(self.account["username"])
+        if item in self.cart:
+            self.cart.pop(item)
+            FH.updateCart(self.account["username"], self.cart)
+            return
+        warn(f"Item with id {item} not found", "DELETE ITEM / SHOPPING CART")

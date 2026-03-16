@@ -1,9 +1,12 @@
 import tkinter as tk
 
 from dataManager.DataModels import Accounts
+from ui.customer.CustomerProfile import CustomerProfile
+from ui.customer.ShoppingCart import ShoppingCart
 from ui.main.Index import Login, SignUp
 
 from ui.customer.CustomerHome import CustomerHome
+from ui.customer.Browser import Browser
 
 from ui.seller.SellerProfile import SellerProfile
 from ui.seller.SellerHome import SellerHome
@@ -37,7 +40,17 @@ sellerScenes = {
 }
 customerScenes = {
     "CustomerHome" : {
-        "frame" : CustomerHome
+        "frame" : CustomerHome,
+        "account" : {}
+    },
+    "CustomerProfile" : {
+        "frame" : CustomerProfile,
+    },
+    "Browser" : {
+        "frame" : Browser
+    },
+    "ShoppingCart" : {
+        "frame" : ShoppingCart
     }
 }
 

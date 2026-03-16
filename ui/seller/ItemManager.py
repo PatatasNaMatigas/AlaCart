@@ -110,7 +110,7 @@ class ItemManager(tk.Frame):
 
         self.itemEntryY = 0
         self.itemEntryMaxY = 0
-        self.itemEntryMinY = min(325 - ((len(self.itemList) + 2) // 3 * 210) - 90, 0)
+        self.itemEntryMinY = min(500 - ((len(self.itemList) + 2) // 3 * 210) - 90, 0)
 
         def scrollItems(event):
             if not self.filterActive:

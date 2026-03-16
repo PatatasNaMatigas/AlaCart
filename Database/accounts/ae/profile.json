@@ -1,0 +1,12 @@
+{
+    "user_id": 9,
+    "username": "ae",
+    "password": "sunfl0w3r!",
+    "role": "buyer",
+    "stats": {
+        "items_purchased": 0,
+        "amount_spent": 0,
+        "items_sold": 0,
+        "amount_earned": 0
+    }
+}
