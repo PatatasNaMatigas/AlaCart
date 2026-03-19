@@ -1,0 +1,280 @@
+[
+    {
+        "transaction_id": "T195398362",
+        "date_time": "2026-02-13 10:31:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 2,
+                "price_at_purchase": 50.0,
+                "sub_total": 100.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 1,
+                "price_at_purchase": 1500.0,
+                "sub_total": 1500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 1600.0,
+        "pay_amount": 1600.0,
+        "change": 0.0,
+        "payment_method": "Bank Transfer"
+    },
+    {
+        "transaction_id": "T719483155",
+        "date_time": "2026-02-13 21:39:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 3,
+                "price_at_purchase": 200.0,
+                "sub_total": 600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 1,
+                "price_at_purchase": 1500.0,
+                "sub_total": 1500.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 101,
+                "item_name": "Mechanical Keyboard",
+                "quantity": 3,
+                "price_at_purchase": 2500.0,
+                "sub_total": 7500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 14100.0,
+        "pay_amount": 14150.0,
+        "change": 50.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T899692860",
+        "date_time": "2026-02-13 08:53:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 3000.0,
+        "pay_amount": 3500.0,
+        "change": 500.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T195046010",
+        "date_time": "2026-02-13 14:47:00",
+        "items_summary": [
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 1,
+                "price_at_purchase": 200.0,
+                "sub_total": 200.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 6200.0,
+        "pay_amount": 7200.0,
+        "change": 1000.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T908658497",
+        "date_time": "2026-02-13 20:00:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 4650.0,
+        "pay_amount": 4750.0,
+        "change": 100.0,
+        "payment_method": "SPayLater"
+    },
+    {
+        "transaction_id": "T114924985",
+        "date_time": "2026-02-13 10:33:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 1,
+                "price_at_purchase": 1200.0,
+                "sub_total": 1200.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 1,
+                "price_at_purchase": 50.0,
+                "sub_total": 50.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 1400.0,
+        "pay_amount": 1400.0,
+        "change": 0.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T253679893",
+        "date_time": "2026-02-13 07:40:00",
+        "items_summary": [
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 2,
+                "price_at_purchase": 500.0,
+                "sub_total": 1000.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 1,
+                "price_at_purchase": 1500.0,
+                "sub_total": 1500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 2500.0,
+        "pay_amount": 2600.0,
+        "change": 100.0,
+        "payment_method": "Bank Transfer"
+    },
+    {
+        "transaction_id": "T698814910",
+        "date_time": "2026-02-13 18:38:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 3000.0,
+        "pay_amount": 3050.0,
+        "change": 50.0,
+        "payment_method": "SPayLater"
+    },
+    {
+        "transaction_id": "T311638413",
+        "date_time": "2026-02-13 13:26:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 150.0,
+        "pay_amount": 250.0,
+        "change": 100.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T347094015",
+        "date_time": "2026-02-13 19:04:00",
+        "items_summary": [
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 1,
+                "price_at_purchase": 450.0,
+                "sub_total": 450.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 450.0,
+        "pay_amount": 1450.0,
+        "change": 1000.0,
+        "payment_method": "Debit Card"
+    },
+    {
+        "transaction_id": "T255017507",
+        "date_time": "2026-02-13 08:41:00",
+        "items_summary": [
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 2,
+                "price_at_purchase": 450.0,
+                "sub_total": 900.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 900.0,
+        "pay_amount": 1400.0,
+        "change": 500.0,
+        "payment_method": "SPayLater"
+    }
+]

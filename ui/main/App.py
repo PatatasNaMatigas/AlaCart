@@ -84,9 +84,11 @@ class App(tk.Tk):
             }
         }
 
+        customerScenes["CustomerHome"]["account"] = Accounts().getAccount("ae")
+
         for k, v in scenes.items():
             frame = v["frame"](container, self)
             frames[v["frame"].__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        show("Login")
+        show("ShoppingCart")

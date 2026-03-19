@@ -8,7 +8,7 @@ from ui.Codes import ReturnCode, ThreatLevel
 from util import Utils
 
 
-def createRoundRect(canvas: tk.Canvas, x: int, y: int, w: int, h: int, radius: int = 25, **kwargs):
+def createRoundRect(canvas: tk.Canvas, x: int, y: int, w: int, h: int, radius: int = 25, splinesteps=36, **kwargs):
     w += x
     h += y
     points = [

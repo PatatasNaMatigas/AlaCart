@@ -1,0 +1,116 @@
+[
+    {
+        "transaction_id": "T141118309",
+        "date_time": "2025-09-30 11:51:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 101,
+                "item_name": "Mechanical Keyboard",
+                "quantity": 3,
+                "price_at_purchase": 2500.0,
+                "sub_total": 7500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 12000.0,
+        "pay_amount": 12100.0,
+        "change": 100.0,
+        "payment_method": "Bank Transfer"
+    },
+    {
+        "transaction_id": "T537178760",
+        "date_time": "2025-09-30 11:28:00",
+        "items_summary": [
+            {
+                "item_id": 101,
+                "item_name": "Mechanical Keyboard",
+                "quantity": 1,
+                "price_at_purchase": 2500.0,
+                "sub_total": 2500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 2500.0,
+        "pay_amount": 3500.0,
+        "change": 1000.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T442064481",
+        "date_time": "2025-09-30 10:45:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 3000.0,
+        "pay_amount": 3500.0,
+        "change": 500.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T928711033",
+        "date_time": "2025-09-30 07:32:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 1,
+                "price_at_purchase": 50.0,
+                "sub_total": 50.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 1,
+                "price_at_purchase": 250.0,
+                "sub_total": 250.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 300.0,
+        "pay_amount": 350.0,
+        "change": 50.0,
+        "payment_method": "Debit Card"
+    },
+    {
+        "transaction_id": "T782302375",
+        "date_time": "2025-09-30 16:27:00",
+        "items_summary": [
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 3,
+                "price_at_purchase": 250.0,
+                "sub_total": 750.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 101,
+                "item_name": "Mechanical Keyboard",
+                "quantity": 1,
+                "price_at_purchase": 2500.0,
+                "sub_total": 2500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 3250.0,
+        "pay_amount": 4250.0,
+        "change": 1000.0,
+        "payment_method": "SPayLater"
+    }
+]

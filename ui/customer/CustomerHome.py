@@ -46,7 +46,6 @@ class CustomerHome(tk.Frame):
 
         self.images = {}
         self.initImages()
-        self.initUi()
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(

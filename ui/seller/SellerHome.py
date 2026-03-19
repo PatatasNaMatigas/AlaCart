@@ -46,7 +46,6 @@ class SellerHome(tk.Frame):
 
         self.images = {}
         self.initImages()
-        self.initUi()
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
@@ -106,7 +105,7 @@ class SellerHome(tk.Frame):
         self.createButton(233, 340, "browse",None, onBrowseRelease)
 
         def onSummariesRelease():
-            pass
+            App.show("Summaries")
         self.createButton(513, 340, "summaries", None, onSummariesRelease)
 
         def onProfileRelease():

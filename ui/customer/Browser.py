@@ -6,7 +6,6 @@ from typing import Callable
 
 from PIL import ImageTk, Image
 
-from dataManager import DataModels as DM
 from dataManager.DataModels import Items, ShoppingCart
 from dataManager.SearchEngine import SearchEngine
 from util import Utils
@@ -496,11 +495,15 @@ class Browser(tk.Frame):
         self.canvas.itemconfig("selectedItemImage", image=self.coverItemImages[f"id:{itemId}"])
 
     def initItems(self, items: list):
+        skipCount = 0
         for i in range(len(items)):
             itm = items[i]
+            if itm["stock"] == 0:
+                skipCount += 1
+                continue
             self.createItemEntry(
-                100 + (290 * (i % 3)),
-                100 + (210 * (i // 3)),
+                100 + (290 * ((i - skipCount) % 3)),
+                100 + (210 * ((i - skipCount) // 3)),
                 itm["item_id"],
                 itm["name"],
                 itm["stock"],

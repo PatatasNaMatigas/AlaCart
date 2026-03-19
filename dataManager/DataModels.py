@@ -4,16 +4,17 @@ from dataManager import FileHandler as FH
 from enum import Enum
 
 from ui.Codes import ReturnCode
-from util.Utils import warn, log, logData
+from util.Utils import warn, log
 
 
-def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float) -> dict:
+def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float, owner: str) -> dict:
     return {
         "item_id"           : itemId,
-        "item_name"         : itemName,
+        "name"              : itemName,
         "quantity"          : quantity,
         "price_at_purchase" : priceAtPurchase,
-        "sub_total"         : quantity * priceAtPurchase
+        "sub_total"         : quantity * priceAtPurchase,
+        "owner"             : owner
     }
 
 class ID(Enum):
@@ -49,13 +50,14 @@ class Items:
     def __init__(self):
         self.items = FH.getItems()
 
-    def addItem(self, name: str, price: float, stock: int, tags: list) -> dict:
+    def addItem(self, name: str, price: float, stock: int, tags: list, owner: str) -> dict:
         data = {
             "item_id" : FH.autoIncrement(ID.ITEM),
             "name"   : name,
             "price"  : price,
             "stock"  : stock,
-            "tags"   : tags
+            "tags"   : tags,
+            "owner"  : owner
         }
         self.items.append(data)
         FH.updateItems(self.items)
@@ -79,14 +81,21 @@ class Items:
         return {}
 
     def getItem(self, itemId: int) -> dict:
-        for item in self.items:
+        for item in FH.getItems():
             if item["item_id"] == itemId:
                 return item
         warn(f"Item with id {itemId} not found", "GET ITEM")
         return {}
 
-    def getItems(self) -> list:
-        return self.items
+    def getItems(self, owner: str=None) -> list:
+        if owner is None:
+            return self.items
+        else:
+            ownerItems = []
+            for item in self.items:
+                if item["owner"] == owner:
+                    ownerItems.append(item)
+            return ownerItems
 
     def deleteItem(self, itemId: int) -> None:
         for i in range(len(self.items)):
@@ -110,6 +119,14 @@ class Items:
             case 3:
                 key = self.Filter.NAME.value
                 return sorted(self.items, key=lambda item: item[key].lower(), reverse=ascending)
+        return []
+
+    def exists(self, i: int) -> bool:
+        for item in self.items:
+            if item["item_id"] == i:
+                return True
+        return False
+
 
 class Transactions:
 
@@ -190,8 +207,11 @@ class Accounts:
             "username" : (str)
             "password" : (str)
             "stats"    : {
-                items_purchased : (int),
-                "amount_spent"  : (int),
+                "items_purchased" : (int),
+                "amount_spent"    : (int),
+                "items_sold"      : (int),
+                "amount_earned"   : (int),
+                "balance"         : (int)
             }
         },
         ...
@@ -206,6 +226,7 @@ class Accounts:
         self.accounts = FH.getAccounts()
 
     def createAccount(self, username: str, password: str, role: Role) -> tuple:
+        self.accounts = FH.getAccounts()
         if not username or not password:
             return tuple(
                 code for code, condition in [
@@ -235,7 +256,8 @@ class Accounts:
                 "items_purchased" : 0,
                 "amount_spent"    : 0,
                 "items_sold"      : 0,
-                "amount_earned"    : 0,
+                "amount_earned"   : 0,
+                "balance"         : 0
             }
         }
         FH.createAccount(profile)
@@ -276,14 +298,18 @@ class Accounts:
                       amountSpent: int = None, incrementAmountSpent: bool = False,
                       itemsSold: int = None, incrementItemsSold: bool = False,
                       amountEarned: int = None, incrementAmountEarned: bool = False,
+                      balance: int = None, incrementBalance: bool = False, decrementBalance: bool = False,
                       ) -> None:
+        self.accounts = FH.getAccounts()
         if username not in self.accounts:
             warn(f"Account with username \"{username}\" does not exist", "MODIFY ACCOUNT")
             return
 
         profile = FH.getAccount(username)
-        profile["username"] = newUsername if newUsername is not None else profile["username"]
-        profile["password"] = newPassword if newPassword is not None else profile["password"]
+        if newUsername is not None:
+            profile["username"] = newUsername
+        if newPassword is not None:
+            profile["password"] = newPassword
         if itemsPurchased is not None:
             if incrementItemsPurchased:
                 profile["stats"]["items_purchased"] += itemsPurchased
@@ -304,15 +330,25 @@ class Accounts:
                 profile["stats"]["amount_earned"] += amountEarned
             else:
                 profile["stats"]["amount_earned"] = amountEarned
-        self.accounts.remove(username)
-        self.accounts.append(newUsername)
-        FH.updateAccounts(self.accounts)
-        FH.changeFileName(
-            "../Database/accounts/",
-            username,
-            newUsername
-        )
-        FH.updateAccount(newUsername, profile)
+        if balance is not None:
+            if incrementBalance:
+                profile["stats"]["balance"] += balance
+            elif decrementBalance:
+                profile["stats"]["balance"] -= balance
+            else:
+                profile["stats"]["balance"] = balance
+        if newUsername:
+            self.accounts.remove(username)
+            self.accounts.append(newUsername)
+            FH.updateAccounts(self.accounts)
+            FH.changeFileName(
+                "../Database/accounts/",
+                username,
+                newUsername
+            )
+            FH.updateAccount(newUsername, profile)
+        else:
+            FH.updateAccount(username, profile)
 
     def deleteAccount(self, username: str) -> None:
         if username not in self.accounts:
@@ -432,10 +468,9 @@ class ShoppingCart:
     """
     Structure:
     {
-        "item_id"   : "quantity,
+        "itemId:{id: int}"   : "quantity,
         ...
-    },
-    ...
+    }
     """
 
     def __init__(self, account: dict):
@@ -448,7 +483,13 @@ class ShoppingCart:
         FH.updateCart(self.account["username"], self.cart)
 
     def getCart(self) -> dict:
-        return FH.getCart(self.account["username"])
+        raw_cart = FH.getCart(self.account["username"])
+
+        return {
+            key: quantity
+            for key, quantity in raw_cart.items()
+            if Items().exists(int(key.split(":")[-1]))
+        }
 
     def deleteItem(self, item: str) -> None:
         self.cart = FH.getCart(self.account["username"])
@@ -456,4 +497,5 @@ class ShoppingCart:
             self.cart.pop(item)
             FH.updateCart(self.account["username"], self.cart)
             return
+
         warn(f"Item with id {item} not found", "DELETE ITEM / SHOPPING CART")

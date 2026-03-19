@@ -58,7 +58,7 @@ class ItemManager(tk.Frame):
 
         self.filterIcons = [
             ImageTk.PhotoImage(
-                Image.open("../res/recently_added.png").resize((30, 30), Image.Resampling.LANCZOS)
+                Image.open("../res/calendar.png").resize((30, 30), Image.Resampling.LANCZOS)
             ),
             ImageTk.PhotoImage(
                 Image.open("../res/stock.png").resize((30, 30), Image.Resampling.LANCZOS)
@@ -102,7 +102,7 @@ class ItemManager(tk.Frame):
             tags="bg"
         )
 
-        self.itemList = self.items.getItems()
+        self.itemList = self.items.getItems(App.sellerScenes["SellerHome"]["account"]["username"])
         self.initItems(self.itemList)
         self.initAddButton()
         self.initDiv()
@@ -629,7 +629,7 @@ class ItemManager(tk.Frame):
             elif event.keysym == "Return":
                 items = SearchEngine(self.items).search(self.query)
                 self.canvas.delete("itemEntry")
-                self.initItems(items if self.query else self.items.getItems())
+                self.initItems(items if self.query else self.items.getItems(App.sellerScenes["SellerHome"]["account"]["username"]))
                 self.itemEntryY = 0
                 self.itemEntryMaxY = 0
                 self.canvas.tag_raise("addButton")

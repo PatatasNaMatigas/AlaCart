@@ -1,0 +1,13 @@
+{
+    "user_id": 14,
+    "username": "seller1",
+    "password": "seller1@ac",
+    "role": "seller",
+    "stats": {
+        "items_purchased": 0,
+        "amount_spent": 0,
+        "items_sold": 3,
+        "amount_earned": 3.0,
+        "balance": 3.0
+    }
+}

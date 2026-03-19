@@ -1,0 +1,210 @@
+[
+    {
+        "transaction_id": "T383884239",
+        "date_time": "2025-03-28 09:19:00",
+        "items_summary": [
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 3,
+                "price_at_purchase": 200.0,
+                "sub_total": 600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 1,
+                "price_at_purchase": 450.0,
+                "sub_total": 450.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 3,
+                "price_at_purchase": 200.0,
+                "sub_total": 600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 2,
+                "price_at_purchase": 450.0,
+                "sub_total": 900.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 2550.0,
+        "pay_amount": 2600.0,
+        "change": 50.0,
+        "payment_method": "Debit Card"
+    },
+    {
+        "transaction_id": "T473221267",
+        "date_time": "2025-03-28 14:02:00",
+        "items_summary": [
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 1,
+                "price_at_purchase": 1200.0,
+                "sub_total": 1200.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 1,
+                "price_at_purchase": 250.0,
+                "sub_total": 250.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 1450.0,
+        "pay_amount": 1950.0,
+        "change": 500.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T313221923",
+        "date_time": "2025-03-28 07:58:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 2,
+                "price_at_purchase": 50.0,
+                "sub_total": 100.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 100.0,
+        "pay_amount": 1100.0,
+        "change": 1000.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T347876783",
+        "date_time": "2025-03-28 21:40:00",
+        "items_summary": [
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 2,
+                "price_at_purchase": 250.0,
+                "sub_total": 500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 2,
+                "price_at_purchase": 450.0,
+                "sub_total": 900.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 1800.0,
+        "pay_amount": 1900.0,
+        "change": 100.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T204085476",
+        "date_time": "2025-03-28 08:34:00",
+        "items_summary": [
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 1,
+                "price_at_purchase": 200.0,
+                "sub_total": 200.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 200.0,
+        "pay_amount": 700.0,
+        "change": 500.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T942132025",
+        "date_time": "2025-03-28 13:51:00",
+        "items_summary": [
+            {
+                "item_id": 101,
+                "item_name": "Mechanical Keyboard",
+                "quantity": 1,
+                "price_at_purchase": 2500.0,
+                "sub_total": 2500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 2500.0,
+        "pay_amount": 3500.0,
+        "change": 1000.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T211268135",
+        "date_time": "2025-03-28 13:43:00",
+        "items_summary": [
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 2,
+                "price_at_purchase": 250.0,
+                "sub_total": 500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 2,
+                "price_at_purchase": 450.0,
+                "sub_total": 900.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 3,
+                "price_at_purchase": 200.0,
+                "sub_total": 600.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 2000.0,
+        "pay_amount": 3000.0,
+        "change": 1000.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T429719342",
+        "date_time": "2025-03-28 14:17:00",
+        "items_summary": [
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 3,
+                "price_at_purchase": 1200.0,
+                "sub_total": 3600.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 3600.0,
+        "pay_amount": 4100.0,
+        "change": 500.0,
+        "payment_method": "Bank Transfer"
+    }
+]

@@ -17,3 +17,7 @@ class ReturnCode(Enum):
     MISSING_USERNAME        = 5
     MISSING_PASSWORD        = 6
     MISSING_HER             = 7
+    CART_EMPTY              = 8
+    INSUFFICIENT_PAYMENT    = 9
+    INSUFFICIENT_STOCK      = 10
+    ITEM_NOT_FOUND          = 12

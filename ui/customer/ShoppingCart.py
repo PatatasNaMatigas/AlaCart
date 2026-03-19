@@ -1,14 +1,18 @@
 import tkinter as tk
+from logging import FileHandler
 from pathlib import Path
 from typing import Callable
 
 from PIL import ImageTk, Image
 
+from dataManager import DataModels
+from dataManager.Checkout import CheckoutManager
 from ui import UIUtils
+from ui.Codes import ReturnCode
 from ui.main import App
 from util import Utils
 from util.Utils import log, logData, wtf, warn
-from dataManager.DataModels import ShoppingCart as SC, Items
+from dataManager.DataModels import ShoppingCart as SC, Items, Accounts
 
 
 class ShoppingCart(tk.Frame):
@@ -33,6 +37,9 @@ class ShoppingCart(tk.Frame):
 
         self.shoppingCart = None
         self.cartItems = None
+        self.paymentOption = 0
+        self.paymentOptions = list(DataModels.Transactions.PaymentMethods)
+        self.activePaymentOption = self.paymentOptions[self.paymentOption]
         self.itemEntryY = 0
         self.itemEntryMaxY = 0
         self.itemEntryMinY = 0
@@ -97,13 +104,15 @@ class ShoppingCart(tk.Frame):
             text="Shopping Cart",
             font=(Utils.Fonts.KOULEN.value, 30),
             fill="#F0C38E",
-            anchor='nw'
+            anchor='nw',
+            tags="front"
         )
         self.canvas.create_text(
             875, 125,
             text="Cart details",
             font=(Utils.Fonts.KOULEN.value, 30),
-            fill="#F0C38E"
+            fill="#F0C38E",
+            tags="front"
         )
         self.canvas.create_text(
             775, 170,
@@ -124,8 +133,37 @@ class ShoppingCart(tk.Frame):
             tags="totalPrice"
         )
 
+        def cyclePaymentOptions():
+            self.paymentOption = (self.paymentOption + 1) % len(self.paymentOptions)
+            self.activePaymentOption = self.paymentOptions[self.paymentOption]
+            self.canvas.itemconfig("cyclePaymentOptionsText", text=self.activePaymentOption.value)
+
+        self.createButton(
+            790, 350,
+            170, 50,
+            self.activePaymentOption.value,
+            "cyclePaymentOptions",
+            cyclePaymentOptions,
+            tags=("cyclePaymentOptions", )
+        )
+
         def placeOrder():
-            pass
+            checkout = CheckoutManager(
+                App.customerScenes["CustomerHome"]["account"],
+            )
+            logData(App.customerScenes["CustomerHome"]["account"])
+
+            code = checkout.checkout(
+                App.customerScenes["CustomerHome"]["account"]["stats"]["balance"],
+                self.activePaymentOption,
+            )
+            if code.success:
+                self.canvas.delete("all")
+                self.onRaise()
+            UIUtils.launchErrorWindow(
+                "Shopping Cart",
+                code.message
+            )
 
         self.createButton(
             790, 425,
@@ -187,10 +225,10 @@ class ShoppingCart(tk.Frame):
                         newSize = (int(self.itemImages[f"id:{itemId}"].width * ratio),
                                    int(self.itemImages[f"id:{itemId}"].height * ratio))
                         self.itemImages[f"id:{itemId}"] = (self.itemImages[f"id:{itemId}"]
-                        .resize(
-                            newSize,
-                            Image.Resampling.LANCZOS
-                        )
+                            .resize(
+                                newSize,
+                                Image.Resampling.LANCZOS
+                            )
                         )
 
                     self.itemImages[f"id:{itemId}"] = ImageTk.PhotoImage(self.itemImages[f"id:{itemId}"])
@@ -355,7 +393,7 @@ class ShoppingCart(tk.Frame):
                 text=label,
                 font=(Utils.Fonts.KOULEN.value, 20),
                 fill="#48426D",
-                tags=tags
+                tags=(tags, ) + tuple(f"{tag}Text" for tag in tags)
             )
         elif label.__class__ == ImageTk.PhotoImage:
             self.canvas.create_image(
@@ -392,7 +430,20 @@ class ShoppingCart(tk.Frame):
         self.shoppingCart = SC(App.customerScenes["CustomerHome"]["account"])
         self.cartItems = self.shoppingCart.getCart()
 
+        self.paymentOption = 0
+        self.paymentOptions = list(DataModels.Transactions.PaymentMethods)
+        self.activePaymentOption = self.paymentOptions[self.paymentOption]
         self.itemEntryY = 0
         self.itemEntryMaxY = 0
-        self.itemEntryMinY = min(500 - (len(self.cartItems) * 125), 0)
+        self.itemEntryMinY = 0
+        try:
+            self.shoppingCart = SC(App.customerScenes["CustomerHome"]["account"])
+            self.cartItems = self.shoppingCart.getCart()
+
+            self.itemEntryY = 0
+            self.itemEntryMaxY = 0
+            self.itemEntryMinY = min(500 - (len(self.cartItems) * 125), 0)
+        except KeyError as e:
+            pass
+
         self.initUi()

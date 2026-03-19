@@ -1,0 +1,142 @@
+[
+    {
+        "transaction_id": "T399115820",
+        "date_time": "2025-11-08 17:50:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 1,
+                "price_at_purchase": 50.0,
+                "sub_total": 50.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 50.0,
+        "pay_amount": 550.0,
+        "change": 500.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T339942080",
+        "date_time": "2025-11-08 08:37:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 1,
+                "price_at_purchase": 1500.0,
+                "sub_total": 1500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 1500.0,
+        "pay_amount": 2500.0,
+        "change": 1000.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T844173768",
+        "date_time": "2025-11-08 08:05:00",
+        "items_summary": [
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 3,
+                "price_at_purchase": 200.0,
+                "sub_total": 600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 1,
+                "price_at_purchase": 250.0,
+                "sub_total": 250.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 2,
+                "price_at_purchase": 50.0,
+                "sub_total": 100.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 950.0,
+        "pay_amount": 1950.0,
+        "change": 1000.0,
+        "payment_method": "Debit Card"
+    },
+    {
+        "transaction_id": "T989228857",
+        "date_time": "2025-11-08 18:04:00",
+        "items_summary": [
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 3,
+                "price_at_purchase": 1200.0,
+                "sub_total": 3600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 1,
+                "price_at_purchase": 500.0,
+                "sub_total": 500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 2,
+                "price_at_purchase": 500.0,
+                "sub_total": 1000.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 5100.0,
+        "pay_amount": 5150.0,
+        "change": 50.0,
+        "payment_method": "SPayLater"
+    },
+    {
+        "transaction_id": "T332342325",
+        "date_time": "2025-11-08 10:54:00",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 1,
+                "price_at_purchase": 1500.0,
+                "sub_total": 1500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 1500.0,
+        "pay_amount": 1500.0,
+        "change": 0.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T659739756",
+        "date_time": "2025-11-08 11:06:00",
+        "items_summary": [
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 2,
+                "price_at_purchase": 500.0,
+                "sub_total": 1000.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 1000.0,
+        "pay_amount": 1000.0,
+        "change": 0.0,
+        "payment_method": "Bank Transfer"
+    }
+]

@@ -114,8 +114,9 @@ class CustomerProfile(tk.Frame):
             image=self.images["buyer_F0C38E"]
         )
 
-        self.createDataEntry(575, 230, "items sold:", self.profile["stats"]["items_purchased"])
-        self.createDataEntry(575, 305, "amount earned:", self.profile["stats"]["amount_spent"])
+        self.createDataEntry(575, 150, "items purchased:", self.profile["stats"]["items_purchased"])
+        self.createDataEntry(575, 225, "amount spent:", self.profile["stats"]["amount_spent"])
+        self.createDataEntry(575, 300, "balance:", self.profile["stats"]["balance"])
 
         UIUtils.createRoundRect(
             self.canvas,
@@ -155,7 +156,7 @@ class CustomerProfile(tk.Frame):
 
         def onTransactionsRelease(event):
             self.canvas.move("transactionShadow", 5, 5)
-            log("#TODO: transaction history")
+
 
         self.canvas.tag_bind("transactionsButton", "<Button-1>", onTransactionsClick)
         self.canvas.tag_bind("transactionsButton", "<ButtonRelease-1>", onTransactionsRelease)
@@ -298,7 +299,7 @@ class CustomerProfile(tk.Frame):
         UIUtils.createRoundRect(
             self.canvas,
             x, y,
-            200, 50,
+            230, 50,
             radius=30,
             fill="#F0C38E",
             outline=""
@@ -311,7 +312,7 @@ class CustomerProfile(tk.Frame):
             anchor='nw',
         )
         self.canvas.create_text(
-            x + 220, y,
+            x + 250, y,
             text=data,
             font=(Utils.Fonts.KOULEN.value, 22),
             fill="#F0C38E",
@@ -354,7 +355,7 @@ class CustomerProfile(tk.Frame):
         self.canvas.delete("all")
         self.initImages()
 
-        self.profile = App.customerScenes["CustomerHome"]["account"]
+        self.profile = Accounts().getAccount(App.customerScenes["CustomerHome"]["account"]["username"])
         self.username = [
             self.profile["username"],
             self.profile["username"],

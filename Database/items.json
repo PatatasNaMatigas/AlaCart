@@ -1,329 +1,167 @@
 [
     {
         "item_id": 1,
-        "name": "Not'so regular sisy g",
-        "price": 100.0,
-        "stock": 60,
+        "name": "Mechanical Keyboard",
+        "stock": 97,
+        "price": 2500.0,
         "tags": [
-            "masarap",
-            "legit",
-            "bili n kau",
-            "pls"
-        ]
+            "Tech",
+            "Peripherals"
+        ],
+        "owner": "TechStore"
     },
     {
         "item_id": 2,
-        "name": "kuryenteh",
-        "price": 5500.67,
-        "stock": 1,
+        "name": "Gaming Mouse",
+        "stock": 29,
+        "price": 1200.0,
         "tags": [
-            "solar power station",
-            "charging station",
-            "power bank",
-            "innovation"
-        ]
+            "Tech",
+            "Gaming"
+        ],
+        "owner": "TechStore"
+    },
+    {
+        "item_id": 3,
+        "name": "USB-C Cable",
+        "stock": 34,
+        "price": 200.0,
+        "tags": [
+            "Tech",
+            "Cables"
+        ],
+        "owner": "TechStore"
+    },
+    {
+        "item_id": 4,
+        "name": "Monitor Stand",
+        "stock": 17,
+        "price": 1500.0,
+        "tags": [
+            "Tech",
+            "Office"
+        ],
+        "owner": "TechStore"
+    },
+    {
+        "item_id": 5,
+        "name": "Webcam 1080p",
+        "stock": 57,
+        "price": 3500.0,
+        "tags": [
+            "Tech",
+            "Streaming"
+        ],
+        "owner": "TechStore"
     },
     {
         "item_id": 6,
-        "name": "si carl",
-        "price": 100000000000.0,
-        "stock": 1,
+        "name": "Espresso Beans (500g)",
+        "stock": 49,
+        "price": 450.0,
         "tags": [
-            "nigga"
-        ]
+            "Food",
+            "Coffee"
+        ],
+        "owner": "Seller123"
+    },
+    {
+        "item_id": 7,
+        "name": "Coffee Grinder",
+        "stock": 40,
+        "price": 1500.0,
+        "tags": [
+            "Kitchen",
+            "Tools"
+        ],
+        "owner": "Seller123"
+    },
+    {
+        "item_id": 8,
+        "name": "Paper Filters",
+        "stock": 8,
+        "price": 150.0,
+        "tags": [
+            "Kitchen",
+            "Disposable"
+        ],
+        "owner": "Seller123"
+    },
+    {
+        "item_id": 9,
+        "name": "Ceramic Mug",
+        "stock": 40,
+        "price": 300.0,
+        "tags": [
+            "Home",
+            "Dining"
+        ],
+        "owner": "Seller123"
+    },
+    {
+        "item_id": 10,
+        "name": "Milk Frother",
+        "stock": 76,
+        "price": 800.0,
+        "tags": [
+            "Kitchen",
+            "Tools"
+        ],
+        "owner": "Seller123"
+    },
+    {
+        "item_id": 11,
+        "name": "V-Bucks Pack (1000)",
+        "stock": 79,
+        "price": 500.0,
+        "tags": [
+            "Digital",
+            "Fortnite"
+        ],
+        "owner": "GamingHub"
     },
     {
         "item_id": 12,
-        "name": "bold ni vj at spike",
-        "price": 100.0,
-        "stock": 50,
+        "name": "Robux Gift Card",
+        "stock": 62,
+        "price": 250.0,
         "tags": [
-            "bida max"
-        ]
+            "Digital",
+            "Roblox"
+        ],
+        "owner": "GamingHub"
     },
     {
-        "item_id": 18,
-        "name": "bold ni yuan at rainier",
-        "price": 694.2,
+        "item_id": 13,
+        "name": "Minecoins (1720)",
+        "stock": 86,
+        "price": 550.0,
+        "tags": [
+            "Digital",
+            "Minecraft"
+        ],
+        "owner": "GamingHub"
+    },
+    {
+        "item_id": 14,
+        "name": "Steam Wallet (P500)",
+        "stock": 62,
+        "price": 520.0,
+        "tags": [
+            "Digital",
+            "Steam"
+        ],
+        "owner": "GamingHub"
+    },
+    {
+        "item_id": 15,
+        "name": "Discord Nitro (1 Mo)",
         "stock": 67,
+        "price": 499.0,
         "tags": [
-            "bida max"
-        ]
-    },
-    {
-        "item_id": 38,
-        "name": "Palm Corned Beef 150g",
-        "price": 29.0,
-        "stock": 160,
-        "tags": [
-            "canned goods",
-            "corned beef",
-            "150g",
-            "meat",
-            "budget"
-        ]
-    },
-    {
-        "item_id": 39,
-        "name": "Colgate Toothbrush Medium",
-        "price": 39.0,
-        "stock": 120,
-        "tags": [
-            "oral care",
-            "toothbrush",
-            "medium",
-            "hygiene"
-        ]
-    },
-    {
-        "item_id": 40,
-        "name": "Safeguard Liquid Hand Soap 225ml",
-        "price": 68.0,
-        "stock": 85,
-        "tags": [
-            "soap",
-            "liquid soap",
-            "225ml",
-            "hand wash",
-            "hygiene"
-        ]
-    },
-    {
-        "item_id": 41,
-        "name": "Fanta Grape Soda 330ml Can",
-        "price": 35.0,
-        "stock": 105,
-        "tags": [
-            "beverage",
-            "soft drink",
-            "fanta",
-            "grape",
-            "soda",
-            "330ml",
-            "can"
-        ]
-    },
-    {
-        "item_id": 42,
-        "name": "Mountain Dew 330ml Can",
-        "price": 36.0,
-        "stock": 95,
-        "tags": [
-            "beverage",
-            "soft drink",
-            "mountain dew",
-            "soda",
-            "330ml",
-            "can"
-        ]
-    },
-    {
-        "item_id": 43,
-        "name": "C2 Green Tea Lemon 355ml Bottle",
-        "price": 28.0,
-        "stock": 120,
-        "tags": [
-            "beverage",
-            "green tea",
-            "lemon",
-            "355ml",
-            "bottle",
-            "iced tea"
-        ]
-    },
-    {
-        "item_id": 44,
-        "name": "Lipton Iced Tea Lemon 320ml",
-        "price": 27.0,
-        "stock": 110,
-        "tags": [
-            "beverage",
-            "iced tea",
-            "lipton",
-            "lemon",
-            "320ml"
-        ]
-    },
-    {
-        "item_id": 45,
-        "name": "San Mig Coffee 3-in-1 Original 10 Sachets",
-        "price": 54.0,
-        "stock": 150,
-        "tags": [
-            "coffee",
-            "3-in-1",
-            "instant coffee",
-            "10 sachets",
-            "beverage",
-            "original"
-        ]
-    },
-    {
-        "item_id": 46,
-        "name": "Great Taste White Coffee 10 Sachets",
-        "price": 56.0,
-        "stock": 140,
-        "tags": [
-            "coffee",
-            "white coffee",
-            "3-in-1",
-            "10 sachets",
-            "instant"
-        ]
-    },
-    {
-        "item_id": 47,
-        "name": "Energen Chocolate Cereal Drink 30g",
-        "price": 12.5,
-        "stock": 240,
-        "tags": [
-            "cereal drink",
-            "chocolate",
-            "30g",
-            "breakfast",
-            "sachet"
-        ]
-    },
-    {
-        "item_id": 48,
-        "name": "Quaker Oats Quick Cook 400g",
-        "price": 88.0,
-        "stock": 75,
-        "tags": [
-            "oats",
-            "breakfast",
-            "400g",
-            "healthy",
-            "cereal"
-        ]
-    },
-    {
-        "item_id": 49,
-        "name": "Spam Luncheon Meat 340g",
-        "price": 168.0,
-        "stock": 60,
-        "tags": [
-            "canned goods",
-            "luncheon meat",
-            "340g",
-            "meat",
-            "premium"
-        ]
-    },
-    {
-        "item_id": 50,
-        "name": "Youngstown Corned Beef 150g",
-        "price": 33.0,
-        "stock": 135,
-        "tags": [
-            "canned goods",
-            "corned beef",
-            "150g",
-            "meat"
-        ]
-    },
-    {
-        "item_id": 51,
-        "name": "Mega Sardines Spicy 155g",
-        "price": 24.0,
-        "stock": 145,
-        "tags": [
-            "canned goods",
-            "sardines",
-            "spicy",
-            "155g",
-            "fish"
-        ]
-    },
-    {
-        "item_id": 52,
-        "name": "Del Monte Pineapple Juice 240ml",
-        "price": 29.0,
-        "stock": 100,
-        "tags": [
-            "beverage",
-            "juice",
-            "pineapple",
-            "240ml",
-            "fruit"
-        ]
-    },
-    {
-        "item_id": 53,
-        "name": "Minute Maid Orange Juice 300ml",
-        "price": 32.0,
-        "stock": 90,
-        "tags": [
-            "beverage",
-            "juice",
-            "orange",
-            "300ml",
-            "fruit"
-        ]
-    },
-    {
-        "item_id": 54,
-        "name": "Hansel Premium Sandwich Cookies 10s",
-        "price": 50.0,
-        "stock": 100,
-        "tags": [
-            "snack",
-            "cookies",
-            "sandwich",
-            "10s",
-            "chocolate"
-        ]
-    },
-    {
-        "item_id": 55,
-        "name": "Oishi Prawn Crackers 90g",
-        "price": 45.0,
-        "stock": 130,
-        "tags": [
-            "snack",
-            "chips",
-            "prawn crackers",
-            "90g",
-            "seafood"
-        ]
-    },
-    {
-        "item_id": 56,
-        "name": "Boy Bawang Cornick Garlic 100g",
-        "price": 38.0,
-        "stock": 150,
-        "tags": [
-            "snack",
-            "cornick",
-            "garlic",
-            "100g",
-            "crispy"
-        ]
-    },
-    {
-        "item_id": 57,
-        "name": "UFC Sweet Chili Sauce 320g",
-        "price": 39.0,
-        "stock": 110,
-        "tags": [
-            "condiment",
-            "sweet chili",
-            "320g",
-            "sauce",
-            "spicy"
-        ]
-    },
-    {
-        "item_id": 58,
-        "name": "Knorr Chicken Cube 10g",
-        "price": 6.0,
-        "stock": 300,
-        "tags": [
-            "seasoning",
-            "chicken cube",
-            "10g",
-            "cooking",
-            "broth"
-        ]
+            "Digital",
+            "Social"
+        ],
+        "owner": "GamingHub"
     }
 ]

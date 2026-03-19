@@ -636,7 +636,8 @@ class Item(tk.Frame):
                 self.itemName[0],
                 float(self.itemPrice[0]),
                 int(self.itemStock[0]),
-                self.itemTag[3]
+                self.itemTag[3],
+                App.sellerScenes["SellerHome"]["account"]["username"]
             )
             FH.clone(self.image, f"../Database/images/{item["item_id"]}.{self.image.split('.').pop()}")
 

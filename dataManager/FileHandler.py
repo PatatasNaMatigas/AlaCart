@@ -76,7 +76,7 @@ def getTransactions() -> list:
     except FileExistsError:
         pass
 
-    safeCreateFile(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json")
+    safeCreateFile(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json", True)
     date = datetime.now().date()
     return read(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json")
 
@@ -93,7 +93,7 @@ def getAccount(username: str) -> dict:
 def updateAccounts(data: list) -> None:
     safeWrite("../Database/accounts/accounts.json", data, )
 
-def updateAccount(username: str, data: list) -> None:
+def updateAccount(username: str, data: dict) -> None:
     safeWrite(f"../Database/accounts/{username}/profile.json", data)
 
 def createAccount(data: dict) -> None:

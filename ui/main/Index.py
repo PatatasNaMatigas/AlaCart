@@ -35,8 +35,6 @@ class Login(tk.Frame):
         self.username = ["", "Enter username", "username"]
         self.password = ["", "Enter password", "password"]
 
-        self.initUi()
-
     def unfocus(self, event):
         self.focusedField = None
         self.canvas.itemconfig(

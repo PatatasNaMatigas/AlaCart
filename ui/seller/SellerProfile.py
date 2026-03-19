@@ -116,8 +116,9 @@ class SellerProfile(tk.Frame):
             image=self.images["seller_F0C38E"]
         )
 
-        self.createDataEntry(575, 230, "items sold:", self.profile["stats"]["items_sold"])
-        self.createDataEntry(575, 305, "amount earned:", self.profile["stats"]["amount_earned"])
+        self.createDataEntry(575, 150, "items purchased:", self.profile["stats"]["items_sold"])
+        self.createDataEntry(575, 225, "amount spent:", self.profile["stats"]["amount_earned"])
+        self.createDataEntry(575, 300, "balance:", self.profile["stats"]["balance"])
 
         UIUtils.createRoundRect(
             self.canvas,
@@ -313,7 +314,7 @@ class SellerProfile(tk.Frame):
         self.canvas.delete("all")
         self.initImages()
 
-        self.profile = App.sellerScenes["SellerHome"]["account"]
+        self.profile = Accounts().getAccount(App.customerScenes["CustomerHome"]["account"]["username"])
         self.username = [
             self.profile["username"],
             self.profile["username"],

@@ -1,0 +1,132 @@
+[
+    {
+        "transaction_id": "T156781675",
+        "date_time": "2025-12-08 12:58:00",
+        "items_summary": [
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 1500.0,
+        "pay_amount": 1500.0,
+        "change": 0.0,
+        "payment_method": "Bank Transfer"
+    },
+    {
+        "transaction_id": "T844718175",
+        "date_time": "2025-12-08 12:20:00",
+        "items_summary": [
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 1,
+                "price_at_purchase": 1200.0,
+                "sub_total": 1200.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 1600.0,
+        "pay_amount": 1600.0,
+        "change": 0.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T257405789",
+        "date_time": "2025-12-08 07:13:00",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 1,
+                "price_at_purchase": 50.0,
+                "sub_total": 50.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 2,
+                "price_at_purchase": 50.0,
+                "sub_total": 100.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 700.0,
+        "pay_amount": 1200.0,
+        "change": 500.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T917843690",
+        "date_time": "2025-12-08 19:25:00",
+        "items_summary": [
+            {
+                "item_id": 202,
+                "item_name": "Espresso Beans",
+                "quantity": 2,
+                "price_at_purchase": 450.0,
+                "sub_total": 900.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 2400.0,
+        "pay_amount": 2400.0,
+        "change": 0.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T885343397",
+        "date_time": "2025-12-08 15:54:00",
+        "items_summary": [
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 1500.0,
+        "pay_amount": 2000.0,
+        "change": 500.0,
+        "payment_method": "GCash"
+    }
+]
