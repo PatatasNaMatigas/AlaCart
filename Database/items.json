@@ -163,5 +163,16 @@
             "Social"
         ],
         "owner": "GamingHub"
+    },
+    {
+        "item_id": 16,
+        "name": "Item 1",
+        "price": 1.0,
+        "stock": 1975,
+        "tags": [
+            "generic item",
+            "item"
+        ],
+        "owner": "testuser1"
     }
 ]

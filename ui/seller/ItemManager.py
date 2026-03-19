@@ -224,7 +224,7 @@ class ItemManager(tk.Frame):
             self.filterActive = False
             self.canvas.tag_lower("filter")
             self.canvas.delete("itemEntry")
-            self.initItems(Items().sort(self.activeFilter, ascending=self.activeSortType))
+            self.initItems(Items().sort(self.activeFilter, self.activeSortType, App.sellerScenes["SellerHome"]["account"]["username"]))
             self.itemEntryY = 0
             self.itemEntryMaxY = 0
             self.canvas.tag_raise("addButton")

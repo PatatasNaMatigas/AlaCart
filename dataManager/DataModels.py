@@ -105,21 +105,28 @@ class Items:
                 return
         warn(f"Item with id {itemId} not found", "DELETE ITEM")
 
-    def sort(self, key: int, ascending=True) -> list:
+    def sort(self, key: int, ascending=True, owner: str=None) -> list:
+        if owner is None:
+            return self.items
+        ownerItems = []
+        temp = []
         match key:
             case 0:
                 key = self.Filter.RECENTLY_ADDED.value
-                return sorted(self.items, key=lambda item: item[key], reverse=ascending)
+                temp = sorted(self.items, key=lambda item: item[key], reverse=ascending)
             case 1:
                 key = self.Filter.STOCK.value
-                return sorted(self.items, key=lambda item: item[key], reverse=ascending)
+                temp = sorted(self.items, key=lambda item: item[key], reverse=ascending)
             case 2:
                 key = self.Filter.PRICE.value
-                return sorted(self.items, key=lambda item: item[key], reverse=ascending)
+                temp = sorted(self.items, key=lambda item: item[key], reverse=ascending)
             case 3:
                 key = self.Filter.NAME.value
-                return sorted(self.items, key=lambda item: item[key].lower(), reverse=ascending)
-        return []
+                temp = sorted(self.items, key=lambda item: item[key].lower(), reverse=ascending)
+        for item in temp:
+            if item["owner"] == owner:
+                ownerItems.append(item)
+        return ownerItems
 
     def exists(self, i: int) -> bool:
         for item in self.items:
