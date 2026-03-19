@@ -1,143 +1,8 @@
 [
     {
-        "transaction_id": "T242334990",
-        "date_time": "2025-05-26 20:36:00",
-        "items_summary": [
-            {
-                "item_id": 305,
-                "item_name": "Minecoins",
-                "quantity": 3,
-                "price_at_purchase": 50.0,
-                "sub_total": 150.0,
-                "owner": "GamingHub"
-            },
-            {
-                "item_id": 110,
-                "item_name": "USB-C Cable",
-                "quantity": 1,
-                "price_at_purchase": 200.0,
-                "sub_total": 200.0,
-                "owner": "TechStore"
-            },
-            {
-                "item_id": 105,
-                "item_name": "Gaming Mouse",
-                "quantity": 3,
-                "price_at_purchase": 1200.0,
-                "sub_total": 3600.0,
-                "owner": "TechStore"
-            },
-            {
-                "item_id": 303,
-                "item_name": "V-Bucks Pack",
-                "quantity": 3,
-                "price_at_purchase": 500.0,
-                "sub_total": 1500.0,
-                "owner": "GamingHub"
-            }
-        ],
-        "total_price": 5450.0,
-        "pay_amount": 5950.0,
-        "change": 500.0,
-        "payment_method": "Cash"
-    },
-    {
-        "transaction_id": "T564167206",
-        "date_time": "2025-05-26 21:40:00",
-        "items_summary": [
-            {
-                "item_id": 101,
-                "item_name": "Mechanical Keyboard",
-                "quantity": 1,
-                "price_at_purchase": 2500.0,
-                "sub_total": 2500.0,
-                "owner": "TechStore"
-            },
-            {
-                "item_id": 401,
-                "item_name": "Robux Gift Card",
-                "quantity": 1,
-                "price_at_purchase": 250.0,
-                "sub_total": 250.0,
-                "owner": "GamingHub"
-            },
-            {
-                "item_id": 202,
-                "item_name": "Espresso Beans",
-                "quantity": 1,
-                "price_at_purchase": 450.0,
-                "sub_total": 450.0,
-                "owner": "Seller123"
-            },
-            {
-                "item_id": 205,
-                "item_name": "Coffee Grinder",
-                "quantity": 1,
-                "price_at_purchase": 1500.0,
-                "sub_total": 1500.0,
-                "owner": "Seller123"
-            }
-        ],
-        "total_price": 4700.0,
-        "pay_amount": 4800.0,
-        "change": 100.0,
-        "payment_method": "Cash"
-    },
-    {
-        "transaction_id": "T947612819",
-        "date_time": "2025-05-26 21:06:00",
-        "items_summary": [
-            {
-                "item_id": 303,
-                "item_name": "V-Bucks Pack",
-                "quantity": 2,
-                "price_at_purchase": 500.0,
-                "sub_total": 1000.0,
-                "owner": "GamingHub"
-            },
-            {
-                "item_id": 105,
-                "item_name": "Gaming Mouse",
-                "quantity": 2,
-                "price_at_purchase": 1200.0,
-                "sub_total": 2400.0,
-                "owner": "TechStore"
-            }
-        ],
-        "total_price": 3400.0,
-        "pay_amount": 3450.0,
-        "change": 50.0,
-        "payment_method": "GCash"
-    },
-    {
-        "transaction_id": "T675130784",
-        "date_time": "2025-05-26 11:07:00",
-        "items_summary": [
-            {
-                "item_id": 202,
-                "item_name": "Espresso Beans",
-                "quantity": 1,
-                "price_at_purchase": 450.0,
-                "sub_total": 450.0,
-                "owner": "Seller123"
-            },
-            {
-                "item_id": 110,
-                "item_name": "USB-C Cable",
-                "quantity": 2,
-                "price_at_purchase": 200.0,
-                "sub_total": 400.0,
-                "owner": "TechStore"
-            }
-        ],
-        "total_price": 850.0,
-        "pay_amount": 950.0,
-        "change": 100.0,
-        "payment_method": "Credit Card"
-    },
-    {
-        "transaction_id": "T757622821",
-        "date_time": "2025-05-26 10:07:00",
+        "transaction_id": "T866355742",
+        "date_time": "2025-05-26 07:29:00",
+        "buyer": "ae",
         "items_summary": [
             {
                 "item_id": 205,
@@ -150,46 +15,250 @@
             {
                 "item_id": 110,
                 "item_name": "USB-C Cable",
-                "quantity": 1,
+                "quantity": 2,
                 "price_at_purchase": 200.0,
-                "sub_total": 200.0,
+                "sub_total": 400.0,
                 "owner": "TechStore"
-            }
-        ],
-        "total_price": 3200.0,
-        "pay_amount": 3250.0,
-        "change": 50.0,
-        "payment_method": "SPayLater"
-    },
-    {
-        "transaction_id": "T807139488",
-        "date_time": "2025-05-26 13:22:00",
-        "items_summary": [
-            {
-                "item_id": 401,
-                "item_name": "Robux Gift Card",
-                "quantity": 1,
-                "price_at_purchase": 250.0,
-                "sub_total": 250.0,
-                "owner": "GamingHub"
             },
             {
-                "item_id": 202,
-                "item_name": "Espresso Beans",
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
                 "quantity": 2,
-                "price_at_purchase": 450.0,
-                "sub_total": 900.0,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
                 "owner": "Seller123"
             }
         ],
-        "total_price": 1150.0,
-        "pay_amount": 2150.0,
+        "total_price": 6400.0,
+        "pay_amount": 7400.0,
         "change": 1000.0,
         "payment_method": "GCash"
     },
     {
-        "transaction_id": "T502499231",
-        "date_time": "2025-05-26 12:51:00",
+        "transaction_id": "T111018913",
+        "date_time": "2025-05-26 20:10:00",
+        "buyer": "ae",
+        "items_summary": [
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 3,
+                "price_at_purchase": 250.0,
+                "sub_total": 750.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 2,
+                "price_at_purchase": 500.0,
+                "sub_total": 1000.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 110,
+                "item_name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_price": 2150.0,
+        "pay_amount": 2250.0,
+        "change": 100.0,
+        "payment_method": "Credit Card"
+    },
+    {
+        "transaction_id": "T646104332",
+        "date_time": "2025-05-26 20:25:00",
+        "buyer": "admin",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 401,
+                "item_name": "Robux Gift Card",
+                "quantity": 2,
+                "price_at_purchase": 250.0,
+                "sub_total": 500.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 6500.0,
+        "pay_amount": 7500.0,
+        "change": 1000.0,
+        "payment_method": "SPayLater"
+    },
+    {
+        "transaction_id": "T751526115",
+        "date_time": "2025-05-26 19:10:00",
+        "buyer": "ae",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 1,
+                "price_at_purchase": 50.0,
+                "sub_total": 50.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 50.0,
+        "pay_amount": 100.0,
+        "change": 50.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T772800251",
+        "date_time": "2025-05-26 07:59:00",
+        "buyer": "ae",
+        "items_summary": [
+            {
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 4650.0,
+        "pay_amount": 4650.0,
+        "change": 0.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T869102783",
+        "date_time": "2025-05-26 13:43:00",
+        "buyer": "eli",
+        "items_summary": [
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 2,
+                "price_at_purchase": 1200.0,
+                "sub_total": 2400.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            }
+        ],
+        "total_price": 8400.0,
+        "pay_amount": 8500.0,
+        "change": 100.0,
+        "payment_method": "Bank Transfer"
+    },
+    {
+        "transaction_id": "T113388125",
+        "date_time": "2025-05-26 09:03:00",
+        "buyer": "admin",
+        "items_summary": [
+            {
+                "item_id": 105,
+                "item_name": "Gaming Mouse",
+                "quantity": 3,
+                "price_at_purchase": 1200.0,
+                "sub_total": 3600.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 303,
+                "item_name": "V-Bucks Pack",
+                "quantity": 2,
+                "price_at_purchase": 500.0,
+                "sub_total": 1000.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 12100.0,
+        "pay_amount": 12200.0,
+        "change": 100.0,
+        "payment_method": "GCash"
+    },
+    {
+        "transaction_id": "T299085864",
+        "date_time": "2025-05-26 12:21:00",
+        "buyer": "ae",
+        "items_summary": [
+            {
+                "item_id": 205,
+                "item_name": "Coffee Grinder",
+                "quantity": 2,
+                "price_at_purchase": 1500.0,
+                "sub_total": 3000.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_price": 3000.0,
+        "pay_amount": 4000.0,
+        "change": 1000.0,
+        "payment_method": "Cash"
+    },
+    {
+        "transaction_id": "T859668593",
+        "date_time": "2025-05-26 21:26:00",
+        "buyer": "ae",
         "items_summary": [
             {
                 "item_id": 101,
@@ -200,162 +269,6 @@
                 "owner": "TechStore"
             },
             {
-                "item_id": 205,
-                "item_name": "Coffee Grinder",
-                "quantity": 1,
-                "price_at_purchase": 1500.0,
-                "sub_total": 1500.0,
-                "owner": "Seller123"
-            }
-        ],
-        "total_price": 6500.0,
-        "pay_amount": 7500.0,
-        "change": 1000.0,
-        "payment_method": "GCash"
-    },
-    {
-        "transaction_id": "T928773412",
-        "date_time": "2025-05-26 15:08:00",
-        "items_summary": [
-            {
-                "item_id": 205,
-                "item_name": "Coffee Grinder",
-                "quantity": 3,
-                "price_at_purchase": 1500.0,
-                "sub_total": 4500.0,
-                "owner": "Seller123"
-            }
-        ],
-        "total_price": 4500.0,
-        "pay_amount": 4500.0,
-        "change": 0.0,
-        "payment_method": "GCash"
-    },
-    {
-        "transaction_id": "T537687119",
-        "date_time": "2025-05-26 14:42:00",
-        "items_summary": [
-            {
-                "item_id": 303,
-                "item_name": "V-Bucks Pack",
-                "quantity": 3,
-                "price_at_purchase": 500.0,
-                "sub_total": 1500.0,
-                "owner": "GamingHub"
-            }
-        ],
-        "total_price": 1500.0,
-        "pay_amount": 2000.0,
-        "change": 500.0,
-        "payment_method": "Debit Card"
-    },
-    {
-        "transaction_id": "T158129968",
-        "date_time": "2025-05-26 11:12:00",
-        "items_summary": [
-            {
-                "item_id": 202,
-                "item_name": "Espresso Beans",
-                "quantity": 1,
-                "price_at_purchase": 450.0,
-                "sub_total": 450.0,
-                "owner": "Seller123"
-            },
-            {
-                "item_id": 105,
-                "item_name": "Gaming Mouse",
-                "quantity": 3,
-                "price_at_purchase": 1200.0,
-                "sub_total": 3600.0,
-                "owner": "TechStore"
-            },
-            {
-                "item_id": 105,
-                "item_name": "Gaming Mouse",
-                "quantity": 3,
-                "price_at_purchase": 1200.0,
-                "sub_total": 3600.0,
-                "owner": "TechStore"
-            }
-        ],
-        "total_price": 7650.0,
-        "pay_amount": 8150.0,
-        "change": 500.0,
-        "payment_method": "Bank Transfer"
-    },
-    {
-        "transaction_id": "T246147070",
-        "date_time": "2025-05-26 09:21:00",
-        "items_summary": [
-            {
-                "item_id": 110,
-                "item_name": "USB-C Cable",
-                "quantity": 3,
-                "price_at_purchase": 200.0,
-                "sub_total": 600.0,
-                "owner": "TechStore"
-            },
-            {
-                "item_id": 401,
-                "item_name": "Robux Gift Card",
-                "quantity": 3,
-                "price_at_purchase": 250.0,
-                "sub_total": 750.0,
-                "owner": "GamingHub"
-            },
-            {
-                "item_id": 401,
-                "item_name": "Robux Gift Card",
-                "quantity": 1,
-                "price_at_purchase": 250.0,
-                "sub_total": 250.0,
-                "owner": "GamingHub"
-            },
-            {
-                "item_id": 305,
-                "item_name": "Minecoins",
-                "quantity": 2,
-                "price_at_purchase": 50.0,
-                "sub_total": 100.0,
-                "owner": "GamingHub"
-            }
-        ],
-        "total_price": 1700.0,
-        "pay_amount": 1700.0,
-        "change": 0.0,
-        "payment_method": "Debit Card"
-    },
-    {
-        "transaction_id": "T203153037",
-        "date_time": "2025-05-26 08:42:00",
-        "items_summary": [
-            {
-                "item_id": 205,
-                "item_name": "Coffee Grinder",
-                "quantity": 1,
-                "price_at_purchase": 1500.0,
-                "sub_total": 1500.0,
-                "owner": "Seller123"
-            },
-            {
-                "item_id": 401,
-                "item_name": "Robux Gift Card",
-                "quantity": 1,
-                "price_at_purchase": 250.0,
-                "sub_total": 250.0,
-                "owner": "GamingHub"
-            }
-        ],
-        "total_price": 1750.0,
-        "pay_amount": 1750.0,
-        "change": 0.0,
-        "payment_method": "GCash"
-    },
-    {
-        "transaction_id": "T224155262",
-        "date_time": "2025-05-26 18:46:00",
-        "items_summary": [
-            {
                 "item_id": 110,
                 "item_name": "USB-C Cable",
                 "quantity": 2,
@@ -364,17 +277,17 @@
                 "owner": "TechStore"
             },
             {
-                "item_id": 101,
-                "item_name": "Mechanical Keyboard",
-                "quantity": 1,
-                "price_at_purchase": 2500.0,
-                "sub_total": 2500.0,
-                "owner": "TechStore"
+                "item_id": 305,
+                "item_name": "Minecoins",
+                "quantity": 3,
+                "price_at_purchase": 50.0,
+                "sub_total": 150.0,
+                "owner": "GamingHub"
             }
         ],
-        "total_price": 2900.0,
-        "pay_amount": 3900.0,
-        "change": 1000.0,
-        "payment_method": "Debit Card"
+        "total_price": 5550.0,
+        "pay_amount": 5650.0,
+        "change": 100.0,
+        "payment_method": "GCash"
     }
 ]

@@ -116,7 +116,7 @@ class ShoppingCart(tk.Frame):
         )
         self.canvas.create_text(
             775, 170,
-            text=f"item count: {round(sum(self.cartItems.values()), 2)}",
+            text=f"item count: ₱{(sum(self.cartItems.values())):,.2f}",
             font=(Utils.Fonts.KOULEN.value, 20),
             fill="#F0C38E",
             anchor="nw",
@@ -126,7 +126,7 @@ class ShoppingCart(tk.Frame):
         total = sum(round(items.getItem(int(k.split(":")[1]))["price"] * v, 2) for k, v in self.cartItems.items())
         self.canvas.create_text(
             775, 210,
-            text=f"total: P{total}",
+            text=f"total: ₱{total:,.2f}",
             font=(Utils.Fonts.KOULEN.value, 20),
             fill="#F0C38E",
             anchor="nw",
@@ -288,7 +288,7 @@ class ShoppingCart(tk.Frame):
         )
         self.canvas.create_text(
             x + 115, y + 40,
-            text=f"Price: P{item["price"]}",
+            text=f"Price: ₱{item["price"]:,.2f}",
             font=(Utils.Fonts.KOULEN.value, 15),
             fill="#F0C38E",
             anchor="nw",
@@ -296,7 +296,7 @@ class ShoppingCart(tk.Frame):
         )
         self.canvas.create_text(
             x + 115, y + 60,
-            text=f"Subtotal: P{round(float(item["price"] * quantity), 2)}",
+            text=f"Subtotal: ₱{round(float(item["price"] * quantity), 2):,.2f}",
             font=(Utils.Fonts.KOULEN.value, 15),
             fill="#F0C38E",
             anchor="nw",
@@ -318,11 +318,11 @@ class ShoppingCart(tk.Frame):
         def add():
             self.cartItems[f"itemId:{item["item_id"]}"] += 1
             self.shoppingCart.item(f"itemId:{item["item_id"]}", self.cartItems[f"itemId:{item["item_id"]}"])
-            self.canvas.itemconfig(f"{item["item_id"]}Subtotal", text=f"Subtotal: P{round(float(item["price"] * self.cartItems[f"itemId:{item["item_id"]}"]), 2)}")
+            self.canvas.itemconfig(f"{item["item_id"]}Subtotal", text=f"Subtotal: ₱{round(float(item["price"] * self.cartItems[f"itemId:{item["item_id"]}"]), 2):,.2f}")
             self.canvas.itemconfig(f"{item["item_id"]}Quantity", text=f"{self.cartItems[f"itemId:{item["item_id"]}"]}")
             items = Items()
             total = sum(round(items.getItem(int(k.split(":")[1]))["price"] * v, 2) for k, v in self.cartItems.items())
-            self.canvas.itemconfig("totalPrice", text=f"Total: P{total}")
+            self.canvas.itemconfig("totalPrice", text=f"Total: ₱{total:,.2f}")
             self.canvas.itemconfig("itemCount", text=f"item count: {round(sum(self.cartItems.values()), 2)}")
 
         self.createButton(
@@ -337,11 +337,11 @@ class ShoppingCart(tk.Frame):
         def subtract():
             self.cartItems[f"itemId:{item["item_id"]}"] -= 1 if self.cartItems[f"itemId:{item["item_id"]}"] > 0 else 0
             self.shoppingCart.item(f"itemId:{item["item_id"]}", self.cartItems[f"itemId:{item["item_id"]}"])
-            self.canvas.itemconfig(f"{item["item_id"]}Subtotal", text=f"Subtotal: P{round(float(item["price"] * self.cartItems[f"itemId:{item["item_id"]}"]), 2)}")
+            self.canvas.itemconfig(f"{item["item_id"]}Subtotal", text=f"Subtotal: ₱{round(float(item["price"] * self.cartItems[f"itemId:{item["item_id"]}"]), 2):,.2f}")
             self.canvas.itemconfig(f"{item["item_id"]}Quantity", text=f"{self.cartItems[f"itemId:{item["item_id"]}"]}")
             items = Items()
             total = sum(round(items.getItem(int(k.split(":")[1]))["price"] * v, 2) for k, v in self.cartItems.items())
-            self.canvas.itemconfig("totalPrice", text=f"Total: P{total}")
+            self.canvas.itemconfig("totalPrice", text=f"Total: ₱{total:,.2f}")
             self.canvas.itemconfig("itemCount", text=f"item count: {round(sum(self.cartItems.values()), 2)}")
 
         self.createButton(

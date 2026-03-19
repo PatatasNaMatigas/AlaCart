@@ -761,7 +761,7 @@ class ItemManager(tk.Frame):
             x + 260,
             y + 170,
             anchor="e",
-            text=f"Price: P{price}",
+            text=f"Price: ₱{price:,.2f}",
             fill="#F0C38E",
             font=(Utils.Fonts.KOULEN.value, 12),
             tags=("itemEntry", f"id_{itemId}")

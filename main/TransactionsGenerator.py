@@ -6,6 +6,7 @@ import datetime
 # Configuration matching your DataModels and FileHandler
 BASE_PATH = "../Database/summaries"
 SELLERS = ["TechStore", "Seller123", "GamingHub"]
+BUYERS = ["ae", "eli", "admin"]
 ITEMS = {
     "TechStore": [
         {"id": 101, "name": "Mechanical Keyboard", "price": 2500.0},
@@ -59,6 +60,7 @@ def generateDailyTransactions(date):
         transaction = {
             "transaction_id": f"T{random.randint(100000000, 999999999)}",
             "date_time": f"{date} {random.randint(7, 21):02}:{random.randint(0, 59):02}:00",
+            "buyer" : random.choice(BUYERS),
             "items_summary": itemsSummary,
             "total_price": float(totalPrice),
             "pay_amount": payAmount,

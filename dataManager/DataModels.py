@@ -135,7 +135,8 @@ class Transactions:
     [
         {
             transaction_id : (str)
-            date_time      : (str: ISO)
+            date_time      : (str: ISO),
+            buyer          : (str)
             items_summary  : [
                 {
                     "item_id"           : (int)
@@ -176,23 +177,20 @@ class Transactions:
         self.transactions = FH.getTransactions()
         pass
 
-    def recordTransaction(self, items: list, payAmount: float, paymentMethod: PaymentMethods) -> None:
+    def recordTransaction(self, buyer: str, items: list, payAmount: float, paymentMethod: PaymentMethods) -> None:
         totalPrice = 0
         for item in items:
             totalPrice += item["sub_total"]
         change = payAmount - totalPrice
-        record = FH.prepareTransactionRecord(items, totalPrice, payAmount, change, paymentMethod)
+        record = FH.prepareTransactionRecord(buyer, items, totalPrice, payAmount, change, paymentMethod)
         self.transactions = FH.getTransactions()
         self.transactions.append(record)
         FH.updateTransactions(self.transactions)
 
-    def getTransaction(self, transactionId: str) -> dict:
-        for i in range(len(self.transactions)):
-            print(self.transactions[i]["transaction_id"])
-            if self.transactions[i]["transaction_id"] == transactionId:
-                return self.transactions[i]
-        warn(f"Transaction with id {transactionId} not found", "GET TRANSACTION")
-        return {}
+    def getUserTransactions(self, username: str) -> list:
+        allTransactions = FH.getTransactions(True)
+        user_records = [tx for tx in allTransactions if tx.get('buyer') == username]
+        return user_records[::-1]
 
     def getTransactions(self) -> list:
         return self.transactions

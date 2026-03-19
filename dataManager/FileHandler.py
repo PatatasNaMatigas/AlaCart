@@ -1,6 +1,9 @@
 import os, json
 import shutil
 
+import os
+from glob import glob
+
 from dataManager import DataModels
 from datetime import datetime
 
@@ -44,7 +47,7 @@ def getItems() -> list:
 def updateItems(data: list) -> None:
     safeWrite("../Database/items.json", data)
 
-def prepareTransactionRecord(items: list, totalPrice: float, payAmount: float, change: float, paymentMethod: DataModels.Transactions.PaymentMethods) -> dict:
+def prepareTransactionRecord(buyer: str, items: list, totalPrice: float, payAmount: float, change: float, paymentMethod: DataModels.Transactions.PaymentMethods) -> dict:
     date = datetime.now().date()
     id = autoIncrement(DataModels.ID.TRANSACTION)
     transactionId = f"T{"0" * (9 - len(str(id)))}{id}"
@@ -52,6 +55,7 @@ def prepareTransactionRecord(items: list, totalPrice: float, payAmount: float, c
     data = {
         "transaction_id" : transactionId,
         "date_time"      : date,
+        "buyer"          : buyer,
         "items_summary"  : items,
         "total_price"    : totalPrice,
         "pay_amount"     : payAmount,
@@ -61,24 +65,27 @@ def prepareTransactionRecord(items: list, totalPrice: float, payAmount: float, c
 
     return data
 
-def getTransactions() -> list:
-    date = datetime.now().date()
-    try:
-        os.mkdir(f"../Database/summaries/{date.year}")
-    except FileExistsError:
-        pass
-    try:
-        os.mkdir(f"../Database/summaries/{date.year}/{date.month}")
-    except FileExistsError:
-        pass
-    try:
-        os.mkdir(f"../Database/summaries/{date.year}/{date.month}/{date.day}")
-    except FileExistsError:
-        pass
+def getTransactions(allTime=False) -> list:
+    base_path = "../Database/summaries"
 
-    safeCreateFile(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json", True)
+    if allTime:
+        allRecords = []
+        filePattern = os.path.join(base_path, "**", "transactions.json")
+        for file_path in glob(filePattern, recursive=True):
+            data = read(file_path)
+            if isinstance(data, list):
+                allRecords.extend(data)
+        return allRecords
+
     date = datetime.now().date()
-    return read(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json")
+    today_path = f"{base_path}/{date.year}/{date.month}/{date.day}"
+
+    os.makedirs(today_path, exist_ok=True)
+    fullFilePath = f"{today_path}/transactions.json"
+    safeCreateFile(fullFilePath, True)
+
+    return read(fullFilePath)
+
 
 def updateTransactions(data: list) -> None:
     date = datetime.now().date()

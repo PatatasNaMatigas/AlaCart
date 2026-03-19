@@ -156,7 +156,7 @@ class CustomerProfile(tk.Frame):
 
         def onTransactionsRelease(event):
             self.canvas.move("transactionShadow", 5, 5)
-
+            App.show("Transaction")
 
         self.canvas.tag_bind("transactionsButton", "<Button-1>", onTransactionsClick)
         self.canvas.tag_bind("transactionsButton", "<ButtonRelease-1>", onTransactionsRelease)

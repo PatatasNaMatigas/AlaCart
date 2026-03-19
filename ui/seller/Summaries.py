@@ -233,7 +233,7 @@ class Summaries(tk.Frame):
 
             self.canvas.create_text(
                 graphX - 10, y,
-                text=f"₱{round(((ySize - i) / ySize) * yHighest):,.2f}",
+                text=f"₱{(((ySize - i) / ySize) * yHighest):,.2f}",
                 font=(Utils.Fonts.KOULEN.value, 15),
                 fill="#F0C38E",
                 anchor="e",

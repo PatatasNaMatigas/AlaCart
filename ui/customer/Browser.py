@@ -358,7 +358,7 @@ class Browser(tk.Frame):
                 self.cartItems[f"{self.activeItem}"] -= 1 if self.cartItems[f"{self.activeItem}"] > 0 else 0
                 item = Items().getItem(int(self.activeItem.split(":")[-1]))
                 self.canvas.itemconfig("selectedItemQuantity", text=f"{self.cartItems[f"{self.activeItem}"]}")
-                self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: P{round(item["price"] * self.cartItems[self.activeItem], 2)}")
+                self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: ₱{round(item["price"] * self.cartItems[self.activeItem], 2):,.2f}")
 
         self.createButton(
             390, 385,
@@ -373,7 +373,7 @@ class Browser(tk.Frame):
                 self.cartItems[f"{self.activeItem}"] += 1
                 item = Items().getItem(int(self.activeItem.split(":")[-1]))
                 self.canvas.itemconfig("selectedItemQuantity", text=f"{self.cartItems[f"{self.activeItem}"]}")
-                self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: P{round(item["price"] * self.cartItems[self.activeItem], 2)}")
+                self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: ₱{round(item["price"] * self.cartItems[self.activeItem], 2):,.2f}")
 
         self.createButton(
             560, 385,
@@ -460,7 +460,7 @@ class Browser(tk.Frame):
         self.canvas.tag_raise("itemDetails")
         item = self.items.getItem(itemId)
         self.canvas.itemconfig(f"selectedItemName", text=f"{item["name"]}")
-        self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: P{round(item["price"] * self.cartItems[self.activeItem], 2)}")
+        self.canvas.itemconfig(f"selectedItemPrice", text=f"Price: {item["price"]} | subtotal: ₱{round(item["price"] * self.cartItems[self.activeItem], 2):,.2}")
         self.canvas.itemconfig("selectedItemQuantity", text=f"{self.cartItems[f"{self.activeItem}"]}")
 
         self.coverItemImages[f"id:{itemId}"] = self.coverItemImages.get(f"id:{itemId}", None)
@@ -610,7 +610,7 @@ class Browser(tk.Frame):
             x + 260,
             y + 170,
             anchor="e",
-            text=f"Price: P{price}",
+            text=f"Price: ₱{price}:,.2f",
             fill="#F0C38E",
             font=(Utils.Fonts.KOULEN.value, 12),
             tags=("itemEntry", f"id_{itemId}")

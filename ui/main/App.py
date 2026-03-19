@@ -1,12 +1,13 @@
 import tkinter as tk
 
 from dataManager.DataModels import Accounts
-from ui.customer.CustomerProfile import CustomerProfile
-from ui.customer.ShoppingCart import ShoppingCart
 from ui.main.Index import Login, SignUp
 
 from ui.customer.CustomerHome import CustomerHome
 from ui.customer.Browser import Browser
+from ui.customer.Transactions import Transaction
+from ui.customer.CustomerProfile import CustomerProfile
+from ui.customer.ShoppingCart import ShoppingCart
 
 from ui.seller.SellerProfile import SellerProfile
 from ui.seller.SellerHome import SellerHome
@@ -51,6 +52,9 @@ customerScenes = {
     },
     "ShoppingCart" : {
         "frame" : ShoppingCart
+    },
+    "Transaction" : {
+        "frame" : Transaction
     }
 }
 
@@ -63,6 +67,8 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Ala Carte")
+        self.iconPhoto = tk.PhotoImage(file="../res/icon.png")
+        self.iconphoto(True, self.iconPhoto)
         self.geometry("1000x600")
 
         Utils.initFont("koulen.ttf")
@@ -84,11 +90,9 @@ class App(tk.Tk):
             }
         }
 
-        customerScenes["CustomerHome"]["account"] = Accounts().getAccount("ae")
-
         for k, v in scenes.items():
             frame = v["frame"](container, self)
             frames[v["frame"].__name__] = frame
             frame.grid(row=0, column=0, sticky="nsew")
 
-        show("ShoppingCart")
+        show("Login")
