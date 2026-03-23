@@ -1,0 +1,13 @@
+{
+    "user_id": 22,
+    "username": "tubig",
+    "password": "password1#",
+    "role": "buyer",
+    "stats": {
+        "items_purchased": 1,
+        "amount_spent": 1200.0,
+        "items_sold": 0,
+        "amount_earned": 0,
+        "balance": 98800.0
+    }
+}

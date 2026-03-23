@@ -1,0 +1,13 @@
+{
+    "user_id": 21,
+    "username": "olaf",
+    "password": "olaf@4c!!",
+    "role": "buyer",
+    "stats": {
+        "items_purchased": 31,
+        "amount_spent": 52650.0,
+        "items_sold": 0,
+        "amount_earned": 0,
+        "balance": 47350.0
+    }
+}

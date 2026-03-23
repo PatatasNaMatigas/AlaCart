@@ -1,0 +1,146 @@
+[
+    {
+        "order_id": 36,
+        "date_time": "2026-03-19T15:42:18.975889",
+        "items": [
+            {
+                "item_id": 1,
+                "name": "Mechanical Keyboard",
+                "quantity": 8,
+                "price_at_purchase": 2500.0,
+                "sub_total": 20000.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 3,
+                "name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 6,
+                "name": "Espresso Beans (500g)",
+                "quantity": 3,
+                "price_at_purchase": 450.0,
+                "sub_total": 1350.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 11,
+                "name": "V-Bucks Pack (1000)",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 10,
+                "name": "Milk Frother",
+                "quantity": 3,
+                "price_at_purchase": 800.0,
+                "sub_total": 2400.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 7,
+                "name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_amount": 30150.0,
+        "status": 0
+    },
+    {
+        "order_id": 37,
+        "date_time": "2026-03-19T15:43:57.618756",
+        "items": [
+            {
+                "item_id": 1,
+                "name": "Mechanical Keyboard",
+                "quantity": 8,
+                "price_at_purchase": 2500.0,
+                "sub_total": 20000.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 3,
+                "name": "USB-C Cable",
+                "quantity": 2,
+                "price_at_purchase": 200.0,
+                "sub_total": 400.0,
+                "owner": "TechStore"
+            },
+            {
+                "item_id": 6,
+                "name": "Espresso Beans (500g)",
+                "quantity": 3,
+                "price_at_purchase": 450.0,
+                "sub_total": 1350.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 11,
+                "name": "V-Bucks Pack (1000)",
+                "quantity": 3,
+                "price_at_purchase": 500.0,
+                "sub_total": 1500.0,
+                "owner": "GamingHub"
+            },
+            {
+                "item_id": 10,
+                "name": "Milk Frother",
+                "quantity": 3,
+                "price_at_purchase": 800.0,
+                "sub_total": 2400.0,
+                "owner": "Seller123"
+            },
+            {
+                "item_id": 7,
+                "name": "Coffee Grinder",
+                "quantity": 3,
+                "price_at_purchase": 1500.0,
+                "sub_total": 4500.0,
+                "owner": "Seller123"
+            }
+        ],
+        "total_amount": 30150.0,
+        "status": 4
+    },
+    {
+        "order_id": 38,
+        "date_time": "2026-03-19T15:44:21.350363",
+        "items": [
+            {
+                "item_id": 1,
+                "name": "Mechanical Keyboard",
+                "quantity": 1,
+                "price_at_purchase": 2500.0,
+                "sub_total": 2500.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_amount": 2500.0,
+        "status": 4
+    },
+    {
+        "order_id": 39,
+        "date_time": "2026-03-19T15:44:31.914060",
+        "items": [
+            {
+                "item_id": 1,
+                "name": "Mechanical Keyboard",
+                "quantity": 8,
+                "price_at_purchase": 2500.0,
+                "sub_total": 20000.0,
+                "owner": "TechStore"
+            }
+        ],
+        "total_amount": 20000.0,
+        "status": 4
+    }
+]

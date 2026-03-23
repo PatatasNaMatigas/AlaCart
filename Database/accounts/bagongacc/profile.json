@@ -1,0 +1,13 @@
+{
+    "user_id": 20,
+    "username": "bagongacc",
+    "password": "bgc@4c__",
+    "role": "buyer",
+    "stats": {
+        "items_purchased": 0,
+        "amount_spent": 0,
+        "items_sold": 0,
+        "amount_earned": 0,
+        "balance": 100000
+    }
+}
