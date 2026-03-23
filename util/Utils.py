@@ -2,6 +2,9 @@ import ctypes
 import json
 from enum import Enum
 
+from dataManager import FileHandler
+
+
 class Colors(Enum):
     YELLOW = "\033[93m"
     RED    = "\033[91m"
@@ -54,4 +57,4 @@ def logData(data: object, tag: str=None) -> None:
     print(json.dumps(data, indent=4))
 
 def initFont(fontName: str) -> None:
-    ctypes.windll.gdi32.AddFontResourceExW(f"../res/fonts/{fontName}", 0x10, 0)
+    ctypes.windll.gdi32.AddFontResourceExW(FileHandler.resPath(f"res/fonts/{fontName}"), 0x10, 0)

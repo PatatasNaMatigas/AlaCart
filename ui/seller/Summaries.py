@@ -5,6 +5,7 @@ from typing import Callable
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from dataManager.DataSummaries import SalesSummaries
 from ui import UIUtils
 from ui.main import App
@@ -45,22 +46,22 @@ class Summaries(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["blackFilter"] = ImageTk.PhotoImage(
-            Image.open("../res/black_filter.png")
+            Image.open(FileHandler.resPath("res/black_filter.png"))
         )
         self.images["calendar"] = ImageTk.PhotoImage(
-            Image.open("../res/calendar.png").resize((30, 30), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/calendar.png")).resize((30, 30), Image.Resampling.LANCZOS)
         )
         self.images["arrowRight"] = ImageTk.PhotoImage(
-            Image.open("../res/arrow.png").resize((20, 20), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/arrow.png")).resize((20, 20), Image.Resampling.LANCZOS)
         )
         self.images["arrowLeft"] = ImageTk.PhotoImage(
-            Image.open("../res/arrow.png").resize((20, 20), Image.Resampling.LANCZOS).rotate(180 % 360)
+            Image.open(FileHandler.resPath("res/arrow.png")).resize((20, 20), Image.Resampling.LANCZOS).rotate(180 % 360)
         )
         self.images["check"] = ImageTk.PhotoImage(
-            Image.open("../res/check.png").resize((23, 24), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/check.png")).resize((23, 24), Image.Resampling.LANCZOS)
         )
 
     def initUi(self) -> None:
@@ -288,6 +289,7 @@ class Summaries(tk.Frame):
                 joinstyle="round",
                 tags="graph"
             )
+
 
         for i in range(len(points)):
             currX = graphX + ((i + 1) * xGap)

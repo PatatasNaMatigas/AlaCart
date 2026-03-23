@@ -4,6 +4,7 @@ from typing import Callable
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from dataManager.DataModels import Accounts
 from ui import UIUtils, Codes
 from ui.main import App
@@ -39,16 +40,16 @@ class SellerProfile(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["seller"] = ImageTk.PhotoImage(
-            Image.open("../res/seller_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/seller_48426D.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.images["profile_chopped"] = ImageTk.PhotoImage(
-            Image.open("../res/profile_chopped.png").resize((101, 101), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/profile_chopped.png")).resize((101, 101), Image.Resampling.LANCZOS)
         )
         self.images["seller_F0C38E"] = ImageTk.PhotoImage(
-            Image.open("../res/seller_F0C38E.png").resize((30, 30), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/seller_F0C38E.png")).resize((30, 30), Image.Resampling.LANCZOS)
         )
 
     def initUi(self) -> None:
@@ -116,8 +117,8 @@ class SellerProfile(tk.Frame):
             image=self.images["seller_F0C38E"]
         )
 
-        self.createDataEntry(575, 150, "items purchased:", self.profile["stats"]["items_sold"])
-        self.createDataEntry(575, 225, "amount spent:", self.profile["stats"]["amount_earned"])
+        self.createDataEntry(575, 150, "items sold:", self.profile["stats"]["items_sold"])
+        self.createDataEntry(575, 225, "amount earned:", self.profile["stats"]["amount_earned"])
         self.createDataEntry(575, 300, "balance:", self.profile["stats"]["balance"])
 
         UIUtils.createRoundRect(
@@ -175,6 +176,7 @@ class SellerProfile(tk.Frame):
                     newUsername=self.username[0],
                     newPassword=self.password[0]
                 )
+                App.sellerScenes["SellerHome"]["account"] = accounts.getAccount(self.username[0])
                 App.show("SellerHome")
 
         self.canvas.tag_bind("doneButton", "<Button-1>", onDoneClick)
@@ -314,7 +316,7 @@ class SellerProfile(tk.Frame):
         self.canvas.delete("all")
         self.initImages()
 
-        self.profile = Accounts().getAccount(App.customerScenes["CustomerHome"]["account"]["username"])
+        self.profile = Accounts().getAccount(App.sellerScenes["SellerHome"]["account"]["username"])
         self.username = [
             self.profile["username"],
             self.profile["username"],

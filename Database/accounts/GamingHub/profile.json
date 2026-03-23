@@ -6,8 +6,8 @@
     "stats": {
         "items_purchased": 0,
         "amount_spent": 0,
-        "items_sold": 0,
-        "amount_earned": 0,
-        "balance": 0
+        "items_sold": 3,
+        "amount_earned": 1500.0,
+        "balance": 1500.0
     }
 }

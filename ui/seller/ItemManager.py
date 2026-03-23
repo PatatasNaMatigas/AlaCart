@@ -1,11 +1,14 @@
 import copy
+import os
 import tkinter as tk
 import tkinter.font as tkFont
 from pathlib import Path
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from dataManager.DataModels import Items
+from dataManager.FileHandler import DB_BASE
 from dataManager.SearchEngine import SearchEngine
 from util import Utils
 from util.Utils import *
@@ -31,43 +34,43 @@ class ItemManager(tk.Frame):
         self.itemImage = {}
         self.icons = {}
         self.icons["add_F0C38E"] = ImageTk.PhotoImage(
-            Image.open("../res/add_F0C38E.png").resize((60, 60), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/add_F0C38E.png")).resize((60, 60), Image.Resampling.LANCZOS)
         )
         self.icons["home"] = ImageTk.PhotoImage(
-            Image.open("../res/home.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/home.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.icons["trash_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/trash_48426D.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/trash_48426D.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.icons["trash_9A0000"] = ImageTk.PhotoImage(
-            Image.open("../res/trash_9A0000.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/trash_9A0000.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.icons["filter"] = ImageTk.PhotoImage(
-            Image.open("../res/filter.png").resize((30, 30), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/filter.png")).resize((30, 30), Image.Resampling.LANCZOS)
         )
         self.images = {}
         self.images["blackFilter"] = ImageTk.PhotoImage(
-            Image.open("../res/black_filter.png")
+            Image.open(FileHandler.resPath("res/black_filter.png"))
         )
         self.images["trashCover"] = ImageTk.PhotoImage(
-            Image.open("../res/delete_cover.png").resize((270, 190), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/delete_cover.png")).resize((270, 190), Image.Resampling.LANCZOS)
         )
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
         self.filterIcons = [
             ImageTk.PhotoImage(
-                Image.open("../res/calendar.png").resize((30, 30), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/calendar.png")).resize((30, 30), Image.Resampling.LANCZOS)
             ),
             ImageTk.PhotoImage(
-                Image.open("../res/stock.png").resize((30, 30), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/stock.png")).resize((30, 30), Image.Resampling.LANCZOS)
             ),
             ImageTk.PhotoImage(
-                Image.open("../res/price.png").resize((35, 35), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/price.png")).resize((35, 35), Image.Resampling.LANCZOS)
             ),
             ImageTk.PhotoImage(
-                Image.open("../res/alphabetical.png").resize((25, 25), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/alphabetical.png")).resize((25, 25), Image.Resampling.LANCZOS)
             ),
         ]
         self.filters = [
@@ -78,10 +81,10 @@ class ItemManager(tk.Frame):
         ]
         self.sortTypeIcons = [
             ImageTk.PhotoImage(
-                Image.open("../res/ascending.png").resize((30, 30), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/ascending.png")).resize((30, 30), Image.Resampling.LANCZOS)
             ),
             ImageTk.PhotoImage(
-                Image.open("../res/descending.png").resize((30, 30), Image.Resampling.LANCZOS)
+                Image.open(FileHandler.resPath("res/descending.png")).resize((30, 30), Image.Resampling.LANCZOS)
             ),
         ]
         self.sortType = [
@@ -110,7 +113,7 @@ class ItemManager(tk.Frame):
 
         self.itemEntryY = 0
         self.itemEntryMaxY = 0
-        self.itemEntryMinY = min(500 - ((len(self.itemList) + 2) // 3 * 210) - 90, 0)
+        self.itemEntryMinY = min(300 - ((len(self.itemList) + 2) // 3 * 210) - 90, 0)
 
         def scrollItems(event):
             if not self.filterActive:
@@ -686,7 +689,7 @@ class ItemManager(tk.Frame):
         self.itemImage[f"id:{itemId}"] = None
 
         try:
-            self.itemImage[f"id:{itemId}"] = Image.open(list(Path("../Database/images/").glob(f"{itemId}.*"))[0])
+            self.itemImage[f"id:{itemId}"] = Image.open(list(Path(os.path.join(DB_BASE, "images/")).glob(f"{itemId}.*"))[0])
 
             maxWidth = 240
             maxHeight = 100

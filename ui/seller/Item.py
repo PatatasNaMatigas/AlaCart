@@ -1,3 +1,4 @@
+import os
 import tkinter as tk
 import tkinter.font as tkFont
 from pathlib import Path
@@ -6,8 +7,9 @@ from tkinter import filedialog
 from PIL import ImageTk, Image
 from PIL.ImageTk import PhotoImage
 
-from dataManager import FileHandler as FH
+from dataManager import FileHandler as FH, FileHandler
 from dataManager.DataModels import Items
+from dataManager.FileHandler import DB_BASE
 from ui import UIUtils
 from ui.main import App
 from util import Utils
@@ -24,14 +26,14 @@ class Item(tk.Frame):
         self.photoImage = None
         self.icons = {}
         self.icons["add_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/add_48426D.png").resize((25, 25), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/add_48426D.png")).resize((25, 25), Image.Resampling.LANCZOS)
         )
         self.icons["add_9C827D"] = ImageTk.PhotoImage(
-            Image.open("../res/add_9C827D.png").resize((80, 80), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/add_9C827D.png")).resize((80, 80), Image.Resampling.LANCZOS)
         )
         self.images = {}
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
         self.itemName = ["", "Enter Item Name", "itemName"]
@@ -618,7 +620,7 @@ class Item(tk.Frame):
             )
 
             try:
-                dest = list(Path("../Database/images/").glob(f"{self.selectedItem["item_id"]}.*"))
+                dest = list(Path(os.path.join(DB_BASE, "images/")).glob(f"{self.selectedItem["item_id"]}.*"))
                 if len(dest) > 0:
                     FH.replace(
                         self.image,
@@ -627,7 +629,7 @@ class Item(tk.Frame):
                 else:
                     FH.clone(
                         self.image,
-                        f"../Database/images/{self.selectedItem["item_id"]}.{self.image.split('.').pop()}"
+                        os.path.join(DB_BASE, f"images/{self.selectedItem["item_id"]}.{self.image.split('.').pop()}")
                     )
             except:
                 warn("Image Saving Failed!")
@@ -639,14 +641,14 @@ class Item(tk.Frame):
                 self.itemTag[3],
                 App.sellerScenes["SellerHome"]["account"]["username"]
             )
-            FH.clone(self.image, f"../Database/images/{item["item_id"]}.{self.image.split('.').pop()}")
+            FH.clone(self.image, os.path.join(DB_BASE, f"images/{item["item_id"]}.{self.image.split('.').pop()}"))
 
         self.reset("")
         App.sellerScenes["ItemManager"]["selectedItem"] = []
 
     def attemptLoadImage(self, itemId: int, maxWidth: int, maxHeight: int) -> PhotoImage:
         try:
-            itemImage = Image.open(list(Path("../Database/images/").glob(f"{itemId}.*"))[0])
+            itemImage = Image.open(list(Path(os.path.join(DB_BASE, "images/")).glob(f"{itemId}.*"))[0])
 
             ratio = min(maxWidth / itemImage.width, maxHeight / itemImage.height)
 

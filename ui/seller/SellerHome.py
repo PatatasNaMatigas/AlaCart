@@ -4,6 +4,7 @@ from typing import Callable
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from ui import UIUtils
 from ui.main import App
 from util import Utils
@@ -49,22 +50,22 @@ class SellerHome(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["logo"] = ImageTk.PhotoImage(
-            Image.open("../res/logo.png").resize((550, 130), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/logo.png")).resize((550, 130), Image.Resampling.LANCZOS)
         )
         self.images["browse"] = ImageTk.PhotoImage(
-            Image.open("../res/browse.png").resize((50, 50), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/browse.png")).resize((50, 50), Image.Resampling.LANCZOS)
         )
         self.images["summaries"] = ImageTk.PhotoImage(
-            Image.open("../res/summaries.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/summaries.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.images["signout"] = ImageTk.PhotoImage(
-            Image.open("../res/signout.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/signout.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.images["profile"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/buyer_48426D.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
 
     def initUi(self) -> None:

@@ -3,6 +3,7 @@ from typing import Callable
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from ui import UIUtils
 from ui.main import App
 from util import Utils
@@ -36,7 +37,7 @@ class Transaction(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
     def initUi(self):

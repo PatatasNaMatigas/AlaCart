@@ -2,6 +2,7 @@ import tkinter as tk
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from dataManager.DataModels import Accounts
 from ui import UIUtils
 from ui.Codes import ReturnCode, ThreatLevel
@@ -44,10 +45,10 @@ class Login(tk.Frame):
 
     def initImages(self):
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["logo"] = ImageTk.PhotoImage(
-            Image.open("../res/logo.png").resize((250, 60), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/logo.png")).resize((250, 60), Image.Resampling.LANCZOS)
         )
 
     def initUi(self):
@@ -379,18 +380,18 @@ class SignUp(tk.Frame):
 
     def initIcons(self):
         self.icons["buyer"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/buyer_48426D.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.icons["seller"] = ImageTk.PhotoImage(
-            Image.open("../res/seller_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/seller_48426D.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
 
     def initImages(self):
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["logo"] = ImageTk.PhotoImage(
-            Image.open("../res/logo.png").resize((250, 60), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/logo.png")).resize((250, 60), Image.Resampling.LANCZOS)
         )
 
     def initUi(self):

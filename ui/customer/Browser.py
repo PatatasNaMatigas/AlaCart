@@ -1,4 +1,5 @@
 import copy
+import os
 import tkinter as tk
 import tkinter.font as tkFont
 from pathlib import Path
@@ -7,6 +8,7 @@ from typing import Callable
 from PIL import ImageTk, Image
 
 from dataManager.DataModels import Items, ShoppingCart
+from dataManager.FileHandler import DB_BASE
 from dataManager.SearchEngine import SearchEngine
 from util import Utils
 from util.Utils import *
@@ -33,23 +35,23 @@ class Browser(tk.Frame):
         self.coverItemImages = {}
         self.icons = {}
         self.icons["add_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/add_48426D.png").resize((35, 35), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/add_48426D.png")).resize((35, 35), Image.Resampling.LANCZOS)
         )
         self.icons["subtract_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/subtract_48426D.png").resize((35, 7), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/subtract_48426D.png")).resize((35, 7), Image.Resampling.LANCZOS)
         )
         self.icons["home"] = ImageTk.PhotoImage(
-            Image.open("../res/home.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/home.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.icons["shoppingCart_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/shopping_cart_48426D.png").resize((45, 45), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/shopping_cart_48426D.png")).resize((45, 45), Image.Resampling.LANCZOS)
         )
         self.images = {}
         self.images["blackFilter"] = ImageTk.PhotoImage(
-            Image.open("../res/black_filter.png")
+            Image.open(FileHandler.resPath("res/black_filter.png"))
         )
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
 
         self.searchActive = False
@@ -384,6 +386,7 @@ class Browser(tk.Frame):
         )
 
         def done():
+            self.canvas.itemconfig("selectedItemImage", image=None)
             self.canvas.tag_lower("itemDetails")
             if self.cartItems.get(f"{self.activeItem}", 0) <= 0:
                 self.cartItems.pop(self.activeItem)
@@ -467,7 +470,7 @@ class Browser(tk.Frame):
 
         try:
             if not self.coverItemImages[f"id:{itemId}"]:
-                self.coverItemImages[f"id:{itemId}"] = Image.open(list(Path("../Database/images/").glob(f"{itemId}.*"))[0])
+                self.coverItemImages[f"id:{itemId}"] = Image.open(list(Path(os.path.join(DB_BASE, "images/")).glob(f"{itemId}.*"))[0])
 
                 maxWidth = 350
                 maxHeight = 150
@@ -535,7 +538,7 @@ class Browser(tk.Frame):
         self.itemImages[f"id:{itemId}"] = None
 
         try:
-            self.itemImages[f"id:{itemId}"] = Image.open(list(Path("../Database/images/").glob(f"{itemId}.*"))[0])
+            self.itemImages[f"id:{itemId}"] = Image.open(list(Path(os.path.join(DB_BASE, "images/")).glob(f"{itemId}.*"))[0])
 
             maxWidth = 240
             maxHeight = 100
@@ -610,7 +613,7 @@ class Browser(tk.Frame):
             x + 260,
             y + 170,
             anchor="e",
-            text=f"Price: ₱{price}:,.2f",
+            text=f"Price: ₱{price:,.2f}",
             fill="#F0C38E",
             font=(Utils.Fonts.KOULEN.value, 12),
             tags=("itemEntry", f"id_{itemId}")

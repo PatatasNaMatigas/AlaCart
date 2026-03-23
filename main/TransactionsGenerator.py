@@ -3,8 +3,10 @@ import json
 import random
 import datetime
 
+from dataManager.FileHandler import DB_BASE
+
 # Configuration matching your DataModels and FileHandler
-BASE_PATH = "../Database/summaries"
+BASE_PATH = os.path.join(DB_BASE, "summaries")
 SELLERS = ["TechStore", "Seller123", "GamingHub"]
 BUYERS = ["ae", "eli", "admin"]
 ITEMS = {

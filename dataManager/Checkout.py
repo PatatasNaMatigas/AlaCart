@@ -9,6 +9,7 @@ from dataManager.DataModels import (
     createItemEntry
 )
 from ui.Codes import ReturnCode
+from ui.main import App
 from util.Utils import warn, log, logData, wtf
 
 
@@ -148,7 +149,8 @@ class CheckoutManager:
         self.txn_mgr.recordTransaction(
             items=order_items,
             payAmount=pay_amount,
-            paymentMethod=payment_method
+            paymentMethod=payment_method,
+            buyer=App.customerScenes["CustomerHome"]["account"]["username"]
         )
         # Fetch the latest transaction (just recorded)
         all_transactions = self.txn_mgr.getTransactions()

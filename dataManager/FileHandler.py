@@ -2,6 +2,7 @@ import os, json
 import shutil
 
 import os
+import sys
 from glob import glob
 
 from dataManager import DataModels
@@ -9,43 +10,62 @@ from datetime import datetime
 
 from util.Utils import wtf, log
 
+def resPath(relative):
+    try:
+        base = sys._MEIPASS
+    except Exception:
+        base = os.path.abspath("../")
+    return os.path.join(base, relative)
+
+def getBaseDir():
+    if getattr(sys, 'frozen', False):
+        base = os.path.join(os.environ['LOCALAPPDATA'], 'AlaCart')
+    else:
+        base = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+
+    db_path = os.path.join(base, "Database")
+    if not os.path.exists(db_path):
+        os.makedirs(db_path, exist_ok=True)
+    return db_path
+
+DB_BASE = getBaseDir()
+
+import shutil
 
 def initDatabaseStructure() -> None:
-    try:
-        os.mkdir("../Database")
-    except FileExistsError:
-        pass
-    try:
-        os.mkdir("../Database/summaries")
-    except FileExistsError:
-        pass
-    try:
-        os.mkdir("../Database/accounts")
-    except FileExistsError:
-        pass
-    try:
-        os.mkdir("../Database/images")
-    except FileExistsError:
-        pass
+    # 1. Create the AppData folders if they don't exist
+    subfolders = ["summaries", "accounts", "images"]
+    for folder in subfolders:
+        os.makedirs(os.path.join(DB_BASE, folder), exist_ok=True)
 
-    metaFile = "../Database/meta.json"
-    if not os.path.exists(metaFile) or os.path.getsize(metaFile) == 0:
-        data = {
-            "next_item_id" : 0,
-            "next_account_id" : 0,
-            "next_transaction_id" : 0,
-            "next_order_id" : 0
-        }
-        safeWrite(metaFile, data)
+    # 2. LIST OF FILES TO MIGRATE
+    # These are the files you defined in your .spec datas
+    files_to_copy = ["items.json", "meta.json"]
 
-    safeCreateFile("../Database/items.json")
-    safeCreateFile("../Database/accounts/accounts.json")
+    for filename in files_to_copy:
+        dest_path = os.path.join(DB_BASE, filename)
+
+        # Only copy if the file doesn't exist in AppData yet
+        if not os.path.exists(dest_path):
+            try:
+                # Find the 'template' file inside the EXE bundle
+                source_path = resPath(os.path.join("Database", filename))
+
+                # Copy it to the writable AppData folder
+                shutil.copy2(source_path, dest_path)
+                print(f"Migrated {filename} to AppData")
+            except Exception as e:
+                print(f"Could not migrate {filename}: {e}")
+
+    # 3. Ensure sub-files in folders also exist
+    safeCreateFile(os.path.join(DB_BASE, "accounts", "accounts.json"), isList=True)
+
 
 def getItems() -> list:
-    return read("../Database/items.json")
+    return read(os.path.join(DB_BASE, "items.json"))
 
 def updateItems(data: list) -> None:
-    safeWrite("../Database/items.json", data)
+    safeWrite(os.path.join(DB_BASE, "items.json"), data)
 
 def prepareTransactionRecord(buyer: str, items: list, totalPrice: float, payAmount: float, change: float, paymentMethod: DataModels.Transactions.PaymentMethods) -> dict:
     date = datetime.now().date()
@@ -66,7 +86,7 @@ def prepareTransactionRecord(buyer: str, items: list, totalPrice: float, payAmou
     return data
 
 def getTransactions(allTime=False) -> list:
-    base_path = "../Database/summaries"
+    base_path = os.path.join(DB_BASE, "summaries")
 
     if allTime:
         allRecords = []
@@ -89,22 +109,22 @@ def getTransactions(allTime=False) -> list:
 
 def updateTransactions(data: list) -> None:
     date = datetime.now().date()
-    safeWrite(f"../Database/summaries/{date.year}/{date.month}/{date.day}/transactions.json", data)
+    safeWrite(os.path.join(DB_BASE, f"summaries/{date.year}/{date.month}/{date.day}/transactions.json"), data)
 
 def getAccounts() -> list:
-    return read("../Database/accounts/accounts.json")
+    return read(os.path.join(DB_BASE, "accounts/accounts.json"))
 
 def getAccount(username: str) -> dict:
-    return read(f"../Database/accounts/{username}/profile.json")
+    return read(os.path.join(DB_BASE, f"accounts/{username}/profile.json"))
 
 def updateAccounts(data: list) -> None:
-    safeWrite("../Database/accounts/accounts.json", data, )
+    safeWrite(os.path.join(DB_BASE, "accounts/accounts.json"), data)
 
 def updateAccount(username: str, data: dict) -> None:
-    safeWrite(f"../Database/accounts/{username}/profile.json", data)
+    safeWrite(os.path.join(DB_BASE, f"accounts/{username}/profile.json"), data)
 
 def createAccount(data: dict) -> None:
-    folder = f"../Database/accounts/{data["username"]}"
+    folder = os.path.join(DB_BASE, f"accounts/{data["username"]}")
     try:
         os.mkdir(folder)
     except FileExistsError:
@@ -112,23 +132,23 @@ def createAccount(data: dict) -> None:
 
     safeWrite(folder + "/profile.json", data)
     safeCreateFile(folder + "/shoppingCart.json", False)
-    safeCreateFile(folder + "/orders.json")
+    safeCreateFile(folder + "/orders.json", True)
 
 def getOrders(username: str) -> list:
-    return read(f"../Database/accounts/{username}/orders.json")
+    return read(os.path.join(DB_BASE, f"accounts/{username}/orders.json"))
 
 def updateOrders(username: str, data: list) -> None:
-    safeWrite(f"../Database/accounts/{username}/orders.json", data)
+    safeWrite(os.path.join(DB_BASE, f"accounts/{username}/orders.json"), data)
 
 def getCart(username: str) -> dict:
-    return read(f"../Database/accounts/{username}/shoppingCart.json")
+    return read(os.path.join(DB_BASE, f"accounts/{username}/shoppingCart.json"))
 
 def updateCart(username: str, data: dict) -> None:
-    safeWrite(f"../Database/accounts/{username}/shoppingCart.json", data)
+    safeWrite(os.path.join(DB_BASE, f"accounts/{username}/shoppingCart.json"), data)
 
 def autoIncrement(idType: DataModels.ID) -> int:
     nextId = 0
-    with open("../Database/meta.json", 'r+') as file:
+    with open(os.path.join(DB_BASE, f"meta.json"), 'r+') as file:
         ids = json.load(file)
         match idType:
             case DataModels.ID.ITEM:
@@ -143,7 +163,7 @@ def autoIncrement(idType: DataModels.ID) -> int:
             case DataModels.ID.ORDER:
                 nextId = ids["next_order_id"] + 1
                 ids["next_order_id"] = nextId
-    safeWrite("../Database/meta.json", ids)
+    safeWrite(os.path.join(DB_BASE, f"meta.json"), ids)
     return nextId
 
 def createFile(filename: str, isList: bool=False) -> None:

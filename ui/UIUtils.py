@@ -4,6 +4,7 @@ from PIL import Image, ImageTk
 
 import tkinter.font as tkFont
 
+from dataManager import FileHandler
 from ui.Codes import ReturnCode, ThreatLevel
 from util import Utils
 
@@ -65,7 +66,7 @@ class ErrorWindow(tk.Frame):
 
     def initImages(self):
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((800, 400), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((800, 400), Image.Resampling.LANCZOS)
         )
 
     def initUi(self):

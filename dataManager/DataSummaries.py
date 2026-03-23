@@ -2,11 +2,12 @@ import datetime
 import calendar
 import os
 from dataManager import FileHandler as FH
+from dataManager.FileHandler import DB_BASE
 
 
 class SalesSummaries:
     def __init__(self):
-        self.basePath = "../Database/summaries"
+        self.basePath = os.path.join(DB_BASE, "summaries")
 
     def getWeeklySales(self, owner: str, year: int = None, weekNumber: int = None) -> list[int]:
         today = datetime.date.today()

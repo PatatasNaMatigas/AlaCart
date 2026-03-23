@@ -4,9 +4,10 @@ import os
 
 from dataManager import FileHandler
 from dataManager.DataModels import ID
+from dataManager.FileHandler import DB_BASE
 
 # Configuration
-FILE_PATH = "../Database/items.json"
+FILE_PATH = os.path.join(DB_BASE, "items.json")
 OWNERS = ["TechStore", "Seller123", "GamingHub"]
 
 # Item templates for each owner to make the data realistic

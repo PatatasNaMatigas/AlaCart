@@ -1,14 +1,14 @@
+import os
 import tkinter as tk
-from logging import FileHandler
 from pathlib import Path
 from typing import Callable
 
 from PIL import ImageTk, Image
 
-from dataManager import DataModels
+from dataManager import DataModels, FileHandler
 from dataManager.Checkout import CheckoutManager
+from dataManager.FileHandler import DB_BASE
 from ui import UIUtils
-from ui.Codes import ReturnCode
 from ui.main import App
 from util import Utils
 from util.Utils import log, logData, wtf, warn
@@ -56,16 +56,16 @@ class ShoppingCart(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.icons["trash_9A0000"] = ImageTk.PhotoImage(
-            Image.open("../res/trash_9A0000.png").resize((20, 20), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/trash_9A0000.png")).resize((20, 20), Image.Resampling.LANCZOS)
         )
         self.icons["add_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/add_48426D.png").resize((20, 20), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/add_48426D.png")).resize((20, 20), Image.Resampling.LANCZOS)
         )
         self.icons["subtract_48426D"] = ImageTk.PhotoImage(
-            Image.open("../res/subtract_48426D.png").resize((20, 4), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/subtract_48426D.png")).resize((20, 4), Image.Resampling.LANCZOS)
         )
 
     def initUi(self):
@@ -213,7 +213,7 @@ class ShoppingCart(tk.Frame):
             try:
                 if not self.itemImages[f"id:{itemId}"]:
                     self.itemImages[f"id:{itemId}"] = Image.open(
-                        list(Path("../Database/images/").glob(f"{itemId}.*"))[0])
+                        list(Path(os.path.join(DB_BASE, "images")).glob(f"{itemId}.*"))[0])
 
                     maxWidth = 70
                     maxHeight = 70

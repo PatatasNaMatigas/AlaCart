@@ -2,6 +2,7 @@ import tkinter as tk
 
 from PIL import ImageTk, Image
 
+from dataManager import FileHandler
 from dataManager.DataModels import Accounts
 from ui import UIUtils, Codes
 from ui.main import App
@@ -37,16 +38,16 @@ class CustomerProfile(tk.Frame):
 
     def initImages(self) -> None:
         self.images["bg"] = ImageTk.PhotoImage(
-            Image.open("../res/bg.png").resize((1000, 600), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/bg.png")).resize((1000, 600), Image.Resampling.LANCZOS)
         )
         self.images["buyer"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer_48426D.png").resize((40, 40), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/buyer_48426D.png")).resize((40, 40), Image.Resampling.LANCZOS)
         )
         self.images["profile_chopped"] = ImageTk.PhotoImage(
-            Image.open("../res/profile_chopped.png").resize((101, 101), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/profile_chopped.png")).resize((101, 101), Image.Resampling.LANCZOS)
         )
         self.images["buyer_F0C38E"] = ImageTk.PhotoImage(
-            Image.open("../res/buyer_F0C38E.png").resize((30, 30), Image.Resampling.LANCZOS)
+            Image.open(FileHandler.resPath("res/buyer_F0C38E.png")).resize((30, 30), Image.Resampling.LANCZOS)
         )
 
     def initUi(self) -> None:
@@ -216,6 +217,7 @@ class CustomerProfile(tk.Frame):
                     newUsername=self.username[0],
                     newPassword=self.password[0]
                 )
+                App.customerScenes["CustomerHome"]["account"] = accounts.getAccount(self.username[0])
                 App.show("CustomerHome")
 
         self.canvas.tag_bind("doneButton", "<Button-1>", onDoneClick)

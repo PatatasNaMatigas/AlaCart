@@ -1,11 +1,11 @@
 import datetime
+import os
 
 from dataManager import FileHandler as FH
 from enum import Enum
 
 from ui.Codes import ReturnCode
 from util.Utils import warn, log
-
 
 def createItemEntry(itemId: int, itemName: str, quantity: int, priceAtPurchase: float, owner: str) -> dict:
     return {
@@ -262,7 +262,7 @@ class Accounts:
                 "amount_spent"    : 0,
                 "items_sold"      : 0,
                 "amount_earned"   : 0,
-                "balance"         : 0
+                "balance"         : 100_000
             }
         }
         FH.createAccount(profile)
@@ -346,8 +346,9 @@ class Accounts:
             self.accounts.remove(username)
             self.accounts.append(newUsername)
             FH.updateAccounts(self.accounts)
+            from dataManager.FileHandler import DB_BASE
             FH.changeFileName(
-                "../Database/accounts/",
+                os.path.join(DB_BASE, "accounts"),
                 username,
                 newUsername
             )
@@ -362,7 +363,8 @@ class Accounts:
 
         self.accounts.remove(username)
         FH.updateAccounts(self.accounts)
-        FH.deleteFile(f"../Database/accounts/{username}")
+        from dataManager.FileHandler import DB_BASE
+        FH.deleteFile(os.path.join(DB_BASE, f"accounts/{username}"))
 
     def getAccount(self, username: str) -> dict:
         return FH.getAccount(username)

@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from dataManager.DataModels import Accounts
+from dataManager import FileHandler
 from ui.main.Index import Login, SignUp
 
 from ui.customer.CustomerHome import CustomerHome
@@ -16,7 +16,6 @@ from ui.seller.ItemManager import ItemManager
 from ui.seller.Summaries import Summaries
 
 from util import Utils
-from util.Utils import logData
 
 frames = {}
 
@@ -67,7 +66,7 @@ class App(tk.Tk):
     def __init__(self):
         super().__init__()
         self.title("Ala Carte")
-        self.iconPhoto = tk.PhotoImage(file="../res/icon.png")
+        self.iconPhoto = tk.PhotoImage(file=FileHandler.resPath("res/icon.png"))
         self.iconphoto(True, self.iconPhoto)
         self.geometry("1000x600")
 
